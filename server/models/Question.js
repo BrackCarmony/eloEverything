@@ -14,4 +14,4 @@ var schema = new mongoose.Schema({
   scores:[scoreSchema]
 });
 
-module.exports = mongoose.model('Question', schema);
+module.exports = mongoose.model('Question', schema); 

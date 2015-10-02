@@ -11,11 +11,13 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.get("/api/questions/:", questionsController.seeQuestions);
+app.get("/api/questions", questionsController.seeQuestions);
 app.get("/api/questions/:category/:score", questionsController.askQuestion);
 app.post("/api/questions", questionsController.addQuestion);
-app.post("/api/questions/:id/", questionsController.answerQuestion);
+app.post("/api/answerquestion/:questionId/:userId", questionsController.answerQuestion);
 
+
+app.post("/api/users", usersController.addUser);
 
 
 var mongoUri = "mongodb://localhost:27017/elo";

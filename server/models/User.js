@@ -4,7 +4,8 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var scoreSchema = new mongoose.Schema({
   category:{type:String, lowercase:true},
-  score:Number
+  score:Number,
+  answered:Number
 })
 
 var schema = new mongoose.Schema({

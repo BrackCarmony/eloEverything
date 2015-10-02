@@ -2,25 +2,40 @@ var Question = require('../models/Question');
 var flow = require('../flow.js')
 var shuffle = require('knuth-shuffle').knuthShuffle;
 var _ = require('underscore');
+var User = require('../models/User');
+
+var k = 32;
 
 function calculateUserChangeInRating(score, user, question){
   for(var i=0;i<question.scores.length;i++){
     var userScoreIndex = _.findIndex(user.scores,{category:question.scores[i].category});
-    var playerRating;
+    var userRating;
     var questionRating = question.scores[i].score;
     if (userScoreIndex>-1){
-      playerRating  = user.scores[userScoreIndex].score;
-      playerRatingId = user.scores[userScoreIndex]._id;
+      userRating  = user.scores[userScoreIndex].score;
+      userRatingId = user.scores[userScoreIndex]._id;
     }else{
-      playerRating = 1200;
-      playerRatingId = 'new';
+      //TODO find better place to put the defualt player rating.
+      userRating = 1200;
+      userRatingId = 'new';
     }
-
+    var ratingChange = calculateRatingChange(score,userRating,questionRating);
+    question.scores[i].score -= ratingChange;
   }
+  question.save(function(err){
+    if(err){
+      console.log(err);
+    }else{
+      console.log("success?");
+    }
+  });
 }
 
-function calculateRatingChange(score, userRating, questionRating){
-
+function calculateRatingChange(score, userRating, questionRating, n){
+  var p = 1 / (1 + Math.pow(10,(userRating-questionRating)/400));
+  var Ep = (p + 1/n * (1-p));
+  var dRp = k*(score- Ep);
+  return dRp;
 }
 
 module.exports = {
@@ -93,19 +108,29 @@ module.exports = {
   },
   answerQuestion:function(req,res){
     console.log("answering Question");
-    Question.findById(req.body._id, function(err, result){
+    Question.findById(req.body.questionId, function(err, question){
+      console.log(question)
       if(err){
         console.log(err);
         res.sendStatus(500);
       }else{
         //Retrieved
         var score;
-        if (req.body.answer === result.correct_answer){
+        if (req.body.answer === question.correct_answer){
           score = 1;
         }else{
           score = 0;
         }
-
+        User.findById(req.userId, function(err, user){
+          if(err){
+            console.log(err);
+            res.sendStatus(500);
+          }else{
+            calculateUserChangeInRating(score, user, question);
+            //TODO send back updated scores instead of just a success status
+            res.sendStatus(200);
+          }
+        });
       }
     })
   }
