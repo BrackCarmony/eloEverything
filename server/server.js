@@ -7,6 +7,8 @@ var app = express();
 var questionsController = require('./controllers/questionsController');
 var usersController = require('./controllers/usersController');
 
+app.use(express.static(__dirname+'/../public'));
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -17,10 +19,12 @@ app.post("/api/questions", questionsController.addQuestion);
 app.post("/api/answerquestion/:questionId/:userId", questionsController.answerQuestion);
 
 
+app.get("/api/users", usersController.getAllUsers);
+app.get("/api/users/:id", usersController.getUserById);
 app.post("/api/users", usersController.addUser);
 
 
-var mongoUri = "mongodb://localhost:27017/elo";
+var mongoUri = "mongodb://0.0.0.0:27017/elo";
 mongoose.set('debug', true);
 mongoose.connect(mongoUri);
 mongoose.connection.once('open', function(){

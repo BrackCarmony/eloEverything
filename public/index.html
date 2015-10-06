@@ -1,8 +1,18 @@
-<html>
+<html ng-app = "eloEverything">
 <head>
   <title></title>
+  <link rel="stylesheet" href="/styles/mainStyle.css">
 </head>
 <body>
-
+  <h1>Elo Everything</h1>
+  <ng-view>
+  </ng-view>
+  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+  <script src = "app/app.js"></script>
+  <script src = "app/js/quiz/quizController.js"></script>
+  <script src = "app/js/services/questionsService.js"></script>
+  <script src = "app/js/services/usersService.js"></script>
+  <script src = "app/js/users/usersController.js"></script>
 </body>
 </html>

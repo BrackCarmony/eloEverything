@@ -7,20 +7,38 @@ var User = require('../models/User');
 var k = 32;
 
 function calculateUserChangeInRating(score, user, question){
+  var scoreChange = [];
   for(var i=0;i<question.scores.length;i++){
-    var userScoreIndex = _.findIndex(user.scores,{category:question.scores[i].category});
+    var category = question.scores[i].category
+    var userScoreIndex = _.findIndex(user.scores,{category:category});
     var userRating;
+    var userRatingId;
     var questionRating = question.scores[i].score;
+
     if (userScoreIndex>-1){
       userRating  = user.scores[userScoreIndex].score;
-      userRatingId = user.scores[userScoreIndex]._id;
     }else{
       //TODO find better place to put the defualt player rating.
       userRating = 1200;
-      userRatingId = 'new';
     }
-    var ratingChange = calculateRatingChange(score,userRating,questionRating);
+    var ratingChange = calculateRatingChange(score,userRating,questionRating,question.possible_answers.length+1);
     question.scores[i].score -= ratingChange;
+    console.log(userRatingId);
+    if (userScoreIndex ==-1){
+      user.scores.push({
+        category:category,
+        score:userRating+=ratingChange,
+        answered:1
+      })
+    }else{
+      user.scores[userScoreIndex].score +=ratingChange;
+      user.scores[userScoreIndex].answered +=1;
+    }
+    scoreChange.push({
+      category:category,
+      deltaScore:ratingChange
+    });
+
   }
   question.save(function(err){
     if(err){
@@ -29,12 +47,21 @@ function calculateUserChangeInRating(score, user, question){
       console.log("success?");
     }
   });
+  user.save(function(err){
+    if(err){
+      console.log(err);
+    }else{
+      console.log("success?");
+    }
+  });
+  return scoreChange;
 }
 
 function calculateRatingChange(score, userRating, questionRating, n){
-  var p = 1 / (1 + Math.pow(10,(userRating-questionRating)/400));
-  var Ep = (p + 1/n * (1-p));
+  var p = 1 / (1 + Math.pow(10,(questionRating-userRating)/400));
+  var Ep = p + (1-p)/n;
   var dRp = k*(score- Ep);
+
   return dRp;
 }
 
@@ -73,7 +100,10 @@ module.exports = {
         res.sendStatus(500);
       }else{
         console.log(result);
-        if (result==0) res.json([]);
+        if (result==0) {
+          res.json([]);
+          return 0;
+        }
         Question.findOne()
         .elemMatch('scores',{
           category:req.params.category,
@@ -108,7 +138,7 @@ module.exports = {
   },
   answerQuestion:function(req,res){
     console.log("answering Question");
-    Question.findById(req.body.questionId, function(err, question){
+    Question.findById(req.params.questionId, function(err, question){
       console.log(question)
       if(err){
         console.log(err);
@@ -121,14 +151,14 @@ module.exports = {
         }else{
           score = 0;
         }
-        User.findById(req.userId, function(err, user){
+        User.findById(req.params.userId, function(err, user){
           if(err){
             console.log(err);
             res.sendStatus(500);
           }else{
-            calculateUserChangeInRating(score, user, question);
+            var deltaScores = calculateUserChangeInRating(score, user, question);
             //TODO send back updated scores instead of just a success status
-            res.sendStatus(200);
+            res.json(deltaScores);
           }
         });
       }

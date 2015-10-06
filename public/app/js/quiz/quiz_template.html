@@ -1,0 +1,18 @@
+Quiz template
+
+{{user.name}}
+<div>
+  <ul>
+    <li ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit?5:50" ng-click="loadQuestion(category)">{{category.category}} - {{category.score|number:0}} -- {{category.answered}}</li>
+  </ul>
+  <span ng-show="limit" ng-click = "limit=!limit">More</span><span ng-show="!limit" ng-click = "limit = !limit">Less</span>
+</div>
+
+
+{{warning}}
+<div>
+  <h3>{{question.question}}</h3>
+  <ul>
+    <li ng-click = "answerQuestion(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
+  </ul>
+</div>
