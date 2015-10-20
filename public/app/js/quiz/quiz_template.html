@@ -14,7 +14,7 @@
 <div class = "question" ng-show = "question" ng-click="clickEvent($event)">
   <h3>{{question.question}}</h3>
   <ul>
-    <li ng-dblclick = "answerQuestion()" ng-class = "{selected:$parent.selected == answer, correct:$parent.correct_answer === answer, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
+    <li ng-dblclick = "answerQuestion()" ng-class = "{selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
   </ul>
   <div class = "container-fluid">
     <div class = "row">
