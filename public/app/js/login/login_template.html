@@ -1,7 +1,11 @@
-<input type = "email">
+<div class = 'well container'>
+  <form class = "loginForm" ng-submit= "login(loginUser)">
+    <input type = "email" class = "form-control" placeholder = "email" required ng-model = 'loginUser.email'>
+    <input type = "password" class = "form-control" placeholder = "password" required ng-model = 'loginUser.password'>
+    <button class = "btn-primary btn-lg" type = "submit">Login / Sign-Up</button>
+  </form>
+  <a href="/auth/facebook">
 
-<input type = "password">
-
-<a href="/auth/facebook">
-<img src = "images/facebook-login.png">
-</a>
+    <img src = "images/facebook-login.png" width="175px">
+  </a>
+</div>
