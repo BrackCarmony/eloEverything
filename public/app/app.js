@@ -1,19 +1,41 @@
-var app = angular.module("eloEverything", ['ngRoute']);
+var app = angular.module("eloEverything", ['ngRoute',"angucomplete"]);
+
+app.constant('AUTH_EVENTS',{
+  loginSuccess: 'auth-login-success',
+  loginFailed: 'auth-login-failed',
+  logoutSuccess: 'auth-logout-success',
+  sessionTimeout: 'auth-session-timeout',
+  notAuthenticated: 'auth-not-authenticated',
+  notAuthorized: 'auth-not-authorized'
+});
+
+app.constant('USER_ROLES', {
+  all: '*',
+  admin: 'admin',
+  moderator: 'moderator',
+  user: 'user'
+});
 
 app.config(function($routeProvider){
-  $routeProvider.when("/quiz/:id",{
+  $routeProvider.when("/quiz",{
     templateUrl:"app/js/quiz/quiz_template.html",
     controller:"quizController",
     resolve:{
-      questions: function(questionsService){
-          return questionsService.getAllQuestions();
+      categories:function(categoriesService){
+        return categoriesService.getAllCategories();
       },
-      user: function(usersService, $route){
-          return usersService.getUserById($route.current.params.id);
+      user: function(usersService, $route, $location){
+        return usersService.getMe().then(function(result){
+          if(result._id){
+          return result;
+        }else{
+          $location.path("/login");
+        }
+        })
       }
     }
   })
-  .when("/users/",{
+  .when("/users",{
     templateUrl:"app/js/users/users_list_template.html",
     controller:'usersController',
     resolve:{
@@ -22,7 +44,20 @@ app.config(function($routeProvider){
       }
     }
   })
+  .when("/newQuestion",{
+    templateUrl:"app/js/newQuestion/new_question_template.html",
+    controller:"newQuestionController",
+    resolve:{
+      categories:function(categoriesService){
+        return categoriesService.getAllCategories();
+      }
+    }
+  })
+  .when("/login", {
+      templateUrl:"app/js/login/login_template.html",
+      controller:"loginController"
+  })
   .otherwise({
-    redirectTo:"/quiz/560f1b0c4daa9b7ed3955729"
+    redirectTo:"/quiz/"
   })
 })

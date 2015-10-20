@@ -1,0 +1,41 @@
+<div class = "well">
+  <form class = "newQuestionForm" ng-submit = "addNewQuestion()" >
+    <div>
+      <label for ="inputQuestionText">Question</label>
+      <input type = "text" class = "form-control" placeholder = "Question Text" id = "inputQuestionText" required ng-model = 'newQuestion.question'>
+    </div>
+    <div>
+      <label for ="inputAnswerText">Answer</label>
+       <input type = "text" class = "form-control" placeholder = "Correct Answer" required ng-model = 'newQuestion.correct_answer'>
+    </div>
+  <label for ="optionInputText">Options </label>
+  <div ng-repeat = "possible in newQuestion.possible_answers track by $index">
+
+    <div class = "input-group">
+      <input class = "form-control" type = "text" placeholder = "Incorrect Answer" required ng-model = 'newQuestion.possible_answers[$index]'>
+
+      <div class = "input-group-addon">
+        <span class="glyphicon glyphicon-minus" ng-hide ="$index==0" ng-click = "newQuestion.possible_answers.splice($index, 1)"></span>
+        <span class="glyphicon glyphicon-plus" ng-click = 'newQuestion.possible_answers.push("")' ng-show ="$index==0"></span>
+      </div>
+    </div>
+  </div>
+
+  <label for ="optionInputText">Categories </label>
+  <div ng-repeat = "score in newQuestion.scores track by $index">
+
+    <div class = "input-group">
+      <div angucomplete id="ex1" placeholder="Category {{$index+1}}" pause="100" selectedobject="newQuestion.scores[$index]" localdata="categories" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small"></div>
+      <!--<input class = "form-control" type = "text" placeholder = "Category" ng-model = 'newQuestion.scores[$index].category'>-->
+
+      <div class = "input-group-addon">
+        <span class="glyphicon glyphicon-minus" ng-hide ="$index==0" ng-click = "newQuestion.scores.splice($index, 1)"></span>
+        <span class="glyphicon glyphicon-plus" ng-click = 'newQuestion.scores.push({})' ng-show ="$index==0"></span>
+      </div>
+    </div>
+  </div>
+  </br>
+  <button type = "submit" class = "btn-primary btn-lg">Add Question</button>
+  </form>
+</div>
+{{newQuestion}}

@@ -1,15 +1,123 @@
-li{
+html, body{
+  padding: 0px;
+  margin: 0px;
+}
+
+.question li{
   display: inline-block;
-  margin: 4px;
+  margin: .5%;
   border: 1px solid black;
   padding: 3px;
+  border-radius: 3px;
+  width: 48%;
+  box-sizing: border-box;
+  vertical-align: top;
 }
 
 ul{
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 [ng-click]{
   cursor:pointer;
+}
+
+
+
+nav{
+  background-color: darkslategrey;
+  color: white;
+  padding: 5px;
+}
+
+nav h1{
+  display: inline;
+}
+
+nav ul{
+  padding: 0;
+  margin: 10 5 5 5;
+  float: right;
+  vertical-align: center;
+}
+
+nav li{
+  display: inline-block;
+  margin: 0 8px;
+}
+
+
+.categories li{
+  border:0px;
+  color:blue;
+  display: inline-block;
+  margin: 4px;
+}
+
+.selected{
+  background-color: darkslategrey;
+  color:white;
+}
+
+.wrong{
+  background-color:red;
+  transform:scale(.9);
+  transition: 1s;
+  z-index: -5;
+}
+
+.correct{
+  background-color:green;
+  transform:scale(1.1);
+  transition: 1s;
+  z-index: 5;
+  box-shadow: 5px 5px 5px #333;
+}
+
+.positive{
+  color:green;
+  transition: 1s;
+}
+
+.negative{
+  color:red;
+  transition: 1s;
+}
+
+.question{
+  background: mintcream;
+  border:1px solid saddlebrown;
+  border-radius: 10px;
+  padding: 10px;
+  margin:10px;
+  user-select:none;
+}
+
+
+.clear{
+  clear: both;
+  display: inline-block;
+}
+#deltaBox{
+  width:200px;
+  border: 1px darkslategrey solid;
+  border-radius: 5px;
+  padding: 5px;
+  transition: 1s;
+}
+
+.disabled.btn-primary{
+  background-color: darkslategrey;
+}
+
+.disabled.btn-warning{
+
+}
+
+#facebook-login-button{
+  height:60px;
+  width:100px;
+  background-size:100% 100%;
 }

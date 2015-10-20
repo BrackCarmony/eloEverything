@@ -1,18 +1,44 @@
 <html ng-app = "eloEverything">
-<head>
-  <title></title>
-  <link rel="stylesheet" href="/styles/mainStyle.css">
-</head>
-<body>
-  <h1>Elo Everything</h1>
-  <ng-view>
-  </ng-view>
-  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
-  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
-  <script src = "app/app.js"></script>
-  <script src = "app/js/quiz/quizController.js"></script>
-  <script src = "app/js/services/questionsService.js"></script>
-  <script src = "app/js/services/usersService.js"></script>
-  <script src = "app/js/users/usersController.js"></script>
-</body>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/mainStyle.css">
+    <link rel="stylesheet" href="/styles/angucomplete.css">
+  </head>
+  <body ng-controller = "authController">
+
+
+    <nav ng-controller = "headerController">
+      <div class="container">
+        <h1>Elo Everything</h1>
+        <ul>
+          <li role = "presentation" ng-click = "goto('/newQuestion/')">New Question</li>
+          <li role = "presentation" ng-click = "goto('/quiz/')">Quiz</li>
+          <li ng-hide = 'currentUser' role = "presentation" ng-click = "goto('/login/')">Login</li>
+          <li ng-show = 'currentUser' role = "presentation" ng-click = "goto('/logout/')">Logout</li>
+        </ul>
+        <span class = "clear"> </span>
+      </div>
+    </nav>
+
+
+    <ng-view>
+    </ng-view>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+    <script src = "app/app.js"></script>
+    <script src = "app/js/quiz/quizController.js"></script>
+    <script src = "app/js/auth/authController.js"></script>
+    <script src = "app/js/services/questionsService.js"></script>
+    <script src = "app/js/services/usersService.js"></script>
+    <script src = "app/js/services/authService.js"></script>
+    <script src = "app/js/services/categoriesService.js"></script>
+    <script src = "app/js/services/sessionService.js"></script>
+    <script src = "app/js/users/usersController.js"></script>
+    <script src = "app/js/header/headerController.js"></script>
+    <script src = "app/js/newQuestion/newQuestionController.js"></script>
+    <script src = "app/js/login/loginController.js"></script>
+    <script src = "app/js/angucomplete.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  </body>
 </html>

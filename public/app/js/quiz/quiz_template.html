@@ -1,18 +1,37 @@
-Quiz template
-
-{{user.name}}
-<div>
+<div class = "categories well">
   <ul>
-    <li ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit?5:50" ng-click="loadQuestion(category)">{{category.category}} - {{category.score|number:0}} -- {{category.answered}}</li>
+    <li ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit?5:50" ng-click="loadQuestion(category._category)">{{category._category.name}}-{{category.score|number:0}}</li>
   </ul>
   <span ng-show="limit" ng-click = "limit=!limit">More</span><span ng-show="!limit" ng-click = "limit = !limit">Less</span>
+  <select ng-options = "category.name for category in categories" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)">
+  </select>
 </div>
 
+<div class = 'question' ng-show = "warning"><h2>
+  {{warning}}
+</h2></div>
 
-{{warning}}
-<div>
+<div class = "question" ng-show = "question" ng-click="clickEvent($event)">
   <h3>{{question.question}}</h3>
   <ul>
-    <li ng-click = "answerQuestion(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
+    <li ng-dblclick = "answerQuestion()" ng-class = "{selected:$parent.selected == answer, correct:$parent.correct_answer == answer, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
   </ul>
+  <div class = "container-fluid">
+    <div class = "row">
+      <button class ="btn-primary btn-lg col-sm-2" ng-hide = "answered" ng-disabled = "selected == '' || answered" ng-click = "answerQuestion()">Answer</button>
+      <button class ="btn-primary btn-lg col-sm-2" ng-show = "answered" ng-click = "loadQuestion(category)">Next</button><!-- -->
+
+      <button class ="btn-warning btn-lg col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion()">Pass</button>
+
+      <div id = "deltaBox" class ="col-sm-6"  ng-show = "deltaScores.length>0">
+        <div ng-repeat = "deltaScore in deltaScores">
+          <span ng-class = "{positive:deltaScore.deltaScore*1>0, negative:deltaScore.deltaScore*1<0}">
+            {{deltaScore.category}}:
+            <span ng-show = "deltaScore.deltaScore >0">+</span>
+            {{deltaScore.deltaScore | number : 1}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
