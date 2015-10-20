@@ -3,7 +3,7 @@ var app = angular.module("eloEverything")
 
 
 app.service('questionsService',function($http, $location){
-  var baseUrl = $location.absUrl().split("#")[0]+"/api"
+  var baseUrl = $location.absUrl().split("#")[0]+"api"
   this.getAllQuestions = function(){
     return $http.get(baseUrl + "/questions").then(
       function(response){
