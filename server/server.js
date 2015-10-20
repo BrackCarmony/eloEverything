@@ -6,8 +6,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
-var User = require('./models/User')
-
+var User = require('./models/User');
+var localhost = process.env.publicIP;
 
 var questionsController = require('./controllers/questionsController');
 var usersController = require('./controllers/usersController');
@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 passport.use(new FacebookStrategy({
   clientID:process.env.facebookClientId,
   clientSecret:process.env.facebookClientSecret,
-  callbackURL:'http://localhost:8080/auth/facebook/callback',
+  callbackURL:'http://'+localhost+':8080/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'photos', 'email']
 }, function (token, refreshToken, profile, done){
   usersController.findOrCreateFromFacebook(profile, done)

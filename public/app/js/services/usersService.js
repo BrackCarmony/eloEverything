@@ -2,8 +2,8 @@ var app = angular.module("eloEverything")
 
 
 
-app.service('usersService',function($http, Session){
-  var baseUrl = "http://localhost:8080/api";
+app.service('usersService',function($http, Session, $location){
+  var baseUrl = $location.absUrl().split("#")[0]+"/api"
 
   this.getAllUsers = function(){
     return $http.get(baseUrl + "/users").then(

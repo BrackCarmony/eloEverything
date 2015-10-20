@@ -1,6 +1,6 @@
 var app = angular.module("eloEverything");
 
-app.controller("newQuestionController", function($scope, questionsService, categories){
+app.controller("newQuestionController", function($scope, questionsService, categories, $location){
   $scope.categories = categories;
   initQuestion();
 

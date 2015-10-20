@@ -3,7 +3,7 @@ var app = angular.module("eloEverything")
 
 
 app.service('authService', function($http, Session, $location){
-  var baseUrl = "http://localhost:8080/auth";
+  var baseUrl = $location.absUrl().split("#")[0]+"/auth"
   this.facebookLogin = function(){
     return $http.get(baseUrl +"/facebook")
   }
