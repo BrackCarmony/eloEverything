@@ -1,6 +1,14 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var usersController = require('../controllers/usersController');
+var LocalStrategy = require('passport-local');
+var asyn = require('async');
+var User = require('../models/User');
+var bCrypt = require('bcrypt-nodejs');
+
+var isValidPassword = function(user, password){
+  return bCrypt.compateSyb(password, user.password);
+}
 
 module.exports = {
   ensureAuthenticated:function(req, res, next) {
@@ -18,3 +26,23 @@ module.exports.fbStrat = new FacebookStrategy({
 }, function (token, refreshToken, profile, done){
   usersController.findOrCreateFromFacebook(profile, done)
 })
+
+module.exports.localStrat = new LocalStrategy(
+  {passReqToCallback: true},
+  function(req, email, password, done){
+    User.findOne({'email':email},
+      function(err, user){
+        if(err){
+          console.log(err);
+          return done(err);
+        }
+        if(!user){
+          return done(null, false, req.flash('message', 'No User with that email.'));
+        }
+        if(!isValidPassword(user, password)){
+          return done(null, false, req.flash('message', 'Invalid Password'));
+        }
+        return done(null, user);
+      })
+    }
+);

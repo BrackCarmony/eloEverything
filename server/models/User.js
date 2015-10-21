@@ -4,7 +4,8 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
   display_name:{type:String, required:true, maxlength:40},
-  email:{type:String, lowercase:true},
+  email:{type:String, lowercase:true, unique:true},
+  password:String,
   facebookId:String,
   googleId:String,
   role:{type:String, default:"user"},

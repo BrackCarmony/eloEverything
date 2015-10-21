@@ -1,11 +1,19 @@
 <div class = 'well container'>
-  <form class = "loginForm" ng-submit= "login(loginUser)">
+  <form class = "loginForm container" ng-submit= "login(loginUser)">
+    <span ng-show = "signup">
+      <input type = "password" class = "form-control" placeholder = "display name" ng-required = "signup" ng-model = 'loginUser.display_name'>
+    </span>
     <input type = "email" class = "form-control" placeholder = "email" required ng-model = 'loginUser.email'>
     <input type = "password" class = "form-control" placeholder = "password" required ng-model = 'loginUser.password'>
-    <button class = "btn-primary btn-lg" type = "submit">Login / Sign-Up</button>
+    <div class = "left-margin" ng-hide = "signup">
+      <button class = "btn-primary btn-lg" type = "submit">Login</button> <span  class = "login-message" ng-click = "signup=true">Sign Up</span>
+    </div>
+    <div class = "left-margin" ng-show = "signup" class = "">
+      <button class = "btn-primary btn-lg" type = "submit">Sign Up</button> <span class = "login-message" ng-click = "signup=false">Login</span>
+    </div>
   </form>
   <a href="/auth/facebook">
 
-    <img src = "images/facebook-login.png" width="175px">
+    <img class = "left-margin" src = "images/facebook-login.png" width="175px">
   </a>
 </div>

@@ -8,6 +8,7 @@ var cors = require('cors');
 var app = express();
 var User = require('./models/User');
 var localhost = process.env.publicIP;
+var flash = require('connect-flash');
 
 var questionsController = require('./controllers/questionsController');
 var usersController = require('./controllers/usersController');
@@ -16,12 +17,15 @@ var authController = require("./controllers/authController");
 
 app.use(express.static(__dirname+'/../public'));
 app.use(sessions({secret:"asdfjkcxv7rodij2kl89023dfg314354fbr5t"}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
 app.use(bodyParser.json());
 
+
 passport.use(authController.fbStrat)
+//passport.use(authController.localStrat)
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req,res){
   console.log("Facebookauth experieced problems");
@@ -43,6 +47,8 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(obj, done){
   done(null, obj);
 });
+
+//app.get("/auth/logout", authController.logout)
 
 app.get("/api/questions", questionsController.seeQuestions);
 app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, questionsController.askQuestion);

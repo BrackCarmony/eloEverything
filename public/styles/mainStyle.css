@@ -70,8 +70,9 @@ nav li{
 
 .correct{
   background-color:green;
+  color:white;
   transform:scale(1.1);
-  transition: 1s;
+  transition:all 1s;
   z-index: 5;
   box-shadow: 5px 5px 5px #333;
 }
@@ -129,4 +130,13 @@ nav li{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.login-message{
+  color:blue;
+  font-size: .75em;
+}
+
+.left-margin{
+  margin-left:0%;
 }
