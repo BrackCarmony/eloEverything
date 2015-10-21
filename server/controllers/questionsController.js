@@ -204,7 +204,7 @@ module.exports = {
         }else{
           score = 0;
         }
-        //console.log(req.user);
+        console.log("score:",score);
         User.findById(req.user._id, function(err, user){
           if(err){
             console.log(err);

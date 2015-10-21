@@ -21,14 +21,7 @@ app.use(passport.session());
 app.use(cors());
 app.use(bodyParser.json());
 
-passport.use(new FacebookStrategy({
-  clientID:process.env.facebookClientId,
-  clientSecret:process.env.facebookClientSecret,
-  callbackURL:'/auth/facebook/callback',
-  profileFields: ['id', 'displayName', 'photos', 'email']
-}, function (token, refreshToken, profile, done){
-  usersController.findOrCreateFromFacebook(profile, done)
-}));
+passport.use(authController.fbStrat)
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req,res){
   console.log("Facebookauth experieced problems");
@@ -71,13 +64,11 @@ mongoose.connection.once('open', function(){
   console.log('connected to mongoDb at : ', mongoUri);
 })
 
-console.log(process.env.envStatus)
-
 if(process.env.envStatus === "DEVELOPMENT"){
 var port = 8080;
 }else{
   var port = 80;
 }
 app.listen(port, function(){
-  console.log("Listening on port:" + port +" in " + process.env.status + " mode.");
+  console.log("Listening on port:" + port +" in " + process.env.envStatus + " mode.");
 })

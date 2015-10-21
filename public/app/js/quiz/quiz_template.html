@@ -21,7 +21,7 @@
       <button class ="btn-primary btn-lg col-sm-2" ng-hide = "answered" ng-disabled = "selected == '' || answered" ng-click = "answerQuestion()">Answer</button>
       <button class ="btn-primary btn-lg col-sm-2" ng-show = "answered" ng-click = "loadQuestion(category)">Next</button><!-- -->
 
-      <button class ="btn-warning btn-lg col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion()">Pass</button>
+      <button class ="btn-warning btn-lg col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion(true)">Pass</button>
 
       <div id = "deltaBox" class ="col-sm-6"  ng-show = "deltaScores.length>0">
         <div ng-repeat = "deltaScore in deltaScores">

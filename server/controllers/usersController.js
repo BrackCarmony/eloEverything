@@ -65,48 +65,68 @@ getUserBySession:function(req,res){
   })
 },
 findOrCreateFromFacebook:function(profile, done){
-  profile.email = profile.emails[0].value;
-  //console.log(profile);
-  User.findOne({facebookId:profile.id}, function(err, result){
-    if (err){
-      console.log(err);
-      return err;
-    }
-      if (result === null)
-      {
-        User.findOne({email:profile.email}, function(err, result){
-          if (err){
-            console.log(err);
-            return err;
-          } else{
-            if(result === null){
-              //Didn't find matching email, add as new User
-              var newUser = {
-                email:profile.email,
-                'display_name': profile.displayName,
-                FacebookId: profile.id
-              }
-              User.create(newUser, function(err, result){
-                if(err){
-                  console.log(err);
-                  return err;
-                }
-                return done(null, result);
-              });
-            }else{
-              //Found User with matching email.  Add Facebook profile to it,
-              //then call done
-              result.facebookId = profile.id;
-              //console.log(result);
-              result.save();
-              return done(null, result);
-            }
-          }
-        });
-      }
-      //Found user with matching FacebookId, can call done with the resulting profile.
-      return done(null, result);
+  console.log("Find me for profile:", profile);
 
-  })
+
+    //console.log(profile);
+    User.findOne({facebookId:profile.id}, function(err, result){
+      if (err){
+        console.log(err);
+        return err;
+      }
+        if (result === null)
+        {
+          if(profile.emails){
+            //If the profile contained emails, then try to find a matching user with the same profile.
+            profile.email = profile.emails[0].value;
+            User.findOne({email:profile.email}, function(err, result){
+              if (err){
+                console.log(err);
+                return err;
+              } else{
+                if(result === null){
+                  //Didn't find matching email, add as new User
+                  var newUser = {
+                    email:profile.email,
+                    'display_name': profile.displayName,
+                    FacebookId: profile.id
+                  }
+                  User.create(newUser, function(err, result){
+                    if(err){
+                      console.log(err);
+                      return err;
+                    }
+                    return done(null, result);
+                  });
+                }else{
+                  //Found User with matching email.  Add Facebook profile to it,
+                  //then call done
+                  result.facebookId = profile.id;
+                  //console.log(result);
+                  result.save();
+                  return done(null, result);
+                }
+              }
+            });
+          }
+          //Found user with matching FacebookId, can call done with the resulting profile.
+          return done(null, result);
+        }
+        else{
+          //If there wasn't an email included from the provider, then make a new user with no email :'(
+          var newUser = {
+            'display_name': profile.displayName,
+            FacebookId: profile.id
+          }
+          User.create(newUser, function(err, result){
+            if(err){
+              console.log(err);
+              return err;
+            }
+            return done(null, result);
+          });
+        }
+
+    })
 }//*/
 };
