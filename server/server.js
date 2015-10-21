@@ -71,7 +71,13 @@ mongoose.connection.once('open', function(){
   console.log('connected to mongoDb at : ', mongoUri);
 })
 
+console.log(process.env.envStatus)
+
+if(process.env.envStatus === "DEVELOPMENT"){
 var port = 8080;
+}else{
+  var port = 80;
+}
 app.listen(port, function(){
-  console.log("Listening on port:" + port );
+  console.log("Listening on port:" + port +" in " + process.env.status + " mode.");
 })

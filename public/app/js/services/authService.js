@@ -3,9 +3,8 @@ var app = angular.module("eloEverything")
 
 
 app.service('authService', function($http, Session, $location){
-  var baseUrl = $location.absUrl().split("#")[0]+"auth"
   this.facebookLogin = function(){
-    return $http.get(baseUrl +"/facebook")
+    return $http.get("/auth/facebook")
   }
 
   this.isAuthenticated = function(){

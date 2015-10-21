@@ -2,11 +2,10 @@ var app = angular.module("eloEverything")
 
 
 
-app.service('usersService',function($http, Session, $location){
-  var baseUrl = $location.absUrl().split("#")[0]+"api"
+app.service('usersService',function($http, Session){
 
   this.getAllUsers = function(){
-    return $http.get(baseUrl + "/users").then(
+    return $http.get("/api/users").then(
       function(response){
         console.log(response);
         return response.data;
@@ -18,7 +17,7 @@ app.service('usersService',function($http, Session, $location){
     );
   }
   this.getUserById= function(userId){
-    return $http.get(baseUrl + "/users/"+userId).then(
+    return $http.get("/api/users/"+userId).then(
       function(response){
         console.log(response);
         return response.data;
@@ -31,7 +30,7 @@ app.service('usersService',function($http, Session, $location){
   }
 
   this.addUser = function(newUser){
-    return $http.post(baseUrl+'/users/', newUser).then(function(response){
+    return $http.post('/api/users/', newUser).then(function(response){
 
       return response.data;
     }, function(error){
@@ -41,7 +40,7 @@ app.service('usersService',function($http, Session, $location){
   }
 
   this.getMe = function(){
-    return $http.get(baseUrl+'/me').then(function(response){
+    return $http.get('/api/me').then(function(response){
       if(!Session.userId){
         Session.create(1, response.data._id, response.data.role);
       }

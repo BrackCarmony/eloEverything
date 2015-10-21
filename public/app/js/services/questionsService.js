@@ -3,9 +3,9 @@ var app = angular.module("eloEverything")
 
 
 app.service('questionsService',function($http, $location){
-  var baseUrl = $location.absUrl().split("#")[0]+"api"
+
   this.getAllQuestions = function(){
-    return $http.get(baseUrl + "/questions").then(
+    return $http.get("/api/questions").then(
       function(response){
         return response.data;
       },
@@ -19,7 +19,7 @@ app.service('questionsService',function($http, $location){
 
   this.getSingleQuestion = function(category){
     console.log(category);
-    return $http.get(baseUrl + "/questions/" + category)
+    return $http.get("/api/questions/" + category)
     .then(function(response){
         return response.data
     }, function(error){
@@ -29,7 +29,7 @@ app.service('questionsService',function($http, $location){
   };
 
   this.answerQuestion = function(questionId, answer){
-    return $http.post(baseUrl + "/answerquestion/" + questionId, {answer:answer})
+    return $http.post("/api/answerquestion/" + questionId, {answer:answer})
     .then(function(response){
       return response.data;
     }, function(error){
@@ -40,7 +40,7 @@ app.service('questionsService',function($http, $location){
 
   this.addNewQuestion = function(newQuestion){
     var cleanQuestion  = cleanNewQuestion(newQuestion);
-    return $http.post(baseUrl+"/questions", cleanQuestion)
+    return $http.post("/api/questions", cleanQuestion)
     .then(function(response){
       return response.data;
     }, function(error){
