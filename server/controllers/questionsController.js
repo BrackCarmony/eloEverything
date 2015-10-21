@@ -200,7 +200,7 @@ module.exports = {
         if (req.body.answer === question.correct_answer){
           score = 1;
         }else if(req.body.pass){
-          score = 1/(question.possible_answers.count+1);
+          score = 1/(question.possible_answers.length+1);
         }else{
           score = 0;
         }
