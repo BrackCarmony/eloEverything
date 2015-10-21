@@ -45,14 +45,13 @@ app.controller('quizController', function($scope, user, questionsService, usersS
     }
   }
 
-  $scope.answerQuestion = function(){
+  $scope.answerQuestion = function(pass){
     var answer = $scope.selected;
     if($scope.answered){
       $scope.loadQuestion($scope.category);
-    }
-    if (!$scope.answered){
+    }else {
       $scope.answered = true;
-      questionsService.answerQuestion($scope.question._id, answer ).then(function(response){
+      questionsService.answerQuestion($scope.question._id, answer, pass ).then(function(response){
 
         $scope.correct_answer = response.correct_answer;
         $scope.deltaScores = response.deltaScores;

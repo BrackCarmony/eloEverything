@@ -28,8 +28,8 @@ app.service('questionsService',function($http, $location){
     });
   };
 
-  this.answerQuestion = function(questionId, answer){
-    return $http.post("/api/answerquestion/" + questionId, {answer:answer})
+  this.answerQuestion = function(questionId, answer, pass){
+    return $http.post("/api/answerquestion/" + questionId, {answer:answer, pass:pass})
     .then(function(response){
       return response.data;
     }, function(error){
