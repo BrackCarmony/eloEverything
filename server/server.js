@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 passport.use(new FacebookStrategy({
   clientID:process.env.facebookClientId,
   clientSecret:process.env.facebookClientSecret,
-  callbackURL:'http://'+localhost+':8080/auth/facebook/callback',
+  callbackURL:'/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'photos', 'email']
 }, function (token, refreshToken, profile, done){
   usersController.findOrCreateFromFacebook(profile, done)
