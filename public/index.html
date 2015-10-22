@@ -15,7 +15,7 @@
           <li role = "presentation" ng-click = "goto('/newQuestion/')">New Question</li>
           <li role = "presentation" ng-click = "goto('/quiz/')">Quiz</li>
           <li ng-hide = 'currentUser' role = "presentation" ng-click = "goto('/login/')">Login</li>
-          <li ng-show = 'currentUser' role = "presentation" ng-click = "goto('/logout/')">Logout</li>
+          <li ng-show = 'currentUser' role = "presentation" ng-click = "logout()">Logout</li>
         </ul>
         <span class = "clear"> </span>
       </div>

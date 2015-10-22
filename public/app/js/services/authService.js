@@ -18,4 +18,8 @@ app.service('authService', function($http, Session, $location){
     return (authService.isAuthenticated() &&
       authorizedRoles.indexOf(Session.userRole) !== -1);
   };
+
+  this.logout = function(){
+    return $http.get('/auth/logout');
+  }
 })

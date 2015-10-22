@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 
 passport.use(authController.fbStrat)
-//passport.use(authController.localStrat)
+
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req,res){
   console.log("Facebookauth experieced problems");
@@ -48,7 +48,7 @@ passport.deserializeUser(function(obj, done){
   done(null, obj);
 });
 
-//app.get("/auth/logout", authController.logout)
+app.get("/auth/logout", authController.logout)
 
 app.get("/api/questions", questionsController.seeQuestions);
 app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, questionsController.askQuestion);

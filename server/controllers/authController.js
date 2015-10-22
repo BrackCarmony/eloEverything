@@ -15,6 +15,11 @@ module.exports = {
     if (req.isAuthenticated())
       return next();
       res.sendStatus(401);
+  },
+  logout:function(req, res){
+    console.log("Loggin out user");
+    req.logout();
+    return res.send('logged out');
   }
 }
 
@@ -25,7 +30,7 @@ module.exports.fbStrat = new FacebookStrategy({
   profileFields: ['id', 'displayName', 'photos', 'email']
 }, function (token, refreshToken, profile, done){
   usersController.findOrCreateFromFacebook(profile, done)
-})
+});
 
 module.exports.localStrat = new LocalStrategy(
   {passReqToCallback: true},
