@@ -108,24 +108,23 @@ findOrCreateFromFacebook:function(profile, done){
                 }
               }
             });
+          }else{
+            //If there wasn't an email included from the provider, then make a new user with no email :'(
+            var newUser = {
+              'display_name': profile.displayName,
+              FacebookId: profile.id
+            }
+            User.create(newUser, function(err, result){
+              if(err){
+                console.log(err);
+                return err;
+              }
+              return done(null, result);
+            });
           }
           //Found user with matching FacebookId, can call done with the resulting profile.
-          return done(null, result);
         }
-        else{
-          //If there wasn't an email included from the provider, then make a new user with no email :'(
-          var newUser = {
-            'display_name': profile.displayName,
-            FacebookId: profile.id
-          }
-          User.create(newUser, function(err, result){
-            if(err){
-              console.log(err);
-              return err;
-            }
-            return done(null, result);
-          });
-        }
+        return done(null, result);
 
     })
 }//*/
