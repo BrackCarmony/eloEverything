@@ -34,7 +34,7 @@ app.get('/auth/facebook', passport.authenticate('facebook'), function(req,res){
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   fialureRedirect:'/login'
 }), function(req, res){
-  console.log(req.user);
+  //console.log(req.user);
   res.body = req.user;
   res.redirect('/#/login-land');
 }
@@ -51,9 +51,9 @@ passport.deserializeUser(function(obj, done){
 app.get("/auth/logout", authController.logout)
 
 app.get("/api/questions", questionsController.seeQuestions);
-app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, questionsController.askQuestion);
+app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, usersController.getRecentQuestions, questionsController.askQuestion);
 app.post("/api/questions", authController.ensureAuthenticated, categoriesController.checkAndAddNewCategories, questionsController.addQuestion);
-app.post("/api/answerquestion/:questionId/", authController.ensureAuthenticated, questionsController.answerQuestion);
+app.post("/api/answerquestion/:questionId/", authController.ensureAuthenticated, usersController.addQuestionToAnsweredList, questionsController.answerQuestion);
 
 
 app.get("/api/users", usersController.getAllUsers);

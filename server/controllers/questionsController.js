@@ -12,9 +12,9 @@ var questionRange = 200;
 
 function calculateUserChangeInRating(score, user, question){
   var scoreChange = [];
-  console.log("Starting Scoring");
+  //console.log("Starting Scoring");
   //console.log(user.scores);
-  console.log(question);
+  //console.log(question);
 
   for(var i=0;i<question.scores.length;i++){
     //console.log(question);
@@ -28,7 +28,7 @@ function calculateUserChangeInRating(score, user, question){
     //console.log('categoryId',category);
    // console.log(user.scores);
     var userScoreIndex = -1;
-    console.log('userScoreIndex',userScoreIndex);
+    //console.log('userScoreIndex',userScoreIndex);
     for (var j=0;j<user.scores.length;j++){
 
       if(category === user.scores[j]._doc._category.toString()){
@@ -49,7 +49,7 @@ function calculateUserChangeInRating(score, user, question){
     }
     var ratingChange = calculateRatingChange(score,userRating,questionRating,question.possible_answers.length+1);
     question.scores[i].score -= ratingChange;
-    console.log('userRatingId',userRatingId);
+    //console.log('userRatingId',userRatingId);
     if (userScoreIndex ==-1){
       user.scores.push({
         _category:category,
@@ -69,14 +69,14 @@ function calculateUserChangeInRating(score, user, question){
     if(err){
       console.log(err);
     }else{
-      console.log("success?");
+      //console.log("success?");
     }
   });
   user.save(function(err){
     if(err){
       console.log(err);
     }else{
-      console.log("success?");
+      //console.log("success?");
     }
   });
   return scoreChange;
@@ -91,7 +91,7 @@ function calculateRatingChange(score, userRating, questionRating, n){
 }
 
 function increaseCategoryQuestionCount(scores){
-  console.log("Counting question", scores)
+  //console.log("Counting question", scores)
   scores.forEach(function(item){
     Category.findById(item._category, function (err, result){
       if(err){
@@ -134,7 +134,10 @@ module.exports = {
     });
   },
   askQuestion:function(req, res){
-    Question.count().elemMatch('scores',{
+    //console.log(req.params.recent_questions);
+    Question.count()
+    .where('_id').nin(req.params.recent_questions)
+    .elemMatch('scores',{
       _category:req.params.category,
       score:{$gt:req.params.score-questionRange, $lt:req.params.score*1+questionRange}
     })
@@ -143,12 +146,13 @@ module.exports = {
         console.log(err);
         res.sendStatus(500);
       }else{
-        //console.log(result);
+        //console.log("Valid Questions:",result);
         if (result==0) {
           res.json([]);
           return 0;
         }
         Question.findOne()
+        .where('_id').nin(req.params.recent_questions)
         .elemMatch('scores',{
           _category:req.params.category,
           score:{$gt:req.params.score-questionRange, $lt:req.params.score*1+questionRange}
@@ -158,7 +162,11 @@ module.exports = {
           if(err){
             console.log(err)
           }else{
-            //console.log(result);
+            //console.log("------------------------------------------");
+            //console.log(req.params.recent_questions);
+            //console.log(result._id);
+            //console.log("------------------------------------------");
+
             result.possible_answers.push(result.correct_answer);
             shuffle(result.possible_answers);
             result.correct_answer = "";
@@ -170,7 +178,7 @@ module.exports = {
     });
   },
   addQuestion:function(req, res){
-      console.log("Adding Question");
+      //console.log("Adding Question");
       //console.log(req.user);
       //console.log(req.session.passport);
       req.body._creator = req.user._id;
@@ -204,14 +212,14 @@ module.exports = {
         }else{
           score = 0;
         }
-        console.log("score:",score);
+        //console.log("score:",score);
         User.findById(req.user._id, function(err, user){
           if(err){
             console.log(err);
             res.sendStatus(500);
           }else{
-            console.log("question:", question);
-            console.log("user:", user);
+            //console.log("question:", question);
+            //console.log("user:", user);
             var deltaScores = calculateUserChangeInRating(score, user, question);
             deltaScores.answer = question.correct_answer;
             res.json({correct_answer:question.correct_answer,deltaScores:deltaScores});

@@ -1,5 +1,5 @@
 var User = require('../models/User');
-
+var settings = require('../settings');
 
 module.exports = {
   addUser:function(req, res){
@@ -51,6 +51,24 @@ getScoreInCategory:function(req,res, next){
       next();
     }
   });
+},
+getRecentQuestions:function(req, res, next){
+  User.findById(req.user._id)
+  .select('recent_questions')
+  .exec(function(err, result){
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    }else{
+      //console.log("-----------",result);
+      if(result === null){
+        req.params.recent_questions = [];
+      }else {
+        req.params.recent_questions = result.recent_questions;
+      }
+    }
+    next();
+  })
 },
 getUserBySession:function(req,res){
   //console.log(req.user);
@@ -127,5 +145,28 @@ findOrCreateFromFacebook:function(profile, done){
         return done(null, result);
 
     })
-}//*/
+},//*/
+addQuestionToAnsweredList(req, res, next){
+  console.log(req.user);
+  User.findById(req.user._id)
+  .select("recent_questions")
+  .exec(function(err,user){
+    if(err){
+      console.log("usersController.addQuestionToAnsweredList",err);
+      //res.send(err);
+    }
+    console.log(user);
+      if(!user.recent_questions){
+        user.recent_questions = [req.params.questionId];
+      }else{
+      user.recent_questions.push(req.params.questionId);
+      if (user.recent_questions.length > settings.questionMemoryLimit){
+        console.log(user.recent_questions.length);
+        user.recent_questions.splice(0,1);
+      }
+    }
+    user.save();
+    next();
+  })
+}
 };

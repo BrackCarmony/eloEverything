@@ -14,7 +14,8 @@ var schema = new mongoose.Schema({
     score:{type:Number, default:1200},
     answered:{type:Number, default:0},
     correct:{type:Number, default:0}
-  }]
+  }],
+  recent_questions:[{type:ObjectId, ref:"Question"}]
 });
 
 module.exports = mongoose.model('User', schema);
