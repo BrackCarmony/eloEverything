@@ -21,7 +21,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
     $scope.category = category;
     questionsService.getSingleQuestion(category._id).then(function(question){
       if(question.length == 0){
-        $scope.warning = "No suitable questions in "+category.category+".  Please try another."
+        $scope.warning = "No suitable questions in "+category.name+".  Please try another category."
         $scope.question= false;
       }else{
         $scope.warning = "";
