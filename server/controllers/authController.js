@@ -20,6 +20,13 @@ module.exports = {
     console.log("Loggin out user");
     req.logout();
     return res.send('logged out');
+  },
+  ensureAdmin:function(req, res, next){
+    if(req.user.role === "admin"){
+      next();
+    }else{
+      res.sendStatus(401);
+    }
   }
 }
 

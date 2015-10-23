@@ -57,6 +57,23 @@ app.config(function($routeProvider){
       templateUrl:"app/js/login/login_template.html",
       controller:"loginController"
   })
+  .when("/admin", {
+    templateUrl:"app/js/admin/admin_template.html",
+    controller:"adminController"
+  }).when("/admin/questions",{
+    templateUrl:"app/js/admin/questions/questions_template.html",
+    controller:"adminQuestionsController",
+    resolve:{
+      questions:function(questionsService, $location){
+        return questionsService.getAllQuestions()
+        .then(function(res){return res},
+              function(err){$location.path('/login')});
+      },
+      categories:function(categoriesService){
+        return categoriesService.getAllCategories();
+      }
+    }
+  })
   .otherwise({
     redirectTo:"/quiz/"
   })

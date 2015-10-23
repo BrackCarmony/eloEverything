@@ -7,7 +7,7 @@ app.controller('loginController', function($scope, $location, authService){
   $scope.beginFacebookAuth = function(){
     authService.facebookLogin();
   }
-  $scope.login(loginUser){
+  $scope.login = function(loginUser){
     if ($scope.signup)
     {//Sign-up User
 
