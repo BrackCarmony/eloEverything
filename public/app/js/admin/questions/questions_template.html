@@ -1,7 +1,7 @@
 Edit Questions
 <div ng-repeat = "question in questions">
   <div class = "well">
-    <form class = "newQuestionForm" ng-submit = "addNewQuestion()" >
+    <form class = "newQuestionForm" ng-submit = "updateQuestion(question)" >
       <div>
         <label for ="inputQuestionText">Question</label>
         <input type = "text" class = "form-control" placeholder = "Question Text" id = "inputQuestionText" required ng-model = 'question.question'>

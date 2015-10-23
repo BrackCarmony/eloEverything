@@ -54,7 +54,7 @@ app.get("/api/questions", authController.ensureAuthenticated, authController.ens
 app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, usersController.getRecentQuestions, questionsController.askQuestion);
 app.post("/api/questions", authController.ensureAuthenticated, categoriesController.checkAndAddNewCategories, questionsController.addQuestion);
 app.post("/api/answerquestion/:questionId/", authController.ensureAuthenticated, usersController.addQuestionToAnsweredList, questionsController.answerQuestion);
-
+app.put("/api/questions/:questionId", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.updateQuestion);
 
 app.get("/api/users", usersController.getAllUsers);
 app.get("/api/users/:id", usersController.getUserById);

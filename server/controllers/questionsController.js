@@ -227,6 +227,18 @@ module.exports = {
         });
       }
     })
+  },
+  updateQuestion:function(req, res){
+    console.log("Updating Question", req.params.questionId);
+    console.log(req.body);
+    Question.findByIdAndUpdate(req.params.questionId, req.body, {new:true})
+    .exec(function(err, result){
+      if(err){console.log(err); res.sendStatus(500)}
+      else{
+        console.log(result);
+        res.send(result)
+      }
+    })
   }
 
 }

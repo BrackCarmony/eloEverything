@@ -48,7 +48,31 @@ app.service('questionsService',function($http, $location){
       return error;
     })
   }
+
+  this.updateQuestion = function(questionToUpdate, categories){
+    var cleanedQuestion = cleanNewQuestion(questionToUpdate);
+    checkCategories(questionToUpdate, categories);
+    return $http.put("api/questions/" + questionToUpdate._id, questionToUpdate);
+  }
 });
+
+function checkCategories(question, categories){
+  console.log("hmmm");
+  question.scores.forEach(function(score, index, arry){
+    if(score._category.name !== _.findWhere(categories, {_id:score._category._id}).name){
+        //console.log("Name has changed, find categorie with that name, and set score's Id to match");
+        var newCat = _.findWhere(categories, {name:score._category.name})
+        if (newCat){
+          score._category._id = newCat._id;
+        }
+        else{
+            score._category.name = _.findWhere(categories, {_id:score._category._id}).name
+        }
+    }else{
+      //console.log("categories match, nothing has changed.")
+    }
+  });
+}
 
 function cleanNewQuestion(newQuestion){
 
