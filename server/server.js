@@ -56,10 +56,11 @@ app.post("/api/questions", authController.ensureAuthenticated, categoriesControl
 app.post("/api/answerquestion/:questionId/", authController.ensureAuthenticated, usersController.addQuestionToAnsweredList, questionsController.answerQuestion);
 app.put("/api/questions/:questionId", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.updateQuestion);
 
-app.get("/api/users", usersController.getAllUsers);
-app.get("/api/users/:id", usersController.getUserById);
+//app.get("/api/users", usersController.getAllUsers);
+//app.get("/api/users/:id", usersController.getUserById);
 app.get("/api/me", authController.ensureAuthenticated, usersController.getUserBySession);
 app.post("/api/users", usersController.addUser);
+app.get("/api/users/admin",authController.ensureAuthenticated, authController.ensureAdmin, usersController.getAllUsersAdmin);
 
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories)
 

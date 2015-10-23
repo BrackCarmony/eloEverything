@@ -50,4 +50,8 @@ app.service('usersService',function($http, Session){
       return error;
     })
   }
+
+  this.getUsersAdmin = function(){
+    return $http.get("/api/users/admin");
+  }
 });

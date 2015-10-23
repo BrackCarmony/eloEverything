@@ -73,6 +73,18 @@ app.config(function($routeProvider){
         return categoriesService.getAllCategories();
       }
     }
+  }).when('/admin/users', {
+    templateUrl:"app/js/admin/users/users_template.html",
+    controller:"adminUsersController",
+    resolve:{
+      users:{
+        users:function(usersService, $location){
+          return usersService.getUsersAdmin()
+          .then(function(res){return res},
+                function(err){$location.path('/login')})
+        }
+      }
+    }
   })
   .otherwise({
     redirectTo:"/quiz/"

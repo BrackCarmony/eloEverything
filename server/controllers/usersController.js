@@ -22,6 +22,19 @@ getAllUsers:function(req,res){
     }
   })
 },
+getAllUsersAdmin:function(req, res){
+  User.find({})
+  .select("display_name role email")
+  .exec(function(err, users){
+    if(err){
+      console.log(err);
+      res.send(500);
+    }else{
+      res.json(result);
+    }
+  })
+}
+,
 getUserById:function(req,res){
   User.findById(req.params.id)
   .populate('scores.category')
