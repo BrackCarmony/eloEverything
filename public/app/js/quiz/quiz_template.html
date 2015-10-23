@@ -1,9 +1,12 @@
 <div class = "categories well">
+
   <ul>
+    <strong>Your scores:</strong>
     <li ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit?5:50" ng-click="loadQuestion(category._category)">{{category._category.name}}-{{category.score|number:0}}</li>
+    <i><small><span ng-show="limit" ng-click = "limit=!limit">More</span><span ng-show="!limit" ng-click = "limit = !limit">Less</span></small></i>
   </ul>
-  <span ng-show="limit" ng-click = "limit=!limit">More</span><span ng-show="!limit" ng-click = "limit = !limit">Less</span>
-  <select ng-options = "category.name for category in categories" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)">
+</br>
+  <strong>Popular Categories: </strong><select ng-options = "category.name for category in categories" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)">
   </select>
 </div>
 
@@ -13,17 +16,18 @@
 
 <div class = "question" ng-show = "question" ng-click="clickEvent($event)">
   <h3>{{question.question}}</h3>
-  <ul>
-    <li ng-dblclick = "answerQuestion()" ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
+  <ul class = "container-fluid">
+    <li class = "col-xs-12 col-sm-6"ng-dblclick = "answerQuestion()" ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
   </ul>
   <div class = "container-fluid">
     <div class = "row">
-      <button class ="btn-primary btn-lg col-sm-2" ng-hide = "answered" ng-disabled = "selected == '' || answered" ng-click = "answerQuestion()">Answer</button>
-      <button class ="btn-primary btn-lg col-sm-2" ng-show = "answered" ng-click = "loadQuestion(category)">Next</button><!-- -->
 
-      <button class ="btn-warning btn-lg col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion(true)">Pass</button>
+      <button class ="btn-primary btn-lg col-xs-6 col-sm-2" ng-hide = "answered" ng-disabled = "selected == '' || answered" ng-click = "answerQuestion()">Answer</button>
+      <button class ="btn-primary btn-lg col-xs-6 col-sm-2 " ng-show = "answered" ng-click = "loadQuestion(category)">Next</button><!-- -->
 
-      <div id = "deltaBox" class ="col-sm-6"  ng-show = "deltaScores.length>0">
+      <button class ="btn-warning btn-lg col-xs-6 col-sm-offset-1 col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion(true)">Pass</button>
+
+      <div id = "deltaBox" class ="col-xs-6 col-sm-offset-1 col-sm-2 "  ng-show = "deltaScores.length>0">
         <div ng-repeat = "deltaScore in deltaScores">
           <span ng-class = "{positive:deltaScore.deltaScore*1>0, negative:deltaScore.deltaScore*1<0}">
             {{deltaScore.category}}:
@@ -32,6 +36,7 @@
           </span>
         </div>
       </div>
+      <div class = "col-sm-6"
     </div>
   </div>
 </div>

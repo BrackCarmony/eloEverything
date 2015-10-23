@@ -4,14 +4,19 @@ html, body{
 }
 
 .question li{
-  display: inline-block;
-  margin: .5%;
+
+
   border: 1px solid black;
-  padding: 3px;
-  border-radius: 3px;
-  width: 48%;
+  padding: 5px;
+  border-radius: 5px;
+  vertical-align: to;
   box-sizing: border-box;
-  vertical-align: top;
+  min-height:3em;
+  align-items:center;
+}/**/
+
+.question ul{
+    margin-bottom: 5px;
 }
 
 ul{
@@ -30,6 +35,7 @@ nav{
   background-color: darkslategrey;
   color: white;
   padding: 5px;
+  border-bottom: 1px black solid;
 }
 
 nav h1{
@@ -59,13 +65,17 @@ nav li{
 .selected{
   background-color: darkslategrey;
   color:white;
+  transition: all .25s;
+  transform:scale(1.025);
+  box-shadow: 2px 2px 2px #333;
+  z-index: 2;
 }
 
 .wrong{
   background-color:red;
   transform:scale(.9);
   transition: 1s;
-  z-index: -5;
+  z-index: 1;
 }
 
 .correct{
@@ -102,7 +112,6 @@ nav li{
   display: inline-block;
 }
 #deltaBox{
-  width:200px;
   border: 1px darkslategrey solid;
   border-radius: 5px;
   padding: 5px;
@@ -139,4 +148,8 @@ nav li{
 
 .left-margin{
   margin-left:0%;
+}
+
+.btn-lg{
+  transition:1s;
 }
