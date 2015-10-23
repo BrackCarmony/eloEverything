@@ -77,12 +77,10 @@ app.config(function($routeProvider){
     templateUrl:"app/js/admin/users/users_template.html",
     controller:"adminUsersController",
     resolve:{
-      users:{
-        users:function(usersService, $location){
+      users:function(usersService, $location){
           return usersService.getUsersAdmin()
           .then(function(res){return res},
                 function(err){$location.path('/login')})
-        }
       }
     }
   })

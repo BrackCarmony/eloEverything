@@ -52,6 +52,6 @@ app.service('usersService',function($http, Session){
   }
 
   this.getUsersAdmin = function(){
-    return $http.get("/api/users/admin");
+    return $http.get("/api/users/admin").then(function(user){return user.data});
   }
 });

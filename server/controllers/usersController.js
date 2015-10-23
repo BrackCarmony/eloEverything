@@ -30,7 +30,7 @@ getAllUsersAdmin:function(req, res){
       console.log(err);
       res.send(500);
     }else{
-      res.json(result);
+      res.json(users);
     }
   })
 }
