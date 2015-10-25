@@ -10,7 +10,7 @@ var schema = new mongoose.Schema({
   googleId:String,
   role:{type:String, default:"user"},
   scores:[{
-    _category:{type:ObjectId, ref:"Category", required:true, unique:true},
+    _category:{type:ObjectId, ref:"Category", required:true},
     score:{type:Number, default:1200},
     answered:{type:Number, default:0},
     correct:{type:Number, default:0}
