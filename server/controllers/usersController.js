@@ -120,7 +120,7 @@ findOrCreateFromFacebook:function(profile, done){
                   var newUser = {
                     email:profile.email,
                     'display_name': profile.displayName,
-                    FacebookId: profile.id
+                    facebookId: profile.id
                   }
                   User.create(newUser, function(err, result){
                     if(err){
@@ -143,7 +143,7 @@ findOrCreateFromFacebook:function(profile, done){
             //If there wasn't an email included from the provider, then make a new user with no email :'(
             var newUser = {
               'display_name': profile.displayName,
-              FacebookId: profile.id
+              facebookId: profile.id
             }
             User.create(newUser, function(err, result){
               if(err){
