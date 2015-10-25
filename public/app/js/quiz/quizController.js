@@ -1,9 +1,9 @@
-var app = angular.module("eloEverything")
+var app = angular.module("eloEverything");
 
-app.controller('quizController', function($scope, user, questionsService, usersService, categories){
+app.controller('quizController', function($scope, user, questionsService, usersService, categories, complaintsService){
 
   $scope.categories = categories;
-
+  $scope.complaining = false;
   $scope.user = user;
   if (!$scope.currentUser){
     $scope.setCurrentUser(user);
@@ -15,6 +15,8 @@ app.controller('quizController', function($scope, user, questionsService, usersS
 
   $scope.loadQuestion = function(category){
     console.log(category);
+    $scope.complaining = false;
+    $scope.complaintFinished = false;
     $scope.selected = "";
     $scope.deltaScores = {};
     //$scope.question = {};
@@ -63,5 +65,17 @@ app.controller('quizController', function($scope, user, questionsService, usersS
 
       );
     }
+  }
+
+  $scope.submitComplaint = function(newComplaint){
+
+      newComplaint._question = $scope.question._id;
+      newComplaint._user = $scope.user._id;
+      console.log(newComplaint);
+      complaintsService.submitComplaint(newComplaint).then(
+        function(result){$scope.complaintFinished = true;}, function(err){
+
+        }
+      );
   }
 });

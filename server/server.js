@@ -14,6 +14,7 @@ var questionsController = require('./controllers/questionsController');
 var usersController = require('./controllers/usersController');
 var categoriesController = require("./controllers/categoriesController");
 var authController = require("./controllers/authController");
+var complaintsController = require("./controllers/complaintsController");
 
 app.use(express.static(__dirname+'/../public'));
 app.use(sessions({secret:"asdfjkcxv7rodij2kl89023dfg314354fbr5t"}));
@@ -52,6 +53,7 @@ app.get("/auth/logout", authController.logout)
 
 app.get("/api/questions", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.seeQuestions);
 app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, usersController.getRecentQuestions, questionsController.askQuestion);
+app.get("/histogram/questions", questionsController.mathHistogram);
 app.post("/api/questions", authController.ensureAuthenticated, categoriesController.checkAndAddNewCategories, questionsController.addQuestion);
 app.post("/api/answerquestion/:questionId/", authController.ensureAuthenticated, usersController.addQuestionToAnsweredList, questionsController.answerQuestion);
 app.put("/api/questions/:questionId", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.updateQuestion);
@@ -62,7 +64,12 @@ app.get("/api/me", authController.ensureAuthenticated, usersController.getUserBy
 app.post("/api/users", usersController.addUser);
 app.get("/api/users/admin",authController.ensureAuthenticated, authController.ensureAdmin, usersController.getAllUsersAdmin);
 
-app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories)
+app.get("/api/complaints", authController.ensureAuthenticated, authController.ensureAdmin, complaintsController.getComplaints);
+app.post("/api/complaints", authController.ensureAuthenticated, complaintsController.addComplaint);
+
+
+app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
+
 
 var mongoUri = "mongodb://0.0.0.0:27017/elo";
 mongoose.set('debug', true);

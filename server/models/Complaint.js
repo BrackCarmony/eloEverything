@@ -4,7 +4,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
   _question:{type:ObjectId, ref:"Question"},
-  _User:{type:ObjectId, ref:"User"},
+  _user:{type:ObjectId, ref:"User"},
   complaint:String,
   comment:String
 })

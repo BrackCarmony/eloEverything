@@ -34,8 +34,7 @@ app.config(function($routeProvider){
         })
       }
     }
-  })
-  .when("/users",{
+  }).when("/users",{
     templateUrl:"app/js/users/users_list_template.html",
     controller:'usersController',
     resolve:{
@@ -43,8 +42,7 @@ app.config(function($routeProvider){
         return usersService.getAllUsers();
       }
     }
-  })
-  .when("/newQuestion",{
+  }).when("/newQuestion",{
     templateUrl:"app/js/newQuestion/new_question_template.html",
     controller:"newQuestionController",
     resolve:{
@@ -52,12 +50,10 @@ app.config(function($routeProvider){
         return categoriesService.getAllCategories();
       }
     }
-  })
-  .when("/login", {
+  }).when("/login", {
       templateUrl:"app/js/login/login_template.html",
       controller:"loginController"
-  })
-  .when("/admin", {
+  }).when("/admin", {
     templateUrl:"app/js/admin/admin_template.html",
     controller:"adminController"
   }).when("/admin/questions",{
@@ -83,8 +79,17 @@ app.config(function($routeProvider){
                 function(err){$location.path('/login')})
       }
     }
-  })
-  .otherwise({
+  }).when("/admin/complaints",{
+    templateUrl:"app/js/admin/complaints/complaints_template.html",
+    controller:"adminComplaintsController",
+    resolve:{
+      complaints:function(complaintsService,$location){
+        return complaintsService.getComplaints()
+        .then(function (res){return res},
+              function(err){$location.path('/login');});
+      }
+    }
+  }).otherwise({
     redirectTo:"/quiz/"
   })
 })

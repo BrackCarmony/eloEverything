@@ -17,7 +17,9 @@
 <div class = "question" ng-show = "question" ng-click="clickEvent($event)">
   <h3>{{question.question}}</h3>
   <ul class = "container-fluid">
+    <div class = "row">
     <li class = "col-xs-12 col-sm-6"ng-dblclick = "answerQuestion()" ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
+    </div>
   </ul>
   <div class = "container-fluid">
     <div class = "row">
@@ -27,7 +29,7 @@
 
       <button class ="btn-warning btn-lg col-xs-6 col-sm-offset-1 col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion(true)">Pass</button>
 
-      <div id = "deltaBox" class ="col-xs-6 col-sm-offset-1 col-sm-2 "  ng-show = "deltaScores.length>0">
+      <div id = "deltaBox" class ="col-xs-6 col-sm-offset-1 col-sm-3 "  ng-show = "deltaScores.length>0">
         <div ng-repeat = "deltaScore in deltaScores">
           <span ng-class = "{positive:deltaScore.deltaScore*1>0, negative:deltaScore.deltaScore*1<0}">
             {{deltaScore.category}}:
@@ -36,7 +38,24 @@
           </span>
         </div>
       </div>
-      <div class = "col-sm-6"
+      <form id = "reportBox" class = "col-xs-6 col-sm-2" ng-show = "answered && !complaintFinished">
+        <span ng-click= "complaining=true" ng-hide = "complaining" style="color:red">
+          <span  class = "glyphicon glyphicon-exclamation-sign" aria-label = "report"></span> <small><i>Report Issue With Question</i></small>
+        </span>
+        <span ng-show = "complaining">
+        <select ng-model = "complaint.complaint">
+          <option val ="Miscategorized">Miscategorized</option>
+          <option val ="Wrong Answer">Wrong Answer</option>
+          <option val = "Poorly Worded">Poorly Worded</option>
+          <option val = "Inappropriate/Offensive">Inappropriate/Offensive</option>
+        </select>
+          <input ng-model= "complaint.comment" placeholder = "Additional Information"></input>
+          <button ng-click = "submitComplaint(complaint)" class = "btn-danger btn-sm">Report</button>
+        </span>
+      </form>
+      <div class = "col-xs-6 col-sm-2" ng-show ="complaintFinished" style = "color:green">
+        Thank you for submitting a report.
+      </div>
     </div>
   </div>
 </div>

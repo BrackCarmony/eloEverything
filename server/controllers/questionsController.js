@@ -239,6 +239,12 @@ module.exports = {
         res.send(result)
       }
     })
+  },
+  mathHistogram:function(req, res){
+    console.log("Hit Math Histogram Endpoint");
+    console.log(req.body);
+    Question.
+    res.send("I Was Here");
   }
 
 }

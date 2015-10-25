@@ -1,0 +1,17 @@
+<div ng-repeat = "complaint in complaints | orderBy:complaint._question">
+
+  {{complaint._question.question}}
+  {{complaint._question.correct_answer}}
+  <ul>
+    <li ng-repeat = "possible_answer in complaint._question.possible_answers">
+      {{possible_answer}}
+    </li>
+  </ul>
+
+  <ul>
+    <li ng-repeat = "score in complaint._question.scores">
+      {{score.name}}
+    </li>
+  </ul>
+
+</div>

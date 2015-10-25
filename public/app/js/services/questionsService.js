@@ -54,6 +54,7 @@ app.service('questionsService',function($http, $location){
     checkCategories(questionToUpdate, categories);
     return $http.put("api/questions/" + questionToUpdate._id, questionToUpdate);
   }
+
 });
 
 function checkCategories(question, categories){
