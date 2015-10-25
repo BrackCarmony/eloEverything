@@ -2,7 +2,7 @@
 
   <ul>
     <strong>Your scores:</strong>
-    <li ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit?5:50" ng-click="loadQuestion(category._category)">{{category._category.name}}-{{category.score|number:0}}</li>
+    <li ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit?5:50" ng-click="loadQuestion(category._category)">{{category._category.name}}:{{category.score|number:0}}</li>
     <i><small><span ng-show="limit" ng-click = "limit=!limit">More</span><span ng-show="!limit" ng-click = "limit = !limit">Less</span></small></i>
   </ul>
 </br>

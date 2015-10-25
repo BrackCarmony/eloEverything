@@ -66,14 +66,14 @@ nav li{
   background-color: darkslategrey;
   color:white;
   transition: all .25s;
-  transform:scale(1.025);
+  transform:scale(1.005);
   box-shadow: 2px 2px 2px #333;
   z-index: 2;
 }
 
 .wrong{
   background-color:red;
-  transform:scale(.9);
+  transform:scale(.99);
   transition: 1s;
   z-index: 1;
 }
@@ -81,7 +81,7 @@ nav li{
 .correct{
   background-color:green;
   color:white;
-  transform:scale(1.1);
+  transform:scale(1.01);
   transition:all 1s;
   z-index: 5;
   box-shadow: 5px 5px 5px #333;
