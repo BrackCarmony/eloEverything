@@ -127,6 +127,7 @@ findOrCreateFromFacebook:function(profile, done){
                       console.log(err);
                       return err;
                     }
+                    console.log(result);
                     return done(null, result);
                   });
                 }else{
@@ -155,7 +156,9 @@ findOrCreateFromFacebook:function(profile, done){
           }
           //Found user with matching FacebookId, can call done with the resulting profile.
         }
-        return done(null, result);
+        else{
+          return done(null, result);
+        }
 
     })
 },//*/

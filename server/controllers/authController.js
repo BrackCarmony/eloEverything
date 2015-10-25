@@ -34,6 +34,7 @@ module.exports.fbStrat = new FacebookStrategy({
   clientID:process.env.facebookClientId,
   clientSecret:process.env.facebookClientSecret,
   callbackURL:'/auth/facebook/callback',
+  enableProof: true,
   profileFields: ['id', 'displayName', 'photos', 'email']
 }, function (token, refreshToken, profile, done){
   usersController.findOrCreateFromFacebook(profile, done)
