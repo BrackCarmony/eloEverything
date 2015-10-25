@@ -33,6 +33,8 @@ var schema = new mongoose.Schema({
   }],
   answered:{type:Number, default:0},
   correct:{type:Number, default:0},
+  passed:{type:Number, default:0},
+  wrong:{type:[Number]},
   _creator:{type:ObjectId, ref:'User'}
 });
 

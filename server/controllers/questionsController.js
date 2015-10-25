@@ -51,14 +51,37 @@ function calculateUserChangeInRating(score, user, question){
     question.scores[i].score -= ratingChange;
     //console.log('userRatingId',userRatingId);
     if (userScoreIndex ==-1){
+      if (score ===1){
+        var correctI = 1;
+        var passedI = 0;
+        var wrongI = 0;
+      }else if(score ===0){
+        var correctI = 0;
+        var passedI = 0;
+        var wrongI = 1;
+      }else{
+        var correctI = 0;
+        var passedI = 1;
+        var wrongI = 0;
+      }
       user.scores.push({
         _category:category,
         score:userRating+=ratingChange,
-        answered:1
+        answered:1,
+        correct:correctI,
+        wrong:wrongI,
+        passed:passedI
       })
     }else{
       user.scores[userScoreIndex].score +=ratingChange;
       user.scores[userScoreIndex].answered +=1;
+      if(score ===1){
+        user.scores[userScoreIndex].correct +=1;
+      }else if(score ===0){
+        user.scores[userScoreIndex].wrong +=1;
+      }else{
+        user.scores[userScoreIndex].passed +=1;
+      }
     }
     scoreChange.push({
       category:question.scores[i]._category.name,
@@ -205,13 +228,29 @@ module.exports = {
       }else{
         //Retrieved
         var score;
+        question.answered +=1;
         if (req.body.answer === question.correct_answer){
           score = 1;
+          question.correct +=1;
         }else if(req.body.pass){
           score = 1/(question.possible_answers.length+1);
+          question.passed +=1;
         }else{
           score = 0;
+          for (var i=0;i<question.possible_answers.length;i++){
+            if(question.possible_answers[i]==req.body.answer){
+              console.log("--------------"+question.wrong[i]);
+              if(question.wrong[i]){
+                question.wrong[i]+=1;
+              }else{
+                question.wrong[i]=1;
+              }
+              console.log("--------------"+question.wrong[i]);
+            }
+          }
         }
+        question.markModified('wrong');
+        question.save();
         //console.log("score:",score);
         User.findById(req.user._id, function(err, user){
           if(err){

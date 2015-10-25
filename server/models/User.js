@@ -13,7 +13,10 @@ var schema = new mongoose.Schema({
     _category:{type:ObjectId, ref:"Category"},
     score:{type:Number, default:1200},
     answered:{type:Number, default:0},
-    correct:{type:Number, default:0}
+    correct:{type:Number, default:0},
+    wrong:{type:Number, default:0},
+    passed:{type:Number, default:0},
+
   }],
   recent_questions:[{type:ObjectId, ref:"Question"}]
 });
