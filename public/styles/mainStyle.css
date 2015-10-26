@@ -153,3 +153,47 @@ nav li{
 .btn-lg{
   transition:1s;
 }
+
+score-display button{
+  margin: 0px;
+  width:100%;
+}
+
+
+
+score-display{
+  display: inline-block;
+  margin: .5% 4px;
+}
+
+.progress-button{
+  position:relative;
+  padding:5 10px;
+  background:lightslategrey;
+  color:#fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size:1.1em'
+  line-height:4;
+}
+
+.progress-button .content{
+  position:relative;
+  display:block;
+}
+
+.progress-button .progress {
+	position: absolute;
+	right: 0;
+	background: darkslategrey;
+  top: 0;
+  width: 0;
+  height: 100%;
+  opacity:1;
+  transition: width 0.3s, opacity 0.3s;
+  border-radius:0px;
+}
+
+.red{
+
+}

@@ -50,7 +50,23 @@ app.config(function($routeProvider){
         return categoriesService.getAllCategories();
       }
     }
-  }).when("/login", {
+  })
+  .when("/profile",{
+    templateUrl:"app/js/profile/profile_template.html",
+    controller:"profileController",
+    resolve:{
+      user: function(usersService, $route, $location){
+        return usersService.getMe().then(function(result){
+          if(result._id){
+          return result;
+        }else{
+          $location.path("/login");
+        }
+      });
+      }
+    }
+  })
+  .when("/login", {
       templateUrl:"app/js/login/login_template.html",
       controller:"loginController"
   }).when("/admin", {

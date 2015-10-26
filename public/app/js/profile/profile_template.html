@@ -1,0 +1,19 @@
+
+<div class = "container-fluid">
+  <div class = "row">
+    <div class = "well">
+      <h3>Elo Score: {{eloScore|number:0}}</h3>
+      </div>
+
+  </div>
+  <div class = "row">
+    <div class = "col-xs-9">
+    <span ng-repeat = "score in user.scores|orderBy:'-score'">
+      <score-display score = "score"> </score-display>
+    </span>
+    </div>
+    <div class = "col-xs-3 red">
+
+    </div>
+  </div>
+</div>

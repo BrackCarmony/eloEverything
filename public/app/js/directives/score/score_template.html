@@ -1,0 +1,12 @@
+<!--{{score}}
+<div class = "progress">
+  {{score.score|number:0}}
+  <div class = "progress-bar" ng-style = "{width:percentage}">
+  </div>
+</div>
+{{percentage}} -->
+
+<button class = "progress-button" data-style="fill" data-horizontal>
+  <span class = "progress" ng-style= "{width:percentage}"></span>
+  <span class = "content">{{score._category.name}}:{{score.score|number:0}}</span>
+</button>

@@ -9,7 +9,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
     $scope.setCurrentUser(user);
   }
   console.log(user);
-  $scope.limit = true;
+  $scope.limit = 5;
   $scope.selected = "";
   console.log(user);
 
@@ -35,6 +35,16 @@ app.controller('quizController', function($scope, user, questionsService, usersS
     });
   }
 
+  calcEloScore();
+  function calcEloScore(){
+    var eloScore = 0;
+      $scope.user.scores.forEach(function(score){
+        console.log(score.score*Math.min(100,score.answered)/100)
+        eloScore+=score.score*Math.min(100,score.answered)/100;
+      })
+    $scope.eloScore = eloScore;
+  }
+
   $scope.clickEvent  = function(event){
     event.preventDefault();
     event.cancelBubble = true;
@@ -53,12 +63,14 @@ app.controller('quizController', function($scope, user, questionsService, usersS
       $scope.loadQuestion($scope.category);
     }else {
       $scope.answered = true;
-      questionsService.answerQuestion($scope.question._id, answer, pass ).then(function(response){
-
+      questionsService.answerQuestion($scope.question._id, answer, pass )
+      .then(function(response){
         $scope.correct_answer = response.correct_answer;
         $scope.deltaScores = response.deltaScores;
+
         usersService.getMe().then(function(response){
             $scope.user = response;
+            calcEloScore();
           }
         )
       }

@@ -1,15 +1,26 @@
 <div class = "categories well">
 
-  <ul>
-    <strong>Your scores:</strong>
-    <li ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit?5:50" ng-click="loadQuestion(category._category)">{{category._category.name}}:{{category.score|number:0}}</li>
-    <i><small><span ng-show="limit" ng-click = "limit=!limit">More</span><span ng-show="!limit" ng-click = "limit = !limit">Less</span></small></i>
-  </ul>
+    <div class = 'container-fluid'>
+      <div class = "row">
+        <div class = "col-xs-6">
+          <strong class = "h2">Elo Score: {{eloScore|number:0}}</strong>
+        </div>
+        <div class = "col-xs-6">
+          <strong>Popular Categories: </strong>
+          <select ng-options = "category.name for category in categories" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)"> </select>
+        </div>
+      </div>
+      <div class = 'row'>
+        <div class = 'col-xs-12'>
+          <strong>Your Categories:</strong>
+          <span ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit" ng-click="loadQuestion(category._category)"><score-display score = "category"></score-display></span>
+          <i><small><span ng-show="limit<=user.scores.length" ng-click = "limit=limit+5">More</span><span ng-show="limit>5" ng-click = "limit=limit - 5">Less</span></small></i>
+        </div>
+      </div>
+    </div>
 </br>
-  <strong>Popular Categories: </strong><select ng-options = "category.name for category in categories" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)">
-  </select>
-</div>
 
+</div>
 <div class = 'question' ng-show = "warning"><h2>
   {{warning}}
 </h2></div>
