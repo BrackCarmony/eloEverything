@@ -7,7 +7,7 @@
         </div>
         <div class = "col-xs-6">
           <strong>Popular Categories: </strong>
-          <select ng-options = "category.name for category in categories" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)"> </select>
+          <select ng-options = "category.name for category in categories | orderBy:'-questions_count'" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)"> </select>
         </div>
       </div>
       <div class = 'row'>
