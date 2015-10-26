@@ -7,7 +7,7 @@ app.controller('profileController', function($scope, user){
   function calcEloScore(){
     var eloScore = 0;
       user.scores.forEach(function(score){
-        console.log(score.score*Math.min(100,score.answered)/100)
+        //console.log(score.score*Math.min(100,score.answered)/100)
         eloScore+=score.score*Math.min(100,score.answered)/100;
       })
     $scope.eloScore = eloScore;

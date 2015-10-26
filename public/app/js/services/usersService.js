@@ -7,7 +7,7 @@ app.service('usersService',function($http, Session){
   this.getAllUsers = function(){
     return $http.get("/api/users").then(
       function(response){
-        console.log(response);
+        //console.log(response);
         return response.data;
       },
       function(error){

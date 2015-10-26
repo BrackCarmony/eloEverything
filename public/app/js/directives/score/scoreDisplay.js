@@ -10,16 +10,16 @@ app.directive('scoreDisplay', function(){
     link:function(scope, elem, atts){
 
         //scope.score = score;
-        console.log(scope);
+        //console.log(scope);
         //console.log(score);
         scope.percentage = Math.max(100-scope.score.answered, 0)+'%';
         //scope.huh = "Yup";
         //score.otherProptety = "yay";
         scope.test = function(){
-          console.log("Running");
+          //console.log("Running");
           return "Maybe";
         }
-        console.log(scope);
+        //console.log(scope);
     }
   }
 })

@@ -8,7 +8,7 @@ app.controller('authController', function($scope, authService ,$location){
   }
 
   $scope.goto = function(url){
-    console.log("redirect to " + url);
+    //console.log("redirect to " + url);
     $location.path(url);
   }
 

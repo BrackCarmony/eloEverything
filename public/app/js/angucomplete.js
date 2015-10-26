@@ -162,10 +162,10 @@ angular.module('angucomplete', [] )
             }
 
             $scope.keyPressed = function(event) {
-              console.log(event.which);
+              //console.log(event.which);
                 if (!(event.which == 38 || event.which == 40 || event.which == 13 || event.which ==9)) {
                   if(event.which ==13){
-                    console.log("Gah");
+                    //console.log("Gah");
                   }
                     if (!$scope.searchStr || $scope.searchStr == "") {
                         $scope.showDropdown = false;
@@ -215,7 +215,7 @@ angular.module('angucomplete', [] )
             inputField.on('keyup', $scope.keyPressed);
 
             elem.on("keydown", function(event){
-              console.log(event.which);
+              //console.log(event.which);
               if(event.which ===13){
                 event.preventDefault();
                 event.stopPropagation();
@@ -225,13 +225,13 @@ angular.module('angucomplete', [] )
 
             function checkOnExit(){
               if ($scope.results && $scope.currentIndex >= 0 && $scope.currentIndex < $scope.results.length) {
-                console.log("Hmmn");
+                //console.log("Hmmn");
                   $scope.selectResult($scope.results[$scope.currentIndex]);
                   //$scope.$apply();
                   event.preventDefault;
                   event.stopPropagation();
               } else {
-                console.log("Hmmn2");
+                //console.log("Hmmn2");
                   nonDefault();
                   $scope.results = [];
                   //$scope.$apply();
@@ -241,7 +241,7 @@ angular.module('angucomplete', [] )
             }
 
             elem.on("keyup", function (event) {
-              console.log(event.which);
+              //console.log(event.which);
                 if(event.which === 40) {
                     if ($scope.results && ($scope.currentIndex + 1) < $scope.results.length) {
                         $scope.currentIndex ++;
@@ -260,15 +260,15 @@ angular.module('angucomplete', [] )
                     }
 
                 } else if (event.which == 13) {
-                  console.log("Hmmn3");
+                  //console.log("Hmmn3");
                     if ($scope.results && $scope.currentIndex >= 0 && $scope.currentIndex < $scope.results.length) {
-                      console.log("Hmmn");
+                      //console.log("Hmmn");
                         $scope.selectResult($scope.results[$scope.currentIndex]);
                         $scope.$apply();
                         event.preventDefault;
                         event.stopPropagation();
                     } else {
-                      console.log("Hmmn2");
+                      //console.log("Hmmn2");
                         nonDefault();
                         $scope.results = [];
                         $scope.$apply();

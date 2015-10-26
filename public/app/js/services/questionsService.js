@@ -18,7 +18,7 @@ app.service('questionsService',function($http, $location){
   };
 
   this.getSingleQuestion = function(category){
-    console.log(category);
+    //console.log(category);
     return $http.get("/api/questions/" + category)
     .then(function(response){
         return response.data
@@ -58,7 +58,7 @@ app.service('questionsService',function($http, $location){
 });
 
 function checkCategories(question, categories){
-  console.log("hmmm");
+  //console.log("hmmm");
   question.scores.forEach(function(score, index, arry){
     if(score._category.name !== _.findWhere(categories, {_id:score._category._id}).name){
         //console.log("Name has changed, find categorie with that name, and set score's Id to match");

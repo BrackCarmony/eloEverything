@@ -5,7 +5,7 @@ app.service('categoriesService', function($http, $location){
   this.getAllCategories = function(){
     return $http.get("/api/categories")
     .then(function(response){
-      console.log(response.data);
+      //console.log(response.data);
       return response.data;
     }, function(error){
       console.log(error);

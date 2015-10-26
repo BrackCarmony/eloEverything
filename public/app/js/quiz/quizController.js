@@ -8,13 +8,13 @@ app.controller('quizController', function($scope, user, questionsService, usersS
   if (!$scope.currentUser){
     $scope.setCurrentUser(user);
   }
-  console.log(user);
+  //console.log(user);
   $scope.limit = 5;
   $scope.selected = "";
-  console.log(user);
+  //console.log(user);
 
   $scope.loadQuestion = function(category){
-    console.log(category);
+    //console.log(category);
     $scope.complaining = false;
     $scope.complaintFinished = false;
     $scope.selected = "";
@@ -39,7 +39,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
   function calcEloScore(){
     var eloScore = 0;
       $scope.user.scores.forEach(function(score){
-        console.log(score.score*Math.min(100,score.answered)/100)
+        //console.log(score.score*Math.min(100,score.answered)/100)
         eloScore+=score.score*Math.min(100,score.answered)/100;
       })
     $scope.eloScore = eloScore;
@@ -83,7 +83,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
 
       newComplaint._question = $scope.question._id;
       newComplaint._user = $scope.user._id;
-      console.log(newComplaint);
+      //console.log(newComplaint);
       complaintsService.submitComplaint(newComplaint).then(
         function(result){$scope.complaintFinished = true;}, function(err){
 
