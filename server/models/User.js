@@ -9,6 +9,7 @@ var schema = new mongoose.Schema({
   facebookId:String,
   googleId:String,
   role:{type:String, default:"user"},
+  pictureUrl:String,
   scores:[{
     _category:{type:ObjectId, ref:"Category"},
     score:{type:Number, default:1200},

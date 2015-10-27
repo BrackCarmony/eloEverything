@@ -61,8 +61,9 @@ app.put("/api/questions/:questionId", authController.ensureAuthenticated, authCo
 //app.get("/api/users", usersController.getAllUsers);
 //app.get("/api/users/:id", usersController.getUserById);
 app.get("/api/me", authController.ensureAuthenticated, usersController.getUserBySession);
-app.post("/api/users", usersController.addUser);
 app.get("/api/users/admin",authController.ensureAuthenticated, authController.ensureAdmin, usersController.getAllUsersAdmin);
+app.post("/api/users", usersController.addUser);
+app.put("/api/users", authController.ensureAuthenticated, usersController.updateUser);
 
 app.get("/api/complaints", authController.ensureAuthenticated, authController.ensureAdmin, complaintsController.getComplaints);
 app.post("/api/complaints", authController.ensureAuthenticated, complaintsController.addComplaint);

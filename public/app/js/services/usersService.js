@@ -54,4 +54,14 @@ app.service('usersService',function($http, Session){
   this.getUsersAdmin = function(){
     return $http.get("/api/users/admin").then(function(user){return user.data});
   }
+
+  this.updateUser = function(propsToUpdate){
+    return $http.put("/api/users", propsToUpdate)
+      .then(function(res){
+        return res},
+      function(err){
+        console.log(err);
+        return err
+      });
+  }
 });

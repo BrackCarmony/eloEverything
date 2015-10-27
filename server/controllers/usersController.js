@@ -117,11 +117,15 @@ findOrCreateFromFacebook:function(profile, done){
               } else{
                 if(result === null){
                   //Didn't find matching email, add as new User
+                  var newPhoto;
+                  if(profile.photos){
+                    newPhoto = profile.photos[0].value;
+                  }
                   var newUser = {
                     email:profile.email,
                     'display_name': profile.displayName,
                     facebookId: profile.id,
-
+                    pictureUrl:newPhoto
                   }
                   User.create(newUser, function(err, result){
                     if(err){
@@ -135,6 +139,9 @@ findOrCreateFromFacebook:function(profile, done){
                   //Found User with matching email.  Add Facebook profile to it,
                   //then call done
                   result.facebookId = profile.id;
+                  if (!result.pictureUrl && profile.photos){
+                    result.pictureUrl = profile.photos[0].value;
+                  }
                   //console.log(result);
                   result.save();
                   return done(null, result);
@@ -158,6 +165,10 @@ findOrCreateFromFacebook:function(profile, done){
           //Found user with matching FacebookId, can call done with the resulting profile.
         }
         else{
+          if (!result.pictureUrl && profile.photos){
+            result.pictureUrl = profile.photos[0].value;
+            result.save();
+          }
           return done(null, result);
         }
 
@@ -185,5 +196,16 @@ addQuestionToAnsweredList(req, res, next){
     user.save();
     next();
   })
-}
+},
+  updateUser(req, res){
+    console.log(req.body);
+    User.findByIdAndUpdate(req.user._id, req.body, function(err, result){
+      if(err){
+        console.log(err)
+        res.sendStatus(500);
+      }else{
+        res.sendStatus(200);
+      }
+    })
+  }
 };

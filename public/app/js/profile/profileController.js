@@ -1,6 +1,6 @@
 var app = angular.module('eloEverything');
 
-app.controller('profileController', function($scope, user){
+app.controller('profileController', function($scope, user, usersService){
   $scope.user = user
 
   calcEloScore();
@@ -11,5 +11,20 @@ app.controller('profileController', function($scope, user){
         eloScore+=score.score*Math.min(100,score.answered)/100;
       })
     $scope.eloScore = eloScore;
+  }
+
+  $scope.updateUser = function(){
+    userPropsToUpdate = {
+      display_name: user.display_name,
+      email:user.email
+    }
+    console.log(userPropsToUpdate);
+    usersService.updateUser(userPropsToUpdate).then(
+      function(res){
+        $scope.editing = false;
+        $scope.updating = false;
+      }
+    );
+
   }
 })

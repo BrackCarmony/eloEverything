@@ -169,8 +169,8 @@ score-display{
   color:#fff;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-size:1.1em'
-  line-height:4;
+  font-size:1.1em;
+  line-height:1.25;
   border-radius:7px
 }
 
@@ -189,4 +189,13 @@ score-display{
   opacity:1;
   transition: width 0.3s, opacity 0.3s;
   border-radius:0px;
+}
+
+
+.profile-img-button{
+  height:5em;
+  width:5em;
+  border-radius:5em;
+  border:2px solid darkslategrey;
+  box-shadow: 2px 2px 2px #333;
 }
