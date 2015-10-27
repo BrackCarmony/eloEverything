@@ -150,10 +150,6 @@ nav li{
   margin-left:0%;
 }
 
-.btn-lg{
-  transition:1s;
-}
-
 score-display button{
   margin: 0px;
   width:100%;
