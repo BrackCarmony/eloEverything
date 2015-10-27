@@ -169,12 +169,13 @@ score-display{
 .progress-button{
   position:relative;
   padding:5 10px;
-  background:lightslategrey;
+  background:darkslategrey;
   color:#fff;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size:1.1em'
   line-height:4;
+  border-radius:7px
 }
 
 .progress-button .content{
@@ -185,15 +186,11 @@ score-display{
 .progress-button .progress {
 	position: absolute;
 	right: 0;
-	background: darkslategrey;
+	background: lightslategrey;
   top: 0;
   width: 0;
   height: 100%;
   opacity:1;
   transition: width 0.3s, opacity 0.3s;
   border-radius:0px;
-}
-
-.red{
-
 }
