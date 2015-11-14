@@ -25,7 +25,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-passport.use(authController.fbStrat)
+passport.use(authController.fbStrat);
 
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req,res){
@@ -39,7 +39,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
   res.body = req.user;
   res.redirect('/#/login-land');
 }
-)
+);
 
 passport.serializeUser(function(user, done){
   done(null, user);
@@ -49,7 +49,7 @@ passport.deserializeUser(function(obj, done){
   done(null, obj);
 });
 
-app.get("/auth/logout", authController.logout)
+app.get("/auth/logout", authController.logout);
 
 app.get("/api/questions", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.seeQuestions);
 app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, usersController.getRecentQuestions, questionsController.askQuestion);
@@ -70,14 +70,14 @@ app.post("/api/complaints", authController.ensureAuthenticated, complaintsContro
 
 
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
-
+app.put("/api/categories", authController.ensureAdmin, categoriesController.updateCategory);
 
 var mongoUri = "mongodb://0.0.0.0:27017/elo";
 mongoose.set('debug', true);
 mongoose.connect(mongoUri);
 mongoose.connection.once('open', function(){
   console.log('connected to mongoDb at : ', mongoUri);
-})
+});
 
 if(process.env.envStatus === "DEVELOPMENT"){
 var port = 8080;
@@ -86,4 +86,4 @@ var port = 8080;
 }
 app.listen(port, function(){
   console.log("Listening on port:" + port +" in " + process.env.envStatus + " mode.");
-})
+});

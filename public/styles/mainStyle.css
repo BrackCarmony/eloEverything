@@ -151,7 +151,7 @@ nav li{
 }
 
 score-display button{
-  margin: 0px;
+  margin: 0 auto;
   width:100%;
 }
 
@@ -198,4 +198,12 @@ score-display{
   border-radius:5em;
   border:2px solid darkslategrey;
   box-shadow: 2px 2px 2px #333;
+}
+
+.max-scroll-box{
+  max-height: 50vh;
+  overflow: auto;
+  padding-bottom:10px;
+  margin-top:-10px;
+  box-sizing: padding-box;
 }

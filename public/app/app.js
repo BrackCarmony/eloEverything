@@ -31,7 +31,7 @@ app.config(function($routeProvider){
         }else{
           $location.path("/login");
         }
-        })
+      });
       }
     }
   }).when("/users",{
@@ -78,8 +78,8 @@ app.config(function($routeProvider){
     resolve:{
       questions:function(questionsService, $location){
         return questionsService.getAllQuestions()
-        .then(function(res){return res},
-              function(err){$location.path('/login')});
+        .then(function(res){return res;},
+              function(err){$location.path('/login');});
       },
       categories:function(categoriesService){
         return categoriesService.getAllCategories();
@@ -91,8 +91,8 @@ app.config(function($routeProvider){
     resolve:{
       users:function(usersService, $location){
           return usersService.getUsersAdmin()
-          .then(function(res){return res},
-                function(err){$location.path('/login')})
+          .then(function(res){return res;},
+                function(err){$location.path('/login');});
       }
     }
   }).when("/admin/complaints",{
@@ -101,11 +101,21 @@ app.config(function($routeProvider){
     resolve:{
       complaints:function(complaintsService,$location){
         return complaintsService.getComplaints()
-        .then(function (res){return res},
+        .then(function (res){return res;},
+              function(err){$location.path('/login');});
+      }
+    }
+  }).when("/admin/categories",{
+    templateUrl:"app/js/admin/categories/categories_template.html",
+    controller:"adminCategoriesController",
+    resolve:{
+      categories:function(categoriesService,$location){
+        return categoriesService.getAllCategories('All')
+        .then(function (res){return res;},
               function(err){$location.path('/login');});
       }
     }
   }).otherwise({
     redirectTo:"/quiz/"
-  })
-})
+  });
+});
