@@ -1,4 +1,4 @@
-# eloEverything
+# ELO-Everything
 
 ## Overview
 
