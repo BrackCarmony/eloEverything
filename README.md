@@ -9,15 +9,15 @@ Users can answer questions in various categories to track their profeciency.  Qu
 Angular based single page web application, minimal Bootstrap utilization.  
 
 ### Technologies
-+AngularJS
-+Bootstrap
++ AngularJS
++ Bootstrap
 
 ## Back-End
 Node server with Facebook integration
 
 ### Technologies
-+NodeJS
-+Express
-+MongoDB
-+Mongoose
-+Passport
++ NodeJS
++ Express
++ MongoDB
++ Mongoose
++ Passport
