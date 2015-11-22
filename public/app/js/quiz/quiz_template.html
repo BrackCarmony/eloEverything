@@ -2,21 +2,21 @@
 
     <div class = 'container-fluid'>
       <div class = "row">
-        <div class = "col-xs-6" ng-show = "user.scores.length">
+        <div class = "col-sm-6" ng-show = "user.scores.length">
           <strong class = "h2">Elo Score: {{eloScore|number:0}}</strong>
         </div>
-        <div class = "col-xs-6">
+        <div class = "col-sm-6">
           <strong>Popular Categories: </strong>
           <select ng-options = "category.name for category in categories | orderBy:'-questions_count'" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)"> </select>
         </div>
       </div>
       <div class = 'row'>
-        <div class = 'col-xs-12' ng-show = "user.scores.length">
+        <div class = 'col-sm-12' ng-show = "user.scores.length">
           <strong>Your Categories:</strong>
           <span ng-repeat ="category in user.scores|orderBy:'-score' | limitTo:limit" ng-click="loadQuestion(category._category)"><score-display score = "category"></score-display></span>
           <i><small><span ng-show="limit<user.scores.length" ng-click = "limit=limit+5">More</span><span ng-show="limit>5" ng-click = "limit=limit - 5">Less</span></small></i>
         </div>
-        <div class = 'col-xs-12' ng-hide = "user.scores.length">
+        <div class = 'col-sm-12' ng-hide = "user.scores.length">
           <span class = "h3">Select from populare categories to start increasing your elo score.</span>
         </div>
       </div>
@@ -32,18 +32,18 @@
   <h3>{{question.question}}</h3>
   <ul class = "container-fluid">
     <div class = "row">
-    <li class = "col-xs-12 col-sm-6"ng-dblclick = "answerQuestion()" ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
+    <li class = "col-sm-12 col-sm-6"ng-dblclick = "answerQuestion()" ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
     </div>
   </ul>
   <div class = "container-fluid">
     <div class = "row">
 
-      <button class ="btn-primary btn-lg col-xs-6 col-sm-2" ng-hide = "answered" ng-disabled = "selected == '' || answered" ng-click = "answerQuestion()">Answer</button>
-      <button class ="btn-primary btn-lg col-xs-6 col-sm-2 " ng-show = "answered" ng-click = "loadQuestion(category)">Next</button><!-- -->
+      <button class ="btn-primary btn-lg col-sm-6 col-sm-2" ng-hide = "answered" ng-disabled = "selected == '' || answered" ng-click = "answerQuestion()">Answer</button>
+      <button class ="btn-primary btn-lg col-sm-6 col-sm-2 " ng-show = "answered" ng-click = "loadQuestion(category)">Next</button><!-- -->
 
-      <button class ="btn-warning btn-lg col-xs-6 col-sm-offset-1 col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion(true)">Pass</button>
+      <button class ="btn-warning btn-lg col-sm-6 col-sm-offset-1 col-sm-2" ng-show = "question" ng-disabled = "answered" ng-click = "answerQuestion(true)">Pass</button>
 
-      <div id = "deltaBox" class ="col-xs-6 col-sm-offset-1 col-sm-3 "  ng-show = "deltaScores.length>0">
+      <div id = "deltaBox" class ="col-sm-6 col-sm-offset-1 col-sm-3 "  ng-show = "deltaScores.length>0">
         <div ng-repeat = "deltaScore in deltaScores">
           <span ng-class = "{positive:deltaScore.deltaScore*1>0, negative:deltaScore.deltaScore*1<0}">
             {{deltaScore.category}}:
@@ -52,7 +52,7 @@
           </span>
         </div>
       </div>
-      <form id = "reportBox" class = "col-xs-6 col-sm-2" ng-show = "answered && !complaintFinished">
+      <form id = "reportBox" class = "col-sm-6 col-sm-2" ng-show = "answered && !complaintFinished">
         <span ng-click= "complaining=true" ng-hide = "complaining" style="color:red">
           <span  class = "glyphicon glyphicon-exclamation-sign" aria-label = "report"></span> <small><i>Report Issue With Question</i></small>
         </span>
@@ -67,7 +67,7 @@
           <button ng-click = "submitComplaint(complaint)" class = "btn-danger btn-sm">Report</button>
         </span>
       </form>
-      <div class = "col-xs-6 col-sm-2" ng-show ="complaintFinished" style = "color:green">
+      <div class = "col-sm-6 col-sm-2" ng-show ="complaintFinished" style = "color:green">
         Thank you for submitting a report.
       </div>
     </div>
