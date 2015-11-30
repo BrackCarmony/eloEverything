@@ -66,6 +66,21 @@ app.config(function($routeProvider){
       }
     }
   })
+  .when("/rankings",{
+    templateUrl:"app/js/rankings/rankings_template.html",
+    controller:"rankingsController",
+    resolve:{
+      user: function(usersService, $route, $location){
+        return usersService.getMe().then(function(result){
+          if(result._id){
+          return result;
+        }else{
+          $location.path("/login");
+        }
+      });
+      }
+    }
+  })
   .when("/login", {
       templateUrl:"app/js/login/login_template.html",
       controller:"loginController"

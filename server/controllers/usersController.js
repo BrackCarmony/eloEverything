@@ -3,7 +3,6 @@ var settings = require('../settings');
 
 module.exports = {
   addUser:function(req, res){
-    //console.log("Adding User");
     User.create(req.body, function(err, result){
       if(err){
         console.log(err);
@@ -20,7 +19,7 @@ getAllUsers:function(req,res){
     }else{
       res.json(result);
     }
-  })
+  });
 },
 getAllUsersAdmin:function(req, res){
   User.find({})
@@ -32,9 +31,8 @@ getAllUsersAdmin:function(req, res){
     }else{
       res.json(users);
     }
-  })
-}
-,
+  });
+},
 getUserById:function(req,res){
   User.findById(req.params.id)
   .populate('scores.category')
@@ -44,7 +42,21 @@ getUserById:function(req,res){
     }else{
       res.json(result);
     }
-  })
+  });
+},
+getRankingsInCategory:function(req,res,next){
+  User.find({})
+      .select("scores display_name")
+      .where("scores._category").equals(req.params.category)
+      .sort("scores.score")
+      .exec(function(err, result){
+        if(err){
+            console.log(err);
+        }
+        console.log(result);
+      });
+
+
 },
 getScoreInCategory:function(req,res, next){
   User.findById(req.user.id)
@@ -81,7 +93,7 @@ getRecentQuestions:function(req, res, next){
       }
     }
     next();
-  })
+  });
 },
 getUserBySession:function(req,res){
   //console.log(req.user);
@@ -93,7 +105,7 @@ getUserBySession:function(req,res){
     }else{
       res.json(result);
     }
-  })
+  });
 },
 findOrCreateFromFacebook:function(profile, done){
   console.log("Find me for profile:", profile);
@@ -126,7 +138,7 @@ findOrCreateFromFacebook:function(profile, done){
                     'display_name': profile.displayName,
                     facebookId: profile.id,
                     pictureUrl:newPhoto
-                  }
+                  };
                   User.create(newUser, function(err, result){
                     if(err){
                       console.log(err);
@@ -153,7 +165,7 @@ findOrCreateFromFacebook:function(profile, done){
             var newUser = {
               'display_name': profile.displayName,
               facebookId: profile.id
-            }
+            };
             User.create(newUser, function(err, result){
               if(err){
                 console.log(err);
@@ -172,9 +184,9 @@ findOrCreateFromFacebook:function(profile, done){
           return done(null, result);
         }
 
-    })
-},//*/
-addQuestionToAnsweredList(req, res, next){
+    });
+},
+addQuestionToAnsweredList:function(req, res, next){
   console.log(req.user);
   User.findById(req.user._id)
   .select("recent_questions")
@@ -195,17 +207,17 @@ addQuestionToAnsweredList(req, res, next){
     }
     user.save();
     next();
-  })
+  });
 },
-  updateUser(req, res){
+updateUser:function(req, res){
     console.log(req.body);
     User.findByIdAndUpdate(req.user._id, req.body, function(err, result){
       if(err){
-        console.log(err)
+        console.log(err);
         res.sendStatus(500);
       }else{
         res.sendStatus(200);
       }
-    })
+    });
   }
 };

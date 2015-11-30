@@ -64,6 +64,7 @@ app.get("/api/me", authController.ensureAuthenticated, usersController.getUserBy
 app.get("/api/users/admin",authController.ensureAuthenticated, authController.ensureAdmin, usersController.getAllUsersAdmin);
 app.post("/api/users", usersController.addUser);
 app.put("/api/users", authController.ensureAuthenticated, usersController.updateUser);
+app.get("/api/rankings/:category", authController.ensureAuthenticated, usersController.getRankingsInCategory);
 
 app.get("/api/complaints", authController.ensureAuthenticated, authController.ensureAdmin, complaintsController.getComplaints);
 app.post("/api/complaints", authController.ensureAuthenticated, complaintsController.addComplaint);

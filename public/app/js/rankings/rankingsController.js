@@ -1,6 +1,6 @@
 var app = angular.module('eloEverything');
 
-app.controller('profileController', function($scope, user, usersService){
+app.controller('rankingsController', function($scope, user, usersService){
   $scope.user = user;
   $scope.currentCategory = null;
   calcEloScore();
@@ -27,7 +27,6 @@ app.controller('profileController', function($scope, user, usersService){
         $scope.setCurrentUser(saveUser);
       }
     );
-
   };
 
   $scope.setCurrentCategory = function(currentCategory){
