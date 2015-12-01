@@ -9,4 +9,4 @@ var schema = new mongoose.Schema({
   status:{type:String, default:"Tag"}
 });
 
-module.exports = mongoose.model('Category', schema)
+module.exports = mongoose.model('Category', schema);

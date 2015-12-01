@@ -9,6 +9,7 @@ app.controller('rankingsController', function($scope, user, usersService){
     console.log("Init The Rankings", category);
     usersService.getRankingsInCategory(category).then(function(res){
       console.log(res);
+      $scope.rankings = res;
     },function(err){});
   };
 });

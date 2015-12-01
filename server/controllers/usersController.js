@@ -1,5 +1,9 @@
 var User = require('../models/User');
 var settings = require('../settings');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
+
+//console.log(ObjectId);
 
 module.exports = {
   addUser:function(req, res){
@@ -44,17 +48,38 @@ getUserById:function(req,res){
     }
   });
 },
+// getRankingsInCategory:function(req,res,next){
+//   console.log('req.params.category',req.params.category);
+//   User.find({})
+//       .select("scores display_name")
+//       .where("scores._category").equals(req.params.category)
+//       .sort("scores.score")
+//       .exec(function(err, result){
+//         if(err){
+//             console.log(err);
+//         }
+//         console.log('rankings result:', result);
+//         res.send(result);
+//       });
+// },
 getRankingsInCategory:function(req,res,next){
+  var objId = new ObjectId(req.params.category);
   console.log('req.params.category',req.params.category);
-  User.find({})
-      //.select("scores display_name")
-      .where("scores._category").equals(req.params.category)
-      //.sort("scores.score")
+  console.log('objId',objId);
+  User.aggregate([
+    {$project:{display_name:1, scores:{score:1,_category:1}}},
+    {$match:{'scores._category':objId}},
+    {$unwind:"$scores"},
+    {$match:{'scores._category':objId}},
+    {$sort:{'scores.score':1}},
+    {$limit:50}
+  ])
       .exec(function(err, result){
         if(err){
             console.log(err);
         }
         console.log('rankings result:', result);
+        res.send(result);
       });
 },
 getScoreInCategory:function(req,res, next){

@@ -66,10 +66,11 @@ app.service('usersService',function($http, Session){
   };
 
   this.getRankingsInCategory = function(category){
-    return $http.get("/api/rankings/"+category._id)
+    //console.log('category:',category);
+    return $http.get("/api/rankings/"+category._category._id)
     .then(function(res){
-      console.log(res);
-      return res;
+      //console.log(res);
+      return res.data;
     }, function(err){
       console.log(err);
       return err;

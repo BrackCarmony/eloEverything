@@ -6,3 +6,9 @@ This be rankings template.
     <score-display score = "score" ng-click = "getRankings(score)" > </score-display>
   </span>
 </div>
+<div>
+  <div ng-repeat = "rank in rankings">
+    {{rank.display_name}}:{{rank.scores.score|}}
+  </div>
+
+</div>
