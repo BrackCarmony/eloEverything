@@ -45,20 +45,20 @@ getUserById:function(req,res){
   });
 },
 getRankingsInCategory:function(req,res,next){
+  console.log('req.params.category',req.params.category);
   User.find({})
-      .select("scores display_name")
+      //.select("scores display_name")
       .where("scores._category").equals(req.params.category)
-      .sort("scores.score")
+      //.sort("scores.score")
       .exec(function(err, result){
         if(err){
             console.log(err);
         }
-        console.log(result);
+        console.log('rankings result:', result);
       });
-
-
 },
 getScoreInCategory:function(req,res, next){
+  console.log('req.params.category:----------------------------', req.params.category);
   User.findById(req.user.id)
   .select('scores')
   .where("scores._category").equals(req.params.category)
@@ -98,7 +98,7 @@ getRecentQuestions:function(req, res, next){
 getUserBySession:function(req,res){
   //console.log(req.user);
   User.findById(req.user._id)
-  .populate('scores._category', "name")
+  .populate('scores._category', "name status")
   .exec(function(err, result){
     if (err){
       res.sendStatus(500);

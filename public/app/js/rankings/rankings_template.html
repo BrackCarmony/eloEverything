@@ -1,0 +1,8 @@
+
+This be rankings template.
+
+<div class = "max-scroll-box">
+  <span ng-repeat = "score in user.scores|orderBy:'-score'|filter:catFilter">
+    <score-display score = "score" ng-click = "getRankings(score)" > </score-display>
+  </span>
+</div>

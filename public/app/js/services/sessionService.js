@@ -5,10 +5,10 @@ app.service('Session', function(){
     this.id = sessionId;
     this.userId = userId;
     this.userRole = userRole;
-  },
+  };
   this.destroy = function(){
     this.id = null;
     this.userId = null;
     this.userRole = null;
-  }
+  };
 });

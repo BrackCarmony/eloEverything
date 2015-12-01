@@ -1,4 +1,4 @@
-var app = angular.module("eloEverything")
+var app = angular.module("eloEverything");
 
 
 
@@ -15,7 +15,7 @@ app.service('usersService',function($http, Session){
         return error;
       }
     );
-  }
+  };
   this.getUserById= function(userId){
     return $http.get("/api/users/"+userId).then(
       function(response){
@@ -27,17 +27,17 @@ app.service('usersService',function($http, Session){
         return error;
       }
     );
-  }
+  };
 
   this.addUser = function(newUser){
     return $http.post('/api/users/', newUser).then(function(response){
 
       return response.data;
     }, function(error){
-      console.log(error)
+      console.log(error);
       return error;
-    })
-  }
+    });
+  };
 
   this.getMe = function(){
     return $http.get('/api/me').then(function(response){
@@ -46,22 +46,33 @@ app.service('usersService',function($http, Session){
       }
       return response.data;
     }, function(error){
-      console.log(error)
+      console.log(error);
       return error;
-    })
-  }
+    });
+  };
 
   this.getUsersAdmin = function(){
-    return $http.get("/api/users/admin").then(function(user){return user.data});
-  }
+    return $http.get("/api/users/admin").then(function(user){return user.data;});
+  };
 
   this.updateUser = function(propsToUpdate){
     return $http.put("/api/users", propsToUpdate)
       .then(function(res){
-        return res},
+        return res;},
       function(err){
         console.log(err);
-        return err
+        return err;
       });
-  }
+  };
+
+  this.getRankingsInCategory = function(category){
+    return $http.get("/api/rankings/"+category._id)
+    .then(function(res){
+      console.log(res);
+      return res;
+    }, function(err){
+      console.log(err);
+      return err;
+    });
+  };
 });
