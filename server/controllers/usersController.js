@@ -71,7 +71,7 @@ getRankingsInCategory:function(req,res,next){
     {$match:{'scores._category':objId}},
     {$unwind:"$scores"},
     {$match:{'scores._category':objId}},
-    {$sort:{'scores.score':1}},
+    {$sort:{'scores.score':-1}},
     {$limit:50}
   ])
       .exec(function(err, result){
