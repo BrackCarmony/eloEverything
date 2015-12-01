@@ -5,16 +5,21 @@ html, body{
 
 .question li{
 
-
+  display:flex;
+  align-content: center;
   border: 1px solid black;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 50px;
   vertical-align: to;
   box-sizing: border-box;
   min-height:3em;
   align-items:center;
 }/**/
 
+.question .possible_answer{
+  align-self: center;
+  margin: 0 auto;
+}
 .question ul{
     margin-bottom: 5px;
 }
@@ -171,7 +176,8 @@ score-display{
   letter-spacing: 1px;
   font-size:1.1em;
   line-height:1.25;
-  border-radius:7px
+  border-radius:70px;
+  overflow:hidden;
 }
 
 .progress-button .content{
@@ -204,6 +210,6 @@ score-display{
   max-height: 50vh;
   overflow: auto;
   padding-bottom:10px;
-  margin-top:-10px;
+  margin-top:0px;
   box-sizing: padding-box;
 }

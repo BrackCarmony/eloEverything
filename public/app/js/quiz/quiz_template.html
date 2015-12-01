@@ -32,7 +32,12 @@
   <h3>{{question.question}}</h3>
   <ul class = "container-fluid">
     <div class = "row">
-    <li class = "col-sm-12 col-sm-6"ng-dblclick = "answerQuestion()" ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"  ng-click = "select(answer)" ng-repeat = "answer in question.possible_answers">{{answer}}</li>
+    <li class = "col-sm-12 col-sm-6"
+        ng-dblclick = "answerQuestion()"
+        ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"
+        ng-click = "select(answer)"
+        ng-repeat = "answer in question.possible_answers">
+        <div class = "possible_answer">{{answer}}</div></li>
     </div>
   </ul>
   <div class = "container-fluid">
