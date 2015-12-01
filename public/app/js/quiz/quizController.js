@@ -4,6 +4,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
 
   $scope.categories = categories;
   $scope.complaining = false;
+  $scope.catFilter = {status:"Category"};
   $scope.user = user;
   if (!$scope.currentUser){
     $scope.setCurrentUser(user);
