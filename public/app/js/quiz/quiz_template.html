@@ -13,11 +13,11 @@
       <div class = 'row'>
         <div class = 'col-sm-12' ng-show = "user.scores.length">
           <strong>Your Categories:</strong>
-          <span ng-repeat ="category in user.scores |orderBy:'-score' | limitTo:limit " ng-click="loadQuestion(category._category)"><score-display score = "category"></score-display></span>
+          <span ng-repeat ="category in user.scores | filter:scoreFilter | orderBy:'-score' | limitTo:limit " ng-click="loadQuestion(category._category)"><score-display score = "category"></score-display></span>
           <i><small><span ng-show="limit<user.scores.length" ng-click = "limit=limit+5">More</span><span ng-show="limit>5" ng-click = "limit=limit - 5">Less</span></small></i>
         </div>
         <div class = 'col-sm-12' ng-hide = "user.scores.length">
-          <span class = "h3">Select from populare categories to start increasing your elo score.</span>
+          <span class = "h3">Select from popular categories to start increasing your elo score.</span>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
   <h3>{{question.question}}</h3>
   <ul class = "container-fluid">
     <div class = "row">
-    <li class = "col-sm-12 col-sm-6"
+    <li class = "possible_answer"
         ng-dblclick = "answerQuestion()"
         ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"
         ng-click = "select(answer)"

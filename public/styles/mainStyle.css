@@ -1,6 +1,7 @@
 html, body{
   padding: 0px;
   margin: 0px;
+  background-color: #333;
 }
 
 .question li{
@@ -16,12 +17,22 @@ html, body{
   align-items:center;
 }/**/
 
-.question .possible_answer{
+.question div.possible_answer{
   align-self: center;
   margin: 0 auto;
 }
 .question ul{
     margin-bottom: 5px;
+}
+
+.question li.possible_answer{
+  margin: 5px;
+}
+@media only screen and (min-width: 768px){
+  .question li.possible_answer{
+    float:left;
+    width:calc(50% - 15px);
+  }
 }
 
 ul{
@@ -37,7 +48,7 @@ ul{
 
 
 nav{
-  background-color: darkslategrey;
+  background-color: #1C6BA0;
   color: white;
   padding: 5px;
   border-bottom: 1px black solid;
@@ -62,13 +73,13 @@ nav li{
 
 .categories li{
   border:0px;
-  color:blue;
+  color:#1C6BA0;
   display: inline-block;
   margin: 4px;
 }
 
 .selected{
-  background-color: darkslategrey;
+  background-color: #1C6BA0;
   color:white;
   transition: all .25s;
   transform:scale(1.005);
@@ -103,8 +114,7 @@ nav li{
 }
 
 .question{
-  background: mintcream;
-  border:1px solid saddlebrown;
+  background: #eee;
   border-radius: 10px;
   padding: 10px;
   margin:10px;
@@ -117,14 +127,14 @@ nav li{
   display: inline-block;
 }
 #deltaBox{
-  border: 1px darkslategrey solid;
+  border: 1px #1C6BA0 solid;
   border-radius: 5px;
   padding: 5px;
   transition: 1s;
 }
 
 .disabled.btn-primary{
-  background-color: darkslategrey;
+  background-color: #1C6BA0;
 }
 
 .disabled.btn-warning{
@@ -147,7 +157,7 @@ nav li{
 }
 
 .login-message{
-  color:blue;
+  color:#1C6BA0;
   font-size: .75em;
 }
 
@@ -170,7 +180,7 @@ score-display{
 .progress-button{
   position:relative;
   padding:5 10px;
-  background:darkslategrey;
+  background:#1C6BA0;
   color:#fff;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -202,7 +212,6 @@ score-display{
   height:5em;
   width:5em;
   border-radius:5em;
-  border:2px solid darkslategrey;
   box-shadow: 2px 2px 2px #333;
 }
 

@@ -5,6 +5,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
   $scope.categories = categories;
   $scope.complaining = false;
   $scope.catFilter = {status:"Category"};
+  $scope.scoreFilter = {_category:{status:"Category"}};
   $scope.user = user;
   if (!$scope.currentUser){
     $scope.setCurrentUser(user);
@@ -24,7 +25,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
     $scope.category = category;
     questionsService.getSingleQuestion(category._id).then(function(question){
       if(question.length == 0){
-        $scope.warning = "No suitable questions in "+category.name+".  Please try another category."
+        $scope.warning = "No suitable questions in "+category.name+".  Please try another category.";
         $scope.question= false;
       }else{
         $scope.warning = "";
