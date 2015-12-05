@@ -13,7 +13,7 @@
           <score-display score = "score" ng-click = "setCurrentCategory(score)"> </score-display>
         </span>
       </div>
-    <div class = "row" ng-show = 'currentCategory'>
+    <div class = "row white card" ng-show = 'currentCategory'>
       <div class = "col-xs-12 h3">{{currentCategory._category.name.toUpperCase()}}</div>
          <div class = "col-xs-12">
            Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%

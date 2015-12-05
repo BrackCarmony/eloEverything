@@ -187,6 +187,7 @@ score-display{
   font-size:1.1em;
   line-height:1.25;
   border-radius:70px;
+  border:0px solid black;
   overflow:hidden;
 }
 
@@ -221,4 +222,26 @@ score-display{
   padding-bottom:10px;
   margin-top:0px;
   box-sizing: padding-box;
+}
+
+.white.card{
+  background-color: #eee;
+  border-radius: 3px;
+  margin: 5px;
+  padding:5px;
+}
+
+.bronze{
+  border-top:2px #cd7f32 solid;
+  border-right:2px #cd7f32 solid;
+  border-bottom:2px #b9722d solid;
+  border-left:2px #b9722d solid;
+}
+
+.silver{
+
+}
+
+.gold{
+
 }
