@@ -42,7 +42,9 @@ app.controller('quizController', function($scope, user, questionsService, usersS
     var eloScore = 0;
       $scope.user.scores.forEach(function(score){
         //console.log(score.score*Math.min(100,score.answered)/100)
-        eloScore+=score.score*Math.min(100,score.answered)/100;
+        if(score._category.status ==="Category"){
+          eloScore+=score.score*Math.min(100,score.answered)/100;
+        }
       })
     $scope.eloScore = eloScore;
   }
