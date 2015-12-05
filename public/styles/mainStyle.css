@@ -4,6 +4,10 @@ html, body{
   background-color: #333;
 }
 
+*{
+  box-sizing: border-box;
+}
+
 .question li{
 
   display:flex;
@@ -236,7 +240,7 @@ score-display{
   box-sizing: padding-box;
 }
 
-.white{
+.white-text{
   color:white;
 }
 

@@ -1,42 +1,34 @@
 <div class="container-fluid">
-  <div class="row">
     <div class="well">
       <h3 class = "profile-header">{{user.display_name}}'s Score: {{eloScore|number:0}}</h3>
       <div class="user-profile row">
         <img ng-src="{{user.pictureUrl}}" class="profile-img-button">
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-12">
+    <div class="white card">
       <div class="max-scroll-box profile">
-        <h3 class = "white">Categories</h3>
+        <h3>Categories</h3>
         <span ng-repeat="score in user.scores|orderBy:'-score'|filter:catFilter">
           <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
         </span>
       </br>
-        <h3 class = "white">Tags</h3>
+        <h3>Tags</h3>
         <span ng-repeat="score in user.scores|orderBy:'-score'|filter:tagFilter">
           <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
         </span>
       </div>
-      <div class="row white card" ng-show='currentCategory'>
-        <div class="col-xs-12 h3">{{currentCategory._category.name.toUpperCase()}}</div>
-        <div class="col-xs-12">
+      <div class="white card" ng-show='currentCategory'>
+        <div class="h3">{{currentCategory._category.name.toUpperCase()}}</div>
+        <div class="">
           Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
         </div>
-        <div class="col-xs-12">
+        <div class="">
           Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
         </div>
-        <div class="col-xs-12">
+        <div class="">
           Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
         </div>
       </div>
     </div>
-    <div class="col-xs-6 red col-sm-4">
-
-
-    </div>
-  </div>
 </div>

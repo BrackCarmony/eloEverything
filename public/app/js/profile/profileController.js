@@ -35,6 +35,7 @@ app.controller('profileController', function($scope, user, usersService){
   };
 
   $scope.setCurrentCategory = function(currentCategory){
+    console.log("current Category", currentCategory);
     $scope.currentCategory = currentCategory;
   };
 });
