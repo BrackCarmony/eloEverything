@@ -14,7 +14,7 @@
         </span>
       </br>
         <h3>Tags</h3>
-        <span ng-repeat="score in user.scores|orderBy:'-score'|filter:tagFilter">
+        <span ng-repeat="score in user.scores|orderBy:'-answered'|filter:tagFilter">
           <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
         </span>
       </div>
