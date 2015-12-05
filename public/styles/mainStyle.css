@@ -236,6 +236,10 @@ score-display{
   box-sizing: padding-box;
 }
 
+.white{
+  color:white;
+}
+
 .white.card{
   background-color: #eee;
   border-radius: 3px;

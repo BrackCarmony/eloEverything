@@ -3,6 +3,8 @@ var app = angular.module('eloEverything');
 app.controller('profileController', function($scope, user, usersService){
   $scope.user = user;
   $scope.currentCategory = null;
+  $scope.catFilter = {_category:{status:"Category"}};
+  $scope.tagFilter = {_category:{status:"Tag"}};
   calcEloScore();
   function calcEloScore(){
     var eloScore = 0;

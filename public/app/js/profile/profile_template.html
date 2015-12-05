@@ -11,7 +11,13 @@
   <div class="row">
     <div class="col-xs-12 col-sm-12">
       <div class="max-scroll-box profile">
-        <span ng-repeat="score in user.scores|orderBy:'-score'">
+        <h3 class = "white">Categories</h3>
+        <span ng-repeat="score in user.scores|orderBy:'-score'|filter:catFilter">
+          <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
+        </span>
+      </br>
+        <h3 class = "white">Tags</h3>
+        <span ng-repeat="score in user.scores|orderBy:'-score'|filter:tagFilter">
           <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
         </span>
       </div>

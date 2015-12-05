@@ -8,5 +8,5 @@
 
 <button class = "progress-button" data-style="fill" data-horizontal>
   <span class = "progress" ng-style= "{width:percentage}"></span>
-  <span class = "content">{{score._category.name}}:{{score.score|number:0}}</span>
+  <span class = "content">{{score._category.name}}<span ng-if = "score._category.status === 'Category'">:{{score.score|number:0}}</span></span>
 </button>
