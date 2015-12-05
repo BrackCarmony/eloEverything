@@ -10,6 +10,9 @@ app.controller('profileController', function($scope, user, usersService){
     var eloScore = 0;
       user.scores.forEach(function(score){
         //console.log(score.score*Math.min(100,score.answered)/100)
+        if (!score){
+          return ;
+        }
         if(score._category.status ==="Category"){
           eloScore+=score.score*Math.min(100,score.answered)/100;
         }
