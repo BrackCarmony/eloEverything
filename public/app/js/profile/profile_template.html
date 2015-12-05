@@ -1,69 +1,36 @@
-
-<div class = "container-fluid">
-  <div class = "row">
-    <div class = "well">
-      <h3>Elo Score: {{eloScore|number:0}}</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="well">
+      <h3 class = "profile-header">{{user.display_name}}'s Score: {{eloScore|number:0}}</h3>
+      <div class="user-profile row">
+        <img ng-src="{{user.pictureUrl}}" class="profile-img-button">
       </div>
-
+    </div>
   </div>
-  <div class = "row">
-    <div class = "col-xs-6 col-sm-8">
-      <div class = "max-scroll-box">
-        <span ng-repeat = "score in user.scores|orderBy:'-score'">
-          <score-display score = "score" ng-click = "setCurrentCategory(score)"> </score-display>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <div class="max-scroll-box profile">
+        <span ng-repeat="score in user.scores|orderBy:'-score'">
+          <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
         </span>
       </div>
-    <div class = "row white card" ng-show = 'currentCategory'>
-      <div class = "col-xs-12 h3">{{currentCategory._category.name.toUpperCase()}}</div>
-         <div class = "col-xs-12">
-           Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
-         </div>
-         <div class = "col-xs-12">
-           Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
-         </div>
-         <div class = "col-xs-12">
-           Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
-         </div>
+      <div class="row white card" ng-show='currentCategory'>
+        <div class="col-xs-12 h3">{{currentCategory._category.name.toUpperCase()}}</div>
+        <div class="col-xs-12">
+          Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
+        </div>
+        <div class="col-xs-12">
+          Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
+        </div>
+        <div class="col-xs-12">
+          Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
+        </div>
+      </div>
     </div>
-    </div>
-    <div class = "col-xs-6 red col-sm-4">
-      <div class = "user-profile row">
-        <div class = " col-xs-8 col-sm-4">
-        <img ng-src = "{{user.pictureUrl}}" class = "profile-img-button">
-      </div>
-      <div class = "col-xs-8">
-        Name: <input
-          type = 'text'
-          ng-disabled = '!editing'
-          ng-model = "user.display_name"
-          ng-change = "updating = true"
-          ng-dblclick = "editing=true">
-        <span
-          class="glyphicon glyphicon-pencil"
-          aria-label="Edit"
-          ng-hide = "editing"
-          ng-click = "editing = true">
-        </span>
-      </br>
-        Email: <input
-          type = 'email'
-          ng-disabled = '!editing'
-          ng-model = "user.email"
-          ng-change = "updating = true"
-          ng-dblclick = "editing =true">
-        <span
-          class="glyphicon glyphicon-pencil"
-          aria-label="Edit"
-          ng-hide = "editing"
-          ng-click = "editing = true">
-        </span>
-      </br>
-      <button
-        ng-click = "updateUser()"
-        ng-show = "updating">
-        Update
-      </button>
-      </div>
+    <div class="col-xs-6 red col-sm-4">
+
+
     </div>
   </div>
 </div>

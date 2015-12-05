@@ -28,12 +28,7 @@ html, body{
 .question li.possible_answer{
   margin: 5px;
 }
-@media only screen and (min-width: 768px){
-  .question li.possible_answer{
-    float:left;
-    width:calc(50% - 15px);
-  }
-}
+
 
 ul{
   padding: 0;
@@ -208,12 +203,29 @@ score-display{
   border-radius:0px;
 }
 
+.profile score-display{
+  display: block;
+  margin: 0px;
+  margin-bottom: 2px;
+}
+
+.profile .progress-button{
+  border-radius: 0px;
+  width:100%;
+  display: block;
+}
+
 
 .profile-img-button{
   height:5em;
   width:5em;
   border-radius:5em;
-  box-shadow: 2px 2px 2px #333;
+  float:right;
+  margin-right: 2%;
+}
+
+.profile-header{
+  float:left;
 }
 
 .max-scroll-box{
@@ -244,4 +256,33 @@ score-display{
 
 .gold{
 
+}
+
+
+@media only screen and (min-width: 768px){
+  .question li.possible_answer{
+    float:left;
+    width:calc(50% - 15px);
+  }
+}
+
+@media only screen and (min-width:768px){
+  .profile score-display{
+    display: inline-block;
+    width:calc(50% - 6px);
+    float:left;
+    margin: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+}
+@media only screen and (min-width:1500px){
+  .profile score-display{
+    display: inline-block;
+    width:calc(100%/3 - 6px);
+    margin: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    float:left;
+  }
 }
