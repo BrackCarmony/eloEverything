@@ -1,9 +1,10 @@
-<div class = "max-scroll-box">
+<div class = "white card max-scroll-box">
+  <h3>Categories</h3>
   <span ng-repeat = "score in user.scores|orderBy:'-score'|filter:catFilter">
     <score-display score = "score" ng-click = "getRankings(score)" > </score-display>
   </span>
 </div>
-<div>
+<div class = "white card">
   <div ng-repeat = "rank in rankings">
     {{rank.display_name}}:{{rank.scores.score | number:0}}
   </div>

@@ -207,13 +207,13 @@ score-display{
   border-radius:0px;
 }
 
-.profile score-display{
+.max-scroll-box score-display{
   display: block;
   margin: 0px;
   margin-bottom: 2px;
 }
 
-.profile .progress-button{
+.max-scroll-box .progress-button{
   border-radius: 0px;
   width:100%;
   display: block;
@@ -296,7 +296,7 @@ score-display{
   .well h3{
     margin-top: 1px;
     margin-bottom: 1px;
-    font-size: 1.25em;
+    font-size: 1.24em;
   }
 
   .hide-on-small{
@@ -305,7 +305,7 @@ score-display{
 }
 
 @media only screen and (min-width:768px){
-  .profile score-display{
+  .max-scroll-box score-display{
     display: inline-block;
     width:calc(50% - 6px);
     float:left;
@@ -315,7 +315,7 @@ score-display{
   }
 }
 @media only screen and (min-width:1500px){
-  .profile score-display{
+  .max-scroll-box score-display{
     display: inline-block;
     width:calc(100%/3 - 6px);
     margin: 3px;
