@@ -16,7 +16,7 @@
           <li ng-show = 'currentUser' role = "presentation" ng-click = "goto('/quiz/')">Quiz</li>
           <li ng-show = 'currentUser' role = "presentation" ng-click = "goto('/profile/')">Profile</li>
           <li ng-show = 'currentUser' role = "presentation" ng-click = "goto('/rankings/')">Rankings</li>
-          <li ng-show = 'currentUser' role = "presentation" ng-click = "goto('/newQuestion/')">Add Question</li>
+          <li class = "hide-on-small" ng-show = 'currentUser' role = "presentation" ng-click = "goto('/newQuestion/')">Add Question</li>
           <li ng-hide = 'currentUser' role = "presentation" ng-click = "goto('/login/')">Login</li>
           <li ng-show = 'currentUser' role = "presentation" ng-click = "logout()">Logout</li>
         </ul>

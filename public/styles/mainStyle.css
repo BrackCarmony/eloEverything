@@ -296,9 +296,12 @@ score-display{
   .well h3{
     margin-top: 1px;
     margin-bottom: 1px;
+    font-size: 1.25em;
   }
 
-
+  .hide-on-small{
+    display:none;
+  }
 }
 
 @media only screen and (min-width:768px){
