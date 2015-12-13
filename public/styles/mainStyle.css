@@ -8,6 +8,15 @@ html, body{
   box-sizing: border-box;
 }
 
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.center{
+  text-align: center;
+}
+
 .question li{
 
   display:flex;
@@ -70,6 +79,10 @@ nav li{
 }
 
 
+.categories.well{
+  transition:all 2s;
+}
+
 .categories li{
   border:0px;
   color:#1C6BA0;
@@ -118,6 +131,7 @@ nav li{
   padding: 10px;
   margin:10px;
   user-select:none;
+  transition: all 1s;
 }
 
 
@@ -323,12 +337,4 @@ score-display{
     margin-bottom: 2px;
     float:left;
   }
-}
-
-.uppercase{
-  text-transform: uppercase;
-}
-
-.center{
-  text-align: center;
 }
