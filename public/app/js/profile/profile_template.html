@@ -8,15 +8,18 @@
 
     <div class="white card">
       <div class="max-scroll-box profile">
-        <h3>Categories</h3>
-        <span ng-repeat="score in user.scores|orderBy:'-score'|filter:catFilter">
-          <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
-        </span>
-      </br>
-        <h3>Tags</h3>
-        <span ng-repeat="score in user.scores|orderBy:'-answered'|filter:tagFilter">
-          <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
-        </span>
+        <div class = "clearfix">
+          <h3 class = "center">Categories</h3>
+          <span ng-repeat="score in user.scores|orderBy:'-score'|filter:catFilter">
+            <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
+          </span>
+        </div>
+        <div class = "clearfix">
+          <h3 class = "center">Tags</h3>
+          <span ng-repeat="score in user.scores|orderBy:'-answered'|filter:tagFilter">
+            <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
+          </span>
+        </div>
       </div>
       <div class="white card" ng-show='currentCategory'>
         <div class="h3">{{currentCategory._category.name.toUpperCase()}}</div>

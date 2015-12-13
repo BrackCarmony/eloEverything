@@ -9,6 +9,10 @@ html, body{
 }
 
 
+.clearfix{
+  overflow:auto;
+}
+
 .uppercase{
   text-transform: uppercase;
 }
