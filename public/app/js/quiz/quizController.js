@@ -28,6 +28,9 @@ app.controller('quizController', function($scope, user, questionsService, usersS
         return prev
       }
       console.log(cur, $scope.category);
+      if (cur._category === null){
+        return -1;
+      }
       if (cur._category._id === $scope.category._id){
         return index;
       }
