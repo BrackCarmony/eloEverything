@@ -324,3 +324,11 @@ score-display{
     float:left;
   }
 }
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+.center{
+  text-align: center;
+}

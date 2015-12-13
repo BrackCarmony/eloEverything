@@ -23,6 +23,16 @@ app.controller('quizController', function($scope, user, questionsService, usersS
     $scope.deltaScores = {};
     //$scope.question = {};
     $scope.category = category;
+    $scope.categoryIndexInUser = user.scores.reduce(function(prev, cur, index){
+      if (prev>-1){
+        return prev
+      }
+      console.log(cur, $scope.category);
+      if (cur._category._id === $scope.category._id){
+        return index;
+      }
+    },-1);
+    console.log($scope.categoryIndexInUser);
     questionsService.getSingleQuestion(category._id).then(function(question){
       if(question.length == 0){
         $scope.warning = "No suitable questions in "+category.name+".  Please try another category.";
