@@ -10,24 +10,24 @@ app.controller('quizController', function($scope, user, questionsService, usersS
   if (!$scope.currentUser){
     $scope.setCurrentUser(user);
   }
-  //console.log(user);
+
   $scope.limit = 5;
   $scope.selected = "";
-  //console.log(user);
+
 
   $scope.loadQuestion = function(category){
-    //console.log(category);
+
     $scope.complaining = false;
     $scope.complaintFinished = false;
     $scope.selected = "";
     $scope.deltaScores = {};
-    //$scope.question = {};
+
     $scope.category = category;
     $scope.categoryIndexInUser = user.scores.reduce(function(prev, cur, index){
       if (prev>-1){
         return prev
       }
-      console.log(cur, $scope.category);
+
       if (cur._category === null){
         return -1;
       }
@@ -35,7 +35,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
         return index;
       }
     },-1);
-    console.log($scope.categoryIndexInUser);
+
     questionsService.getSingleQuestion(category._id).then(function(question){
       if(question.length == 0){
         $scope.warning = "No suitable questions in "+category.name+".  Please try another category.";
@@ -103,7 +103,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
 
       newComplaint._question = $scope.question._id;
       newComplaint._user = $scope.user._id;
-      //console.log(newComplaint);
+
       complaintsService.submitComplaint(newComplaint).then(
         function(result){$scope.complaintFinished = true;}, function(err){
 
