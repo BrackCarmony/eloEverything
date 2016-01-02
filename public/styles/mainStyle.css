@@ -333,7 +333,7 @@ score-display{
 }
 
 @media only screen and (min-width:768px){
-  .max-scroll-box score-display{
+  .profile .score-wrapper{
     display: inline-block;
     width:calc(50% - 6px);
     float:left;
@@ -343,7 +343,7 @@ score-display{
   }
 }
 @media only screen and (min-width:1500px){
-  .max-scroll-box score-display{
+  .profile .score-wrapper{
     display: inline-block;
     width:calc(100%/3 - 6px);
     margin: 3px;
@@ -369,7 +369,6 @@ score-display{
 
 @keyframes collapsein {
   from {
-
     max-height:200px;
     overflow: hidden;
   }
