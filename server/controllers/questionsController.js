@@ -22,7 +22,7 @@ function calculateUserChangeInRating(score, user, question){
     //console.log(question.scores[i]);//WTH clearly I am doing something bizzare o.O
     //console.log(question.scores[i]._doc._category._doc._id.toString());
     if (!question.scores[i]._doc._category){
-      next
+      continue
     }
     var category = question.scores[i]._doc._category._doc._id.toString();
 
