@@ -256,7 +256,6 @@ score-display{
 }
 
 .max-scroll-box{
-  max-height: 50vh;
   overflow: auto;
   padding-bottom:10px;
   margin-top:0px;
@@ -288,6 +287,17 @@ score-display{
 .gold{
 
 }
+
+.vertical-expand-in.ng-enter{
+  animation-duration:1s;
+  animation-name: expandin;
+}
+
+.vertical-expand-in.ng-leave{
+  animation-duration:1s;
+  animation-name: collapsein;
+}
+
 
 
 @media only screen and (min-width: 768px){
@@ -340,5 +350,33 @@ score-display{
     margin-top: 2px;
     margin-bottom: 2px;
     float:left;
+  }
+}
+
+
+@keyframes expandin {
+  from {
+
+    max-height:0px;
+    overflow: hidden;
+  }
+
+  to{
+
+    max-height:200px;
+  }
+}
+
+@keyframes collapsein {
+  from {
+
+    max-height:200px;
+    overflow: hidden;
+  }
+
+  to{
+
+    max-height:0px;
+    overflow:hidden;
   }
 }

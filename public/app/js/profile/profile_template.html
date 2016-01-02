@@ -11,27 +11,43 @@
         <div class = "clearfix">
           <h3 class = "center">Categories</h3>
           <span ng-repeat="score in user.scores|orderBy:'-score'|filter:catFilter">
-            <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
+            <score-display class = "vertical-expand-in" score="score" ng-click="setCurrentCategory(score)" ng-hide = "currentCategory==score"> </score-display>
+
+            <div class="white card vertical-expand-in" ng-if='currentCategory==score'>
+              <div class="h3">{{currentCategory._category.name.toUpperCase()}}</div>
+              <div class="">
+                Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
+              </div>
+            </div>
+
           </span>
         </div>
         <div class = "clearfix">
           <h3 class = "center">Tags</h3>
           <span ng-repeat="score in user.scores|orderBy:'-answered'|filter:tagFilter">
-            <score-display score="score" ng-click="setCurrentCategory(score)"> </score-display>
+            <score-display class = "vertical-expand-in" score="score" ng-click="setCurrentCategory(score)" ng-if = "!(currentCategory==score)"> </score-display>
+
+            <div class="white card vertical-expand-in" ng-if='currentCategory==score'>
+              <div class="h3">{{currentCategory._category.name.toUpperCase()}}</div>
+              <div class="">
+                Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
+              </div>
+            </div>
           </span>
         </div>
       </div>
-      <div class="white card" ng-show='currentCategory'>
-        <div class="h3">{{currentCategory._category.name.toUpperCase()}}</div>
-        <div class="">
-          Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
-        </div>
-        <div class="">
-          Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
-        </div>
-        <div class="">
-          Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
-        </div>
-      </div>
+
     </div>
 </div>
