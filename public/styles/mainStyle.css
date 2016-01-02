@@ -376,6 +376,8 @@ score-display{
 
   to{
 
+    margin-top: 0px;
+    margin-bottom: 0px;
     max-height:0px;
     overflow:hidden;
   }
