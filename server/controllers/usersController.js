@@ -6,6 +6,13 @@ var ObjectId = mongoose.Types.ObjectId;
 //console.log(ObjectId);
 
 module.exports = {
+  deserializeUser(_id, done){
+    console.log("Trying to find user with _id", _id)
+    User.findById(_id, function(err, user){
+      //console.log(err, ":err || user:", user);
+      done(err, user);
+    });
+  },
   addUser:function(req, res){
     User.create(req.body, function(err, result){
       if(err){

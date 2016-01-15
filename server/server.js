@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var sessions = require('express-session');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var bodyParser = require('body-parser');
@@ -16,8 +17,13 @@ var categoriesController = require("./controllers/categoriesController");
 var authController = require("./controllers/authController");
 var complaintsController = require("./controllers/complaintsController");
 
+var mongoUri = "mongodb://0.0.0.0:27017/elo";
+
+mongoose.connect(mongoUri);
+var sessionOptions = {mongooseConnection:mongoose.connection};
+
 app.use(express.static(__dirname+'/../public'));
-app.use(sessions({secret:"asdfjkcxv7rodij2kl89023dfg314354fbr5t"}));
+app.use(session({secret:"asdfjkcxv7rodij2kl89023dfg314354fbr5t", store: new MongoStore(sessionOptions)}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,11 +48,14 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 );
 
 passport.serializeUser(function(user, done){
-  done(null, user);
+  //console.log("serializing user", user);
+  var serializedUser = {_id:user._id};
+  done(null, serializedUser);
 });
 
 passport.deserializeUser(function(obj, done){
-  done(null, obj);
+  //console.log("deserialing user", obj);
+  usersController.deserializeUser(obj._id, done);
 });
 
 app.get("/auth/logout", authController.logout);
@@ -73,15 +82,14 @@ app.post("/api/complaints", authController.ensureAuthenticated, complaintsContro
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
 app.put("/api/categories", authController.ensureAdmin, categoriesController.updateCategory);
 
-var mongoUri = "mongodb://0.0.0.0:27017/elo";
-mongoose.set('debug', true);
-mongoose.connect(mongoUri);
+
 mongoose.connection.once('open', function(){
   console.log('connected to mongoDb at : ', mongoUri);
 });
 
 if(process.env.envStatus === "DEVELOPMENT"){
 var port = 8080;
+mongoose.set('debug', true);
 }else{
   var port = 80;
 }

@@ -8,7 +8,7 @@ var async = require('async');
 
 var k = 15;
 var defaultPlayerScore = 1200;
-var questionRange = 200;
+var questionRange = 150;
 
 function calculateUserChangeInRating(score, user, question){
   var scoreChange = [];
@@ -160,7 +160,7 @@ module.exports = {
     });
   },
   askQuestion:function(req, res){
-    //console.log(req.params.recent_questions);
+    console.log(req.params.recent_questions);
     Question.count()
     .where('_id').nin(req.params.recent_questions)
     .elemMatch('scores',{
