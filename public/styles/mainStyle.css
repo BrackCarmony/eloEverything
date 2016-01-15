@@ -119,6 +119,10 @@ nav li{
   box-shadow: 5px 5px 5px #333;
 }
 
+.correct.ng-leave{
+  transition-duration: 0s;
+}
+
 .positive{
   color:green;
   transition: 1s;
@@ -352,6 +356,7 @@ score-display{
     float:left;
   }
 }
+
 
 
 @keyframes expandin {
