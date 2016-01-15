@@ -160,7 +160,8 @@ module.exports = {
     });
   },
   askQuestion:function(req, res){
-    console.log(req.params.recent_questions);
+    console.log("163",req.params.recent_questions);
+    var abc = "123";
     Question.count()
     .where('_id').nin(req.params.recent_questions)
     .elemMatch('scores',{

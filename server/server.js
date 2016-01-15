@@ -88,7 +88,7 @@ mongoose.connection.once('open', function(){
 });
 
 if(process.env.envStatus === "DEVELOPMENT"){
-var port = 8080;
+var port = 11746;
 mongoose.set('debug', true);
 }else{
   var port = 80;

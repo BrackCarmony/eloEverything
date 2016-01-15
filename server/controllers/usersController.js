@@ -1,6 +1,7 @@
 var User = require('../models/User');
 var settings = require('../settings');
 var mongoose = require('mongoose');
+var _ = require('underscore');
 var ObjectId = mongoose.Types.ObjectId;
 
 //console.log(ObjectId);
@@ -90,24 +91,14 @@ getRankingsInCategory:function(req,res,next){
       });
 },
 getScoreInCategory:function(req,res, next){
-  console.log('req.params.category:----------------------------', req.params.category);
-  User.findById(req.user.id)
-  .select('scores')
-  .where("scores._category").equals(req.params.category)
-  .exec(function(err, result){
-    if (err){
-      console.log(err);
-      res.sendStatus(500);
-    }else{
-      //console.log(result);
-      if (result === null){
-        req.params.score = 1200;
-      }else{
-        req.params.score = result.score;
-      }
-      next();
-    }
-  });
+
+    var abc = 123;
+    console.log("===========",req.user.scores);
+    console.log(req.params.category);
+    req.params.score = _.find(req.user.scores,function(item){return item._category = req.params.category}).score;
+    console.log("=============",req.params.score);
+    next();
+
 },
 getRecentQuestions:function(req, res, next){
   User.findById(req.user._id)
