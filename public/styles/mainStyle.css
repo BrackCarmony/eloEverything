@@ -106,7 +106,7 @@ nav li{
 .wrong{
   background-color:red;
   transform:scale(.99);
-  transition: 1s;
+  transition: .5s;
   z-index: 1;
 }
 
@@ -114,15 +114,20 @@ nav li{
   background-color:green;
   color:white;
   transform:scale(1.01);
-  transition:all 1s;
+  transition:all .5s;
   z-index: 5;
   box-shadow: 5px 5px 5px #333;
 }
 
-.correct.ng-leave{
-  transition-duration: 0s;
+.possible_answer.ng-leave{
+  animation-duration: .5s;
+  animation-name:slide-out-left;
 }
 
+.possible_answer.ng-enter{
+  animation-duration: .5s;
+  animation-name:slide-in-left;
+}
 .positive{
   color:green;
   transition: 1s;
@@ -369,6 +374,25 @@ score-display{
   to{
 
     max-height:200px;
+  }
+}
+
+@keyframes slide-in-left{
+  from{
+    transform: translateX(1000px);
+    position: absolute;
+  }
+  to{
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slide-out-left{
+  from{
+    transform: translateX(0px);
+  }
+  to{
+    transform: translateX(-1000px);
   }
 }
 
