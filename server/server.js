@@ -4,6 +4,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
@@ -31,8 +32,22 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-passport.use(authController.fbStrat);
+passport.use('facebook',authController.fbStrat);
+passport.use('login', authController.localStratLogin);
+passport.use('signup', authController.localSignup);
 
+app.post('/auth/local', passport.authenticate('local', {
+  successRedirect:"/loginSuccess",
+  failureRedirect:"/loginFailure"
+}))
+
+app.get("/loginSuccess", function(req, res, next){
+  res.redirect('/#/login-land');
+})
+
+app.get("/loginFailure", function(req, res, next){
+  res.redirect('/#/login');
+})
 
 app.get('/auth/facebook', passport.authenticate('facebook'), function(req,res){
   console.log("Facebookauth experieced problems");

@@ -1,13 +1,17 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var usersController = require('../controllers/usersController');
-var LocalStrategy = require('passport-local');
+var LocalStrategy = require('passport-local').Strategy;
 var asyn = require('async');
 var User = require('../models/User');
 var bCrypt = require('bcrypt-nodejs');
 
 var isValidPassword = function(user, password){
-  return bCrypt.compateSyb(password, user.password);
+  return bCrypt.compareSyn(password, user.password);
+}
+
+var createHash = function(toHash){
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
 }
 
 module.exports = {
@@ -41,21 +45,53 @@ module.exports.fbStrat = new FacebookStrategy({
 });
 
 module.exports.localStrat = new LocalStrategy(
-  {passReqToCallback: true},
-  function(req, email, password, done){
+    {usernaneField: 'email',
+    passwordField:'password'},
+  function(email, password, done){
     User.findOne({'email':email},
       function(err, user){
+        console.log(user);
         if(err){
           console.log(err);
           return done(err);
         }
         if(!user){
-          return done(null, false, req.flash('message', 'No User with that email.'));
+          return done(null, false);
         }
         if(!isValidPassword(user, password)){
-          return done(null, false, req.flash('message', 'Invalid Password'));
+          return done(null, false);
         }
         return done(null, user);
       })
     }
+);
+
+module.exports.localSignup = new LocalStrategy(
+  {usernameField:'email',passwordField:'password'},
+  function(email, password, done){
+    findOrCreateUser = function(){
+      User.findOne({'email':email}, function(err, user){
+        if (err){
+
+        }
+        if (user){
+          console.log("User already exists");
+          return;
+        }else{
+          var newUser = new User();
+          newUser.email = email;
+          newUser.password = createHash(password);
+
+          newUser.save(function(err){
+            if (err){
+              console.log('Error in saving user', err);
+              throw err;
+            }
+            console.log('User Registration Succesful');
+            return done(null, newUser);
+          })
+        }
+      });
+    }
+  }
 );
