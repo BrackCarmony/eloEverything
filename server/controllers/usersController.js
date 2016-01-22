@@ -7,13 +7,6 @@ var ObjectId = mongoose.Types.ObjectId;
 //console.log(ObjectId);
 
 module.exports = {
-  deserializeUser(_id, done){
-    console.log("Trying to find user with _id", _id)
-    User.findById(_id, function(err, user){
-      //console.log(err, ":err || user:", user);
-      done(err, user);
-    });
-  },
   addUser:function(req, res){
     User.create(req.body, function(err, result){
       if(err){
@@ -95,7 +88,8 @@ getScoreInCategory:function(req,res, next){
     var abc = 123;
     console.log("===========",req.user.scores);
     console.log(req.params.category);
-    req.params.score = _.find(req.user.scores,function(item){return item._category = req.params.category}).score;
+    var score = _.find(req.user.scores,function(item){return item._category = req.params.category})
+    req.params.score = (!score?1200:score.score);
     console.log("=============",req.params.score);
     next();
 
@@ -130,85 +124,7 @@ getUserBySession:function(req,res){
     }
   });
 },
-findOrCreateFromFacebook:function(profile, done){
-  console.log("Find me for profile:", profile);
 
-
-    //console.log(profile);
-    User.findOne({facebookId:profile.id}, function(err, result){
-      if (err){
-        console.log(err);
-        return err;
-      }
-        if (result === null)
-        {
-          if(profile.emails){
-            //If the profile contained emails, then try to find a matching user with the same profile.
-            profile.email = profile.emails[0].value;
-            User.findOne({email:profile.email}, function(err, result){
-              if (err){
-                console.log(err);
-                return err;
-              } else{
-                if(result === null){
-                  //Didn't find matching email, add as new User
-                  var newPhoto;
-                  if(profile.photos){
-                    newPhoto = profile.photos[0].value;
-                  }
-                  var newUser = {
-                    email:profile.email,
-                    'display_name': profile.displayName,
-                    facebookId: profile.id,
-                    pictureUrl:newPhoto
-                  };
-                  User.create(newUser, function(err, result){
-                    if(err){
-                      console.log(err);
-                      return err;
-                    }
-                    console.log(result);
-                    return done(null, result);
-                  });
-                }else{
-                  //Found User with matching email.  Add Facebook profile to it,
-                  //then call done
-                  result.facebookId = profile.id;
-                  if (!result.pictureUrl && profile.photos){
-                    result.pictureUrl = profile.photos[0].value;
-                  }
-                  //console.log(result);
-                  result.save();
-                  return done(null, result);
-                }
-              }
-            });
-          }else{
-            //If there wasn't an email included from the provider, then make a new user with no email :'(
-            var newUser = {
-              'display_name': profile.displayName,
-              facebookId: profile.id
-            };
-            User.create(newUser, function(err, result){
-              if(err){
-                console.log(err);
-                return err;
-              }
-              return done(null, result);
-            });
-          }
-          //Found user with matching FacebookId, can call done with the resulting profile.
-        }
-        else{
-          if (!result.pictureUrl && profile.photos){
-            result.pictureUrl = profile.photos[0].value;
-            result.save();
-          }
-          return done(null, result);
-        }
-
-    });
-},
 addQuestionToAnsweredList:function(req, res, next){
   console.log(req.user);
   User.findById(req.user._id)

@@ -1,7 +1,5 @@
 var app = angular.module("eloEverything")
 
-
-
 app.service('questionsService',function($http, $location){
 
   this.getAllQuestions = function(){

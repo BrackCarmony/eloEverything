@@ -4,7 +4,11 @@ var app = angular.module("eloEverything")
 
 app.service('authService', function($http, Session, $location){
   this.facebookLogin = function(){
-    return $http.get("/auth/facebook")
+    return $http.get("/auth/facebook");
+  }
+
+  this.signupLogin = function(user){
+    return $http.post("/auth/login", user);
   }
 
   this.isAuthenticated = function(){
