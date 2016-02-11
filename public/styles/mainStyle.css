@@ -6,6 +6,7 @@ html, body{
 
 *{
   box-sizing: border-box;
+  outline: red 1px dashed;
 }
 
 
@@ -19,6 +20,11 @@ html, body{
 
 .center{
   text-align: center;
+}
+.center-block{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .question li{
@@ -297,6 +303,39 @@ score-display{
 
 }
 
+.login-form{
+  background-color: #eee;
+  display: block;
+  padding:10px;
+  margin-right: 20px;
+  margin-left: 20px;
+
+}
+
+.login-form input{
+  width:80%;
+  margin-left: 10%;
+  margin-bottom: 10px;
+
+}
+
+.login-form span{
+  font-size: 20px;
+  text-align: center;
+  margin: auto;
+  display: block;
+}
+
+.login-form button{
+
+  width:175px;
+  background-color: #eee;
+  border-radius:30px;
+  border:2px solid #1C6BA0;
+  color:black;
+  font-size:1em;
+}
+
 .vertical-expand-in.ng-enter{
   animation-duration:1s;
   animation-name: expandin;
@@ -403,7 +442,6 @@ score-display{
   }
 
   to{
-
     margin-top: 0px;
     margin-bottom: 0px;
     max-height:0px;
