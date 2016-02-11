@@ -4,10 +4,10 @@ html, body{
   background-color: #333;
 }
 
-*{
+/**{
   box-sizing: border-box;
   outline: red 1px dashed;
-}
+}*/
 
 
 .clearfix{

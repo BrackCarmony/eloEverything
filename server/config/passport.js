@@ -14,14 +14,13 @@ var fbStrat = new FacebookStrategy({
   enableProof: true,
   profileFields: ['id', 'displayName', 'photos', 'email']
 }, function(token, refreshToken, profile, done) {
-  findOrCreateFromFacebook(profile, done)
+  findOrCreateFromFacebook(profile, done);
 });
 
 var localStrat = new LocalStrategy({
   usernameField: 'email',
-  passwordField: 'password',
-  passReqToCallback: true
-}, function(req, email, password, done) {
+  passwordField: 'password'
+}, function(email, password, done) {
   process.nextTick(function() {
     User.findOne({
       email: email
@@ -59,6 +58,7 @@ module.exports = function(app, passport) {
   app.use(passport.session());
 
   app.post('/auth/login', passport.authenticate('local', {
+    successRedirect: "/api/me"
     failureRedirect: "/loginFailure"
   }))
 
