@@ -71,9 +71,7 @@ module.exports = function(app, passport) {
     fialureRedirect: '/login'
   }), function(req, res) {
     res.body = req.user;
-    res.send({
-      goto: "/"
-    })
+    res.redirect('/#/login-land');
   });
 
   passport.serializeUser(function(user, done) {

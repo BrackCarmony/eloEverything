@@ -1,6 +1,6 @@
 var app = angular.module("eloEverything")
 
-
+var user = {};
 
 app.service('authService', function($http, Session, $location){
   this.facebookLogin = function(){
@@ -8,7 +8,14 @@ app.service('authService', function($http, Session, $location){
   }
 
   this.signupLogin = function(user){
-    return $http.post("/auth/login", user);
+    return $http.post("/auth/login", user).then(function(response){
+      if (response.data._id){
+        _.extend(user, response.data);
+        $location.path('/quiz');
+      }
+    }, function(err){
+
+    });
   }
 
   this.isAuthenticated = function(){
@@ -22,6 +29,10 @@ app.service('authService', function($http, Session, $location){
     return (authService.isAuthenticated() &&
       authorizedRoles.indexOf(Session.userRole) !== -1);
   };
+
+  this.getUser =function(){
+    return user;
+  }
 
   this.logout = function(){
     return $http.get('/auth/logout');
