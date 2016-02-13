@@ -65,7 +65,7 @@ if (process.env.envStatus === "DEVELOPMENT") {
   var port = 11746;
   mongoose.set('debug', true);
 } else {
-  var port = 80;
+  var port = 8081;
 }
 app.listen(port, function() {
   console.log("Listening on port:" + port + " in " + process.env.envStatus + " mode.");
