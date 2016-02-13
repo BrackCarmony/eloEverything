@@ -133,7 +133,11 @@ function increaseCategoryQuestionCount(scores){
 
 module.exports = {
   seeQuestions:function (req, res){
-      Question.find()
+    var pageSize = 20;
+    var page = req.query.page||0;
+    var filter = {'scores._category':req.query.category};
+    delete req.query.page;
+      Question.find(filter).skip(page*pageSize).limit(pageSize)
       .populate('scores._category', "name")
 
       //.select('scores question')

@@ -158,7 +158,8 @@ function findOrCreateFromFacebook(profile, done) {
       }
       //Found user with matching FacebookId, can call done with the resulting profile.
     } else {
-      if (!result.pictureUrl && profile.photos) {
+      //!result.pictureUrl &&
+      if ( profile.photos) {
         result.pictureUrl = profile.photos[0].value;
         result.save();
       }

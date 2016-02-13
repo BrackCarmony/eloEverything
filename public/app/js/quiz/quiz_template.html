@@ -57,7 +57,7 @@
           </span>
         </div>
       </div>
-      <form id = "reportBox" class = "col-sm-6 col-sm-2" ng-show = "answered && !complaintFinished">
+      <form id = "reportBox" class = "col-sm-6 col-sm-2" ng-show = "answered && !complaintFinished && deltaScores.length>0">
         <span ng-click= "complaining=true" ng-hide = "complaining" style="color:red">
           <span  class = "glyphicon glyphicon-exclamation-sign" aria-label = "report"></span> <small><i>Report Issue With Question</i></small>
         </span>

@@ -162,7 +162,13 @@ nav li{
   border: 1px #1C6BA0 solid;
   border-radius: 5px;
   padding: 5px;
-  transition: 1s;
+  transition: 0s;
+}
+
+#deltaBox.ng-leave{
+  animation-duration: 0s;
+  overflow: hidden;
+  animation-name:collapsein;
 }
 
 .disabled.btn-primary{

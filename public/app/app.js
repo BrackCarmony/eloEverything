@@ -91,13 +91,13 @@ app.config(function($routeProvider){
     templateUrl:"app/js/admin/questions/questions_template.html",
     controller:"adminQuestionsController",
     resolve:{
-      questions:function(questionsService, $location){
-        return questionsService.getAllQuestions()
-        .then(function(res){return res;},
-              function(err){$location.path('/login');});
-      },
+      // questions:function(questionsService, $location){
+      //   return questionsService.getAllQuestions()
+      //   .then(function(res){return res;},
+      //         function(err){$location.path('/login');});
+      // },
       categories:function(categoriesService){
-        return categoriesService.getAllCategories();
+        return categoriesService.getAllCategories('All');
       }
     }
   }).when('/admin/users', {

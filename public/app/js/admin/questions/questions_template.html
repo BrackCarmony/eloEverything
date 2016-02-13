@@ -1,3 +1,9 @@
+<div class = "card white">
+<select ng-options = "category.name + ':' + category.questions_count for category in categories" ng-model = "selectedCategory" ng-change = "retrieveQuestions()">
+</select>
+<button type="button" name="button" ng-disabled = "page==0" ng-click = "gotoPage(-1)">Prev</button>
+Page:{{page + 1}}
+<button type="button" name="button" ng-click = "gotoPage(1)">Next</button>
 <div ng-repeat = "question in questions">
   <div class = "well">
     <form class = "newQuestionForm" ng-submit = "updateQuestion(question)" >
@@ -37,4 +43,6 @@
     <button type = "submit" class = "btn-primary btn-lg">Update Question</button>
     </form>
   </div>
+</div>
+
 </div>
