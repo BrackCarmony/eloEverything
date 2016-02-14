@@ -100,7 +100,11 @@ app.config(function($routeProvider){
         return categoriesService.getAllCategories('All');
       }
     }
-  }).when('/admin/users', {
+  }).when("/admin/questions/:id",{
+    templateUrl:"app/js/admin/editQuestion/editQuestion_template.html",
+    controller:"editQuestionController",
+  })
+  .when('/admin/users', {
     templateUrl:"app/js/admin/users/users_template.html",
     controller:"adminUsersController",
     resolve:{

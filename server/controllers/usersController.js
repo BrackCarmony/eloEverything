@@ -86,9 +86,7 @@ getRankingsInCategory:function(req,res,next){
 getScoreInCategory:function(req,res, next){
 
     var abc = 123;
-    console.log("===========",req.user.scores);
-    console.log(req.params.category);
-    var score = _.find(req.user.scores,function(item){return item._category = req.params.category})
+    var score = _.find(req.user.scores,function(item){return item._category == req.params.category})
     req.params.score = (!score?1200:score.score);
     console.log("=============",req.params.score);
     next();

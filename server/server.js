@@ -35,6 +35,7 @@ require('./config/passport')(app, passport); //Setup passport
 app.get("/auth/logout", authController.logout);
 
 app.get("/api/questions", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.seeQuestions);
+app.get("/api/questions/edit/:id", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.getSingleQuestion);
 app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, usersController.getRecentQuestions, questionsController.askQuestion);
 app.get("/histogram/questions", questionsController.mathHistogram);
 app.post("/api/questions", authController.ensureAuthenticated, categoriesController.checkAndAddNewCategories, questionsController.addQuestion);
@@ -49,8 +50,9 @@ app.post("/api/users", usersController.addUser);
 app.put("/api/users", authController.ensureAuthenticated, usersController.updateUser);
 app.get("/api/rankings/:category", authController.ensureAuthenticated, usersController.getRankingsInCategory);
 
-app.get("/api/complaints", authController.ensureAuthenticated, authController.ensureAdmin, complaintsController.getComplaints);
 app.post("/api/complaints", authController.ensureAuthenticated, complaintsController.addComplaint);
+app.get("/api/complaints", authController.ensureAuthenticated, authController.ensureAdmin, complaintsController.getComplaints);
+app.delete("/api/complaints/:id", authController.ensureAuthenticated, complaintsController.removeComplaint);
 
 
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);

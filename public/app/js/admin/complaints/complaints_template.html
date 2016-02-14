@@ -1,7 +1,14 @@
-<div ng-repeat = "complaint in complaints | orderBy:complaint._question">
+<div class = "card white" ng-repeat = "complaint in complaints | orderBy:complaint._question">
 
+  <h5>{{complaint.complaint}} {{complaint}}
+    <a href="/#/admin/questions/{{complaint._question._id}}"> --- Edit Question --- </a>
+
+    <span ng-click = "removeComplaint(complaint)"> --- Remove Complaint --- </span>
+  </h5>
   {{complaint._question.question}}
   {{complaint._question.correct_answer}}
+
+
   <ul>
     <li ng-repeat = "possible_answer in complaint._question.possible_answers">
       {{possible_answer}}

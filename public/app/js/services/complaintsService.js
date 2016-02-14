@@ -21,4 +21,13 @@ app.service('complaintsService', function($http, Session, $location){
       return err;
     });
   }
+  this.deleteComplaint = function(complaint){
+    return $http.delete("/api/complaints/"+complaint._id).
+    then(function(result){
+      return result.data;
+    }, function (err){
+      console.log(err);
+      return err;
+    })
+  }
 });

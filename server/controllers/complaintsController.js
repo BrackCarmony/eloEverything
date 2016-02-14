@@ -27,3 +27,13 @@ module.exports.getComplaints = function(req, res){
     res.json(result);
   });
 }
+
+module.exports.removeComplaint = function(req, res){
+  Complaint.findByIdAndRemove(req.params.id, function(err, result){
+    if(err){
+      res.status(500).send(err);
+    }else{
+      res.send(result);
+    }
+  })
+}

@@ -27,6 +27,16 @@ app.service('questionsService',function($http, $location){
     });
   };
 
+  this.getIndividualQuestion = function(id){
+    return $http.get("/api/questions/edit/" + id)
+    .then(function(response){
+        return response.data
+    }, function(error){
+      console.log(error);
+      return error;
+    });
+  }
+
   this.answerQuestion = function(questionId, answer, pass){
     return $http.post("/api/answerquestion/" + questionId, {answer:answer, pass:pass})
     .then(function(response){
