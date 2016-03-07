@@ -1,28 +1,43 @@
-var app = angular.module("eloEverything")
+<div class = "card white">
+  {{question}}
+  <div class = "well">
+    <form class = "newQuestionForm" ng-submit = "updateQuestion(question)" >
+      <div>
+        <label for ="inputQuestionText">Question</label>
+        <input type = "text" class = "form-control" placeholder = "Question Text" id = "inputQuestionText" required ng-model = 'question.question'>
+      </div>
+      <div>
+        <label for ="inputAnswerText">Answer</label>
+         <input type = "text" class = "form-control" placeholder = "Correct Answer" required ng-model = 'question.correct_answer'>
+      </div>
+    <label for ="optionInputText">Options </label>
+    <div ng-repeat = "possible in question.possible_answers track by $index">
 
-app.controller("adminQuestionsController", function($scope, categories, questionsService){
-  $scope.questions = [];
-  $scope.categories = categories;
-  $scope.page = 0;
-  $scope.categories.sort(function(a,b){return b.questions_count - a.questions_count});
+      <div class = "input-group">
+        <input class = "form-control" type = "text" placeholder = "Incorrect Answer" required ng-model = 'question.possible_answers[$index]'>
 
-  $scope.updateQuestion = function(questionToUpdate){
-    questionsService.updateQuestion(questionToUpdate, categories);
-  };
+        <div class = "input-group-addon">
+          <span class="glyphicon glyphicon-minus" ng-hide ="$index==0" ng-click = "question.possible_answers.splice($index, 1)"></span>
+          <span class="glyphicon glyphicon-plus" ng-click = 'question.possible_answers.push("")' ng-show ="$index==0"></span>
+        </div>
+      </div>
+    </div>
 
-  $scope.gotoPage = function (page){
-    $scope.page+=page;
-    console.log(page);
-    getQuestions();
-  };
+    <label for ="optionInputText">Categories </label>
+    <div ng-repeat = "score in question.scores track by $index">
+      <div class = "input-group">
+        <input class = "form-control" type = "text" placeholder = "Incorrect Answer" required ng-model = 'question.scores[$index]._category.name'>
 
-  $scope.retrieveQuestions = function(){
-    getQuestions();
-  };
+        <div class = "input-group-addon">
+          <span class="glyphicon glyphicon-minus" ng-hide ="$index==0" ng-click = "question.possible_answers.splice($index, 1)"></span>
+          <span class="glyphicon glyphicon-plus" ng-click = 'question.possible_answers.push("")' ng-show ="$index==0"></span>
+        </div>
+      </div>
+    </div>
+    </br>
+    <button type = "submit" class = "btn-primary btn-lg">Update Question</button>
+    </form>
+  </div>
 
-  function getQuestions(){
-    questionsService.getAllQuestions($scope.selectedCategory, $scope.page).then(function(response){
-      $scope.questions = response;
-    });
-  }
-})
+
+</div>

@@ -425,7 +425,7 @@ score-display{
 @keyframes slide-in-left{
   from{
     transform: translateX(1000px);
-    position: absolute;
+    position:absolute;
   }
   to{
     transform: translateX(0px);
@@ -438,6 +438,7 @@ score-display{
   }
   to{
     transform: translateX(-1000px);
+    position:absolute;
   }
 }
 
