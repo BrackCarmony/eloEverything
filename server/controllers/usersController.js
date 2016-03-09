@@ -17,6 +17,13 @@ module.exports = {
       }
   });
 },
+countUsers:function(req, res){
+  User.count({}).exec(function(err, result){
+    if(err) return res.sendStatus(500);
+    console.log(result);
+    res.send({users:result});
+  });
+},
 getAllUsers:function(req,res){
   User.find({}, function(err, result){
     if (err){

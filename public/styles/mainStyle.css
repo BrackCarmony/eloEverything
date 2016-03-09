@@ -52,7 +52,6 @@ html, body{
   margin: 5px;
 }
 
-
 ul{
   padding: 0;
   margin: 0;
@@ -309,7 +308,7 @@ score-display{
 
 }
 
-.login-form{
+.card{
   background-color: #eee;
   display: block;
   padding:10px;
@@ -352,7 +351,16 @@ score-display{
   animation-name: collapsein;
 }
 
+welcome h1{
+  text-align: center;
+  color:#111;
+}
 
+welcome h1 span{
+  font-weight: bold;
+  color:blue;
+  display: inline;
+}
 
 @media only screen and (min-width: 768px){
   .question li.possible_answer{

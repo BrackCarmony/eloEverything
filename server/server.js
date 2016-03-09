@@ -15,6 +15,7 @@ var usersController = require('./controllers/usersController');
 var categoriesController = require("./controllers/categoriesController");
 var authController = require("./controllers/authController");
 var complaintsController = require("./controllers/complaintsController");
+var statsController = require("./controllers/statsController");
 
 var serverConfig = require("./config");
 
@@ -46,6 +47,7 @@ app.put("/api/questions/:questionId", authController.ensureAuthenticated, authCo
 //app.get("/api/users/:id", usersController.getUserById);
 app.get("/api/me", authController.ensureAuthenticated, usersController.getUserBySession);
 app.get("/api/users/admin", authController.ensureAuthenticated, authController.ensureAdmin, usersController.getAllUsersAdmin);
+
 app.post("/api/users", usersController.addUser);
 app.put("/api/users", authController.ensureAuthenticated, usersController.updateUser);
 app.get("/api/rankings/:category", authController.ensureAuthenticated, usersController.getRankingsInCategory);
@@ -54,6 +56,7 @@ app.post("/api/complaints", authController.ensureAuthenticated, complaintsContro
 app.get("/api/complaints", authController.ensureAuthenticated, authController.ensureAdmin, complaintsController.getComplaints);
 app.delete("/api/complaints/:id", authController.ensureAuthenticated, complaintsController.removeComplaint);
 
+app.get("/api/stats", statsController.getStats);
 
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
 app.put("/api/categories", authController.ensureAdmin, categoriesController.updateCategory);
