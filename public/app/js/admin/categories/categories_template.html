@@ -1,6 +1,10 @@
 <div class="card white">
 
-Test
-{{test}}
-{{categories}}
+Admin controls for categories.
+  <div ng-repeat="category in categories | orderBy : 'questions_count' : true">
+    <div class = "smallNumber">{{category.questions_count}}</div>
+    <input ng-model = "category.name" >
+    <input ng-model = "category.status" ng-change = "saveCategory(category)">
+    <button ng-click = "saveCategory(category)"> Save </button>
+  </div>
 </div>

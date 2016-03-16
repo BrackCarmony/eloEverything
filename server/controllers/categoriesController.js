@@ -74,8 +74,10 @@ module.exports = {
     });
   },
   updateCategory: function(req, res){
-      Category.findByIdAndUpdate(req.body._id, req.body)
+    console.log("------------", req.params.id, req.body);
+      Category.findByIdAndUpdate(req.params.id, req.body)
       .exec(function(err, result){
+        console.log("Updating Cateogry:",result);
         if (err){
           console.log(err);
         }

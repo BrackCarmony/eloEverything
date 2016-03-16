@@ -17,4 +17,11 @@ app.service('categoriesService', function($http, $location){
       return error;
     });
   };
+
+  this.updateCategory = function(category){
+    return $http.put("/api/categories/"+category._id, category)
+    .then(function(result){
+      return result.data;
+    })
+  }
 });

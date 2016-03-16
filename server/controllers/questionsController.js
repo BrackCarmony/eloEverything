@@ -5,10 +5,11 @@ var _ = require('underscore');
 var User = require('../models/User');
 var Category = require('../models/Category');
 var async = require('async');
+var settings = require('../settings');
 
 var k = 15;
 var defaultPlayerScore = 1200;
-var questionRange = 150;
+var questionRange = settings.questionRange;
 
 function calculateUserChangeInRating(score, user, question) {
   var scoreChange = [];

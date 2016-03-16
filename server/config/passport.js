@@ -38,7 +38,7 @@ var localStrat = new LocalStrategy({
         var newUser = new User();
         newUser.email = email;
         newUser.password = password;
-        newUser.display_name = "Mysterious Challenger " + Math.floor(Math.random() * 10000);
+        newUser.display_name = "Trivian " + Math.floor(Math.random() * 10000);
         newUser.pictureUrl = gravatar.url(email, {s: 200, f: 'y', d: 'identicon'});
 
         newUser.save(function(err) {

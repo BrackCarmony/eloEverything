@@ -59,7 +59,7 @@ app.delete("/api/complaints/:id", authController.ensureAuthenticated, complaints
 app.get("/api/stats", statsController.getStats);
 
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
-app.put("/api/categories", authController.ensureAdmin, categoriesController.updateCategory);
+app.put("/api/categories/:id", authController.ensureAdmin, categoriesController.updateCategory);
 
 
 mongoose.connection.once('open', function() {

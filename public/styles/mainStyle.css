@@ -351,6 +351,12 @@ score-display{
   animation-name: collapsein;
 }
 
+.smallNumber{
+  width:40px;
+  text-align: right;
+  display: inline-block;
+}
+
 welcome h1{
   text-align: center;
   color:#111;
