@@ -26,7 +26,6 @@ app.controller('profileController', function($scope, user, usersService){
       email:user.email
     };
     var saveUser = user;
-    console.log(userPropsToUpdate);
     usersService.updateUser(userPropsToUpdate).then(
       function(res){
         $scope.editing = false;
@@ -38,7 +37,6 @@ app.controller('profileController', function($scope, user, usersService){
   };
 
   $scope.setCurrentCategory = function(currentCategory){
-    console.log("current Category", currentCategory);
     $scope.currentCategory = currentCategory;
   };
 });

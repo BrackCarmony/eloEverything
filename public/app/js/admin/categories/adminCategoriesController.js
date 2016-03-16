@@ -4,7 +4,7 @@ app.controller("adminCategoriesController", function($scope, categories, categor
   $scope.categories = categories;
 
   $scope.saveCategory = function(category){
-    console.log(category);
+    //console.log(category);
     categoriesService.updateCategory(category);
   }
 });

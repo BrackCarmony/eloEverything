@@ -3,13 +3,11 @@ var app = angular.module("eloEverything")
 app.service('questionsService',function($http, $location){
 
   this.getAllQuestions = function(category, page){
-    console.log(category);
     return $http.get("/api/questions?page="+page+"&category="+category._id).then(
       function(response){
         return response.data;
       },
       function(error){
-        console.log(error);
         $location.path("/login");
         return error;
       }

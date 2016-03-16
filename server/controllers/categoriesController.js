@@ -16,7 +16,6 @@ module.exports = {
             console.log(err);
             res.send(500);
           }
-          console.log(result);
           if(result !== null){
             counter--;
             arry[index]._category = result._id;
@@ -74,10 +73,8 @@ module.exports = {
     });
   },
   updateCategory: function(req, res){
-    console.log("------------", req.params.id, req.body);
       Category.findByIdAndUpdate(req.params.id, req.body)
       .exec(function(err, result){
-        console.log("Updating Cateogry:",result);
         if (err){
           console.log(err);
         }

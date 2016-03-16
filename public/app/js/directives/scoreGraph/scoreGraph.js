@@ -22,7 +22,6 @@ angular.module('eloEverything').directive('scoreGraph', function() {
           min: 2000,
           max: 0
         })
-        console.log(bounds);
 
         var labels = [];
         var segments = 10;
@@ -42,9 +41,7 @@ angular.module('eloEverything').directive('scoreGraph', function() {
         ]
         var datasets = scope.scoresCollection.map(function(data, index) {
             var dataset = data.scores.reduce(function(prev, cur) {
-              console.log(cur);
               var index = Math.floor((cur - bounds.min) / (bounds.max - bounds.min) * segments)
-              console.log(index)
               if(index == segments) index--;
               prev[index]++;
               return prev;
@@ -71,9 +68,7 @@ angular.module('eloEverything').directive('scoreGraph', function() {
           datasets: datasets,
         }
 
-        console.log(chartData);
         var myNewChart = new Chart(ctx).Line(chartData)
-        console.log(myNewChart.generateLegend());
         elem.append(myNewChart.generateLegend());
       }
     }

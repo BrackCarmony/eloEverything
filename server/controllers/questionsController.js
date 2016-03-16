@@ -168,7 +168,6 @@ module.exports = {
       });
   },
   askQuestion: function(req, res) {
-    console.log("163", req.params.recent_questions);
     var abc = "123";
     Question.count()
       .where('_id').nin(req.params.recent_questions)
@@ -269,13 +268,11 @@ module.exports = {
             score = 0;
             for (var i = 0; i < question.possible_answers.length; i++) {
               if (question.possible_answers[i] == req.body.answer) {
-                console.log("--------------" + question.wrong[i]);
                 if (question.wrong[i]) {
                   question.wrong[i] += 1;
                 } else {
                   question.wrong[i] = 1;
                 }
-                console.log("--------------" + question.wrong[i]);
               }
             }
           }
@@ -301,8 +298,6 @@ module.exports = {
       })
   },
   updateQuestion: function(req, res) {
-    console.log("Updating Question", req.params.questionId);
-    console.log(req.body);
     Question.findByIdAndUpdate(req.params.questionId, req.body, {
         new: true
       })
@@ -317,8 +312,6 @@ module.exports = {
       })
   },
   mathHistogram: function(req, res) {
-    console.log("Hit Math Histogram Endpoint");
-    console.log(req.body);
     Question.
     res.send("I Was Here");
   }

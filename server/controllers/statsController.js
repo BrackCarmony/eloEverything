@@ -36,7 +36,6 @@ module.exports = {
   },
   getCategoryDistribution(req, res){
     var objId = new ObjectId(req.params.id);
-    console.log(objId);
       Question.aggregate([
         {$project:{_id:0, scores:{score:1,_category:1}}},
         {$match:{'scores._category':objId}},
@@ -49,7 +48,6 @@ module.exports = {
           console.log(err);
           res.send(err);
         }
-        console.log(result);
 
         res.send(_.pluck(result,'score'));
 

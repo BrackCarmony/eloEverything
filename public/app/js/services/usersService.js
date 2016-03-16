@@ -19,7 +19,6 @@ app.service('usersService',function($http, Session){
   this.getUserById= function(userId){
     return $http.get("/api/users/"+userId).then(
       function(response){
-        console.log(response);
         return response.data;
       },
       function(error){

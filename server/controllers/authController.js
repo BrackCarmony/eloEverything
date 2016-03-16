@@ -50,7 +50,6 @@ module.exports.localStrat = new LocalStrategy(
   function(email, password, done){
     User.findOne({'email':email},
       function(err, user){
-        console.log(user);
         if(err){
           console.log(err);
           return done(err);

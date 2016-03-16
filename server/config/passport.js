@@ -129,7 +129,6 @@ function findOrCreateFromFacebook(profile, done) {
                   console.log(err);
                   return err;
                 }
-                console.log(result);
                 return done(null, result);
               });
             } else {

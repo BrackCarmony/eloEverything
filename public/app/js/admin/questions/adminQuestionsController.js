@@ -12,7 +12,7 @@ app.controller("adminQuestionsController", function($scope, categories, question
 
   $scope.gotoPage = function (page){
     $scope.page+=page;
-    console.log(page);
+    //console.log(page);
     getQuestions();
   };
 

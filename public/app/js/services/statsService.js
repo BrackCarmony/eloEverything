@@ -14,7 +14,6 @@ app.service('Stats', function($http){
     return $http.get("/api/stats/question/"+category._category._id)
     .then(function(result){
 
-      console.log(result);
       return result.data;
     }, function(err){
       console.log(err);
