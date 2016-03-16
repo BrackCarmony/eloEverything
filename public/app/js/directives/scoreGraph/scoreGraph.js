@@ -40,10 +40,11 @@ angular.module('eloEverything').directive('scoreGraph', function() {
           "rgba(120,120,120,"
         ]
         var datasets = scope.scoresCollection.map(function(data, index) {
+          var l = data.scores.length;
             var dataset = data.scores.reduce(function(prev, cur) {
               var index = Math.floor((cur - bounds.min) / (bounds.max - bounds.min) * segments)
               if(index == segments) index--;
-              prev[index]++;
+              prev[index]+= 100/l;
               return prev;
             }, labels.map(function() {
               return 0;
