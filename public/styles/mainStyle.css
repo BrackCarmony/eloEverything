@@ -9,6 +9,9 @@ html, body{
   outline: red 1px dashed;
 }*/
 
+.clear{
+  clear:both;
+}
 
 .clearfix{
   overflow:auto;
@@ -367,6 +370,28 @@ welcome h1 span{
   color:blue;
   display: inline;
 }
+
+score-graph {
+  position:relative;
+  display: block;
+}
+
+score-graph .line-legend{
+  position:absolute;
+  top:20px;
+  left:60px;
+}
+
+.line-legend span{
+  position:relative;
+  display: inline-block;
+  width:15px;
+  height:15px;
+  top:3px;
+  left:-4px;
+  outline: 1px solid #333;
+}
+
 
 @media only screen and (min-width: 768px){
   .question li.possible_answer{

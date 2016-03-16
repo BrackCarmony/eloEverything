@@ -4,8 +4,15 @@
     <score-display score = "score" ng-click = "getRankings(score)" > </score-display>
   </span>
 </div>
-<div class = "white card">
-  <div ng-repeat = "rank in rankings">
-    {{rank.display_name}}:{{rank.scores.score | number:0}}
+<div class = "white card row">
+  <div class = "col-sm-9">
+    <div ng-if = "ready==2">
+      <score-graph scores-collection = "scoreData"> </score-graph>
+    </div>
+  </div>
+  <div class = "col-sm-3">
+    <div ng-repeat = "rank in rankings">
+      {{rank.display_name}}:{{rank.scores.score | number:0}}
+    </div>
   </div>
 </div>
