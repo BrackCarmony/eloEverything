@@ -52,6 +52,8 @@ function calculateUserChangeInRating(score, user, question) {
       userRating = 1200;
     }
     var ratingChange = calculateRatingChange(score, userRating, questionRating, question.possible_answers.length + 1);
+
+    console.log("User:Question:Change",userRating, questionRating, ratingChange);
     question.scores[i].score -= ratingChange;
     //console.log('userRatingId',userRatingId);
     if (userScoreIndex == -1) {
@@ -179,6 +181,10 @@ module.exports = {
         }
       })
       .exec(function(err, result) {
+        if (req.session.currentQuestion){
+          console.log(req.session.currentQuestion)
+          return (req.session.currentQuestion);
+        }
         if (err) {
           console.log(err);
           res.sendStatus(500);
@@ -210,7 +216,7 @@ module.exports = {
                 result.possible_answers.push(result.correct_answer);
                 shuffle(result.possible_answers);
                 result.correct_answer = "";
-
+                req.session.currentQuestion = result;
                 res.json(result);
               }
             })
@@ -247,6 +253,7 @@ module.exports = {
   },
   answerQuestion: function(req, res) {
     //console.log("answering Question");
+    req.session.currentQuestion = null;
     Question.findById(req.params.questionId)
       .populate('scores._category', 'name')
       .exec(function(err, question) {
