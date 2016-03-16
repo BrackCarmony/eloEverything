@@ -50,13 +50,14 @@ app.get("/api/users/admin", authController.ensureAuthenticated, authController.e
 
 app.post("/api/users", usersController.addUser);
 app.put("/api/users", authController.ensureAuthenticated, usersController.updateUser);
-app.get("/api/rankings/:category", authController.ensureAuthenticated, usersController.getRankingsInCategory);
+app.get("/api/rankings/:category", usersController.getRankingsInCategory);
 
 app.post("/api/complaints", authController.ensureAuthenticated, complaintsController.addComplaint);
 app.get("/api/complaints", authController.ensureAuthenticated, authController.ensureAdmin, complaintsController.getComplaints);
 app.delete("/api/complaints/:id", authController.ensureAuthenticated, complaintsController.removeComplaint);
 
 app.get("/api/stats", statsController.getStats);
+app.get("/api/stats/question/:id", statsController.getCategoryDistribution);
 
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
 app.put("/api/categories/:id", authController.ensureAdmin, categoriesController.updateCategory);
