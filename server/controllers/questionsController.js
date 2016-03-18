@@ -170,10 +170,10 @@ module.exports = {
       });
   },
   askQuestion: function(req, res) {
-    if (req.session.currentQuestion){
-      console.log(req.session.currentQuestion)
-      return (req.session.currentQuestion);
-    }
+    // if (req.session.currentQuestion){
+    //   console.log(req.session.currentQuestion)
+    //   return (req.session.currentQuestion);
+    // }
     Question.count()
       .where('_id').nin(req.params.recent_questions)
       .elemMatch('scores', {
