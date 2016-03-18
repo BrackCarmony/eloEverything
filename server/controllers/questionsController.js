@@ -170,7 +170,10 @@ module.exports = {
       });
   },
   askQuestion: function(req, res) {
-    var abc = "123";
+    if (req.session.currentQuestion){
+      console.log(req.session.currentQuestion)
+      return (req.session.currentQuestion);
+    }
     Question.count()
       .where('_id').nin(req.params.recent_questions)
       .elemMatch('scores', {
@@ -181,10 +184,6 @@ module.exports = {
         }
       })
       .exec(function(err, result) {
-        if (req.session.currentQuestion){
-          console.log(req.session.currentQuestion)
-          return (req.session.currentQuestion);
-        }
         if (err) {
           console.log(err);
           res.sendStatus(500);
