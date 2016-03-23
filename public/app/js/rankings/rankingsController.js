@@ -10,14 +10,14 @@ app.controller('rankingsController', function($scope, user, usersService, Stats)
     $scope.ready = 0;
     Stats.getQuestionScores(category)
       .then(function(res){
-        $scope.scoreData[0] = {name:'questions',scores:res};
+        $scope.scoreData[0] = {name:'Questions',scores:res};
         $scope.ready++;
       });
     usersService.getRankingsInCategory(category).then(function(res){
       $scope.rankings = res;
       $scope.ready++;
       var scores = res.map(function(item){return item.scores.score});
-      $scope.scoreData[1] = {name:'players', scores:scores};
+      $scope.scoreData[1] = {name:'Players', scores:scores};
     },function(err){});
   };
 });
