@@ -144,7 +144,10 @@ addQuestionToAnsweredList:function(req, res, next){
     next();
   });
 },
-updateUser:function(req, res){
+updateSelf:function(req, res){
+  var updateThings = {
+    display_name:req.body.display_name
+  }
     User.findByIdAndUpdate(req.user._id, req.body, function(err, result){
       if(err){
         console.log(err);

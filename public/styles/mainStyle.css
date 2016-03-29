@@ -260,7 +260,6 @@ score-display{
   display: block;
 }
 
-
 .profile-img-button{
   height:5em;
   width:5em;
@@ -276,6 +275,22 @@ score-display{
 .profile h3{
   margin-top: 1px;
   margin-bottom: 1px;
+}
+
+.user-profile {
+  position:relative;
+}
+
+.user-profile .fa-cogs{
+  color:grey;
+  font-size: 12px;
+  position:absolute;
+  right:5px;
+  top:-5px;
+}
+
+.user-profile .fa-cogs:hover{
+  color:blue;
 }
 
 .max-scroll-box{
@@ -344,6 +359,15 @@ score-display{
   font-size:1em;
 }
 
+.emptyButton{
+  width:175px;
+  background-color: #eee;
+  border-radius:30px;
+  border:2px solid #1C6BA0;
+  color:black;
+  font-size:1em;
+}
+
 .vertical-expand-in.ng-enter{
   animation-duration:1s;
   animation-name: expandin;
@@ -381,6 +405,8 @@ score-graph .line-legend{
   top:20px;
   left:60px;
 }
+
+
 
 .line-legend span{
   position:relative;

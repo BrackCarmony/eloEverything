@@ -22,14 +22,13 @@ app.controller('profileController', function($scope, user, usersService){
 
   $scope.updateUser = function(){
     userPropsToUpdate = {
-      display_name: user.display_name,
-      email:user.email
+      display_name: $scope.user.display_name
     };
     var saveUser = user;
+    console.log(userPropsToUpdate);
     usersService.updateUser(userPropsToUpdate).then(
       function(res){
         $scope.editing = false;
-        $scope.updating = false;
         $scope.setCurrentUser(saveUser);
       }
     );

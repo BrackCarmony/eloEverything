@@ -1,17 +1,25 @@
+
+
 <div class="container-fluid">
-  <div class="well">
-    <div ng-hide = "editing">
+  <div class="well" ng-dblclick = "editing = !editing">
+    <div>
       <h3 class="profile-header">{{user.display_name}}'s Score: {{eloScore|number:0}}</h3>
     </div>
-    <div ng-hide = "editing">
-      <input type = "text" ng-model="user.display_name"/>
-    </div>
+
     <div class="user-profile row">
       <img ng-src="{{user.pictureUrl}}" class="profile-img-button">
+      <i class="fa fa-cogs" ng-click = "editing = !editing"></i>
     </div>
   </div>
+  <div class = "well" ng-show ="editing">
+      Display Name: <input type = "text" ng-model="user.display_name"/>
+    </br>
+    </br>
+    <button class = "emptyButton"  ng-click = "updateUser()"> Save </button>
+  </div>
 
-  <div class="white card">
+
+  <div ng-if = "!editing" class="white card">
     <div class="max-scroll-box profile">
       <div class="clearfix">
         <h3 class="center">Categories</h3>
