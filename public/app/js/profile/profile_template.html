@@ -1,6 +1,11 @@
 <div class="container-fluid">
   <div class="well">
-    <h3 class="profile-header">{{user.display_name}}'s Score: {{eloScore|number:0}}</h3>
+    <div ng-hide = "editing">
+      <h3 class="profile-header">{{user.display_name}}'s Score: {{eloScore|number:0}}</h3>
+    </div>
+    <div ng-hide = "editing">
+      <input type = "text" ng-model="user.display_name"/>
+    </div>
     <div class="user-profile row">
       <img ng-src="{{user.pictureUrl}}" class="profile-img-button">
     </div>

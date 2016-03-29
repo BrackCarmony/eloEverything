@@ -31,13 +31,23 @@ Page:{{page + 1}}
     <label for ="optionInputText">Categories </label>
     <div ng-repeat = "score in question.scores track by $index">
       <div class = "input-group">
-        <input class = "form-control" type = "text" placeholder = "Incorrect Answer" required ng-model = 'question.scores[$index]._category.name'>
 
+
+      <div ng-if ="score.score">
+        {{score._category.status}} - {{score._category.name}}:{{score.score | number:0}}
+      </div>
+      <div ng-if ="!score.score">
+        <div angucomplete id="ex1" placeholder="Category {{$index}}" pause="100" selectedobject="question.scores[$index]" localdata="categories" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small"></div>
+      </div>
         <div class = "input-group-addon">
-          <span class="glyphicon glyphicon-minus" ng-hide ="$index==0" ng-click = "question.possible_answers.splice($index, 1)"></span>
-          <span class="glyphicon glyphicon-plus" ng-click = 'question.possible_answers.push("")' ng-show ="$index==0"></span>
+          <span class="glyphicon glyphicon-minus" ng-click = "question.scores.splice($index, 1)"></span>
+
         </div>
       </div>
+    </div>
+    <div class = "input-group-addon">
+
+      <span class="glyphicon glyphicon-plus" ng-click = 'question.scores.push("")'></span>
     </div>
     </br>
     <button type = "submit" class = "btn-primary btn-lg">Update Question</button>

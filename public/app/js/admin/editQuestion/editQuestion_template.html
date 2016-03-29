@@ -1,5 +1,4 @@
 <div class = "card white">
-  {{question}}
   <div class = "well">
     <form class = "newQuestionForm" ng-submit = "updateQuestion(question)" >
       <div>
@@ -24,19 +23,21 @@
     </div>
 
     <label for ="optionInputText">Categories </label>
-    <div ng-repeat = "score in question.scores track by $index">
+    <div ng-repeat = "score in question.scores track by $index | orderBy _category.status">
       <div class = "input-group">
-        <input class = "form-control" type = "text" placeholder = "Incorrect Answer" required ng-model = 'question.scores[$index]._category.name'>
+        <div angucomplete id="ex1" placeholder="Category {{$index+1}}" pause="100" selectedobject="question.scores[$index]" localdata="categories" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small"></div>
 
         <div class = "input-group-addon">
-          <span class="glyphicon glyphicon-minus" ng-hide ="$index==0" ng-click = "question.possible_answers.splice($index, 1)"></span>
-          <span class="glyphicon glyphicon-plus" ng-click = 'question.possible_answers.push("")' ng-show ="$index==0"></span>
+          <span class="glyphicon glyphicon-minus" ng-hide ="$index==0" ng-click = "question.scores.splice($index, 1)"></span>
+          <span class="glyphicon glyphicon-plus" ng-click = 'question.scores.push("")' ng-show ="$index==0"></span>
         </div>
       </div>
     </div>
     </br>
     <button type = "submit" class = "btn-primary btn-lg">Update Question</button>
     </form>
+
+    {{categories}}
   </div>
 
 

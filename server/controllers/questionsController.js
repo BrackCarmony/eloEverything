@@ -97,6 +97,7 @@ function calculateUserChangeInRating(score, user, question) {
   question.save(function(err) {
     if (err) {
       console.log(err);
+      console.log("Am I no longer getting called? That makes me sad :()")
     } else {
       //console.log("success?");
     }
@@ -143,7 +144,7 @@ module.exports = {
     };
     delete req.query.page;
     Question.find(filter).skip(page * pageSize).limit(pageSize)
-      .populate('scores._category', "name")
+      .populate('scores._category', "name status")
 
     //.select('scores question')
     .populate('_creator', "display_name _id")
@@ -223,7 +224,7 @@ module.exports = {
       });
   },
   getSingleQuestion: function(req, res) {
-    Question.findById(res.params.id)
+    Question.findById(req.params.id)
       .populate('scores._category', "name")
       .populate('_creator', "display_name _id")
       .exec(function(err, result) {
@@ -283,7 +284,7 @@ module.exports = {
             }
           }
           question.markModified('wrong');
-          question.save();
+          //question.save();
           //console.log("score:",score);
           User.findById(req.user._id, function(err, user) {
             if (err) {
