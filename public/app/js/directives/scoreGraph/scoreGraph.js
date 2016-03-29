@@ -30,14 +30,22 @@ angular.module('eloEverything').directive('scoreGraph', function() {
         }
 
         var cols =[
-          "rgba(220,220,220,",
+          "rgba(54,170,240,",//custom blue
+          "rgba(28,107,180,",//custom blue
+
+          "rgba(120,120,220,",//blue
+          "rgba(120,220,120,",//green
+          "rgba(220,120,120,",//red
+
+
+          "rgba(220,220,220,",//grey
           "rgba(220,220,120,",
           "rgba(220,120,220,",
           "rgba(120,220,220,",
-          "rgba(120,120,220,",
-          "rgba(120,220,120,",
-          "rgba(220,120,120,",
-          "rgba(120,120,120,"
+
+
+
+
         ]
         var datasets = scope.scoresCollection.map(function(data, index) {
           var l = data.scores.length;
@@ -69,9 +77,17 @@ angular.module('eloEverything').directive('scoreGraph', function() {
           datasets: datasets,
         }
 
+        Chart.defaults.global.responsive = true;
+
         var myNewChart = new Chart(ctx).Line(chartData)
         elem.append(myNewChart.generateLegend());
+        drawLine(myNewChart, 1200);
       }
     }
   }
 })
+
+function drawLine(chart, position){
+  console.log(chart);
+
+}

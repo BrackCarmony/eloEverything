@@ -403,7 +403,8 @@ score-graph {
 score-graph .line-legend{
   position:absolute;
   top:20px;
-  left:60px;
+  left:80px;
+  font-size: 10px;
 }
 
 
@@ -415,7 +416,7 @@ score-graph .line-legend{
   height:15px;
   top:3px;
   left:-4px;
-  outline: 1px solid #333;
+  outline: 1px solid #EEE;
 }
 
 
