@@ -20,4 +20,18 @@ app.service('Stats', function($http){
       return err;
     })
   }
+  this.getAuthorStat = function(user){
+    return $http.get('/api/stats/author'+user._id).then(function(response){
+      return response.data;
+    }, function (err){
+      console.log(err);
+    })
+    ​
+    .state('', {
+      url: '/',
+      templateUrl: './../features//.template.html',
+      controller: 'Ctrl'
+    });
+    ;
+  }
 });

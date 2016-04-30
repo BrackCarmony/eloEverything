@@ -52,5 +52,36 @@ module.exports = {
         res.send(_.pluck(result,'score'));
 
       })
+  },
+  makeAuthorStats(req, res){
+    var objId = new Object(req.params.id);
+      Question.find({_creator:objId})
+              .select('scores answered')
+              .populate('scores._category')
+              .exec(function(err, questions){
+        var allCats = questions.reduce(function(prev, cur){
+          cur.scores.reduce(function(prev, cur){
+            if(!prev[cur._category._id]){
+              prev[cur._category.status]++;
+            }
+            prev[cur._category._id]=true
+
+            return prev;
+          }, prev);
+          prev.timesQuestionsAsked += cur.answered;
+          return prev;
+        },{Category:0,Tag:0, timesQuestionsAsked:0})
+        User.findByIdAndUpdate(req.params.id, {
+          questionsAsked:questions.length,
+          categoriesAsked:allCats.Category,
+          tagsAsked:allCats.Tag,
+          timesQuestionsAsked:allCats.timesQuestionsAsked
+        }, function(err, response){
+          if(err){
+            console.log(err);
+          }
+        })
+        res.send({questions:questions.length});
+      });
   }
 }

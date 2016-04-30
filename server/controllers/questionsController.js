@@ -208,11 +208,6 @@ module.exports = {
               if (err) {
                 console.log(err)
               } else {
-                //console.log("------------------------------------------");
-                //console.log(req.params.recent_questions);
-                //console.log(result._id);
-                //console.log("------------------------------------------");
-
                 result.possible_answers.push(result.correct_answer);
                 shuffle(result.possible_answers);
                 result.correct_answer = "";
@@ -235,7 +230,7 @@ module.exports = {
         res.send(result)
       })
   },
-  addQuestion: function(req, res) {
+  addQuestion: function(req, res, next) {
     //console.log("Adding Question");
     //console.log(req.user);
     //console.log(req.session.passport);
@@ -248,6 +243,7 @@ module.exports = {
       } else {
         increaseCategoryQuestionCount(req.body.scores);
         res.json(result);
+        next();
       }
     });
   },
@@ -313,7 +309,6 @@ module.exports = {
           console.log(err);
           res.sendStatus(500)
         } else {
-          console.log(result);
           res.send(result)
         }
       })

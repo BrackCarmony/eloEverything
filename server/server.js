@@ -39,7 +39,7 @@ app.get("/api/questions", authController.ensureAuthenticated, authController.ens
 app.get("/api/questions/edit/:id", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.getSingleQuestion);
 app.get("/api/questions/:category", authController.ensureAuthenticated, usersController.getScoreInCategory, usersController.getRecentQuestions, questionsController.askQuestion);
 app.get("/histogram/questions", questionsController.mathHistogram);
-app.post("/api/questions", authController.ensureAuthenticated, categoriesController.checkAndAddNewCategories, questionsController.addQuestion);
+app.post("/api/questions", authController.ensureAuthenticated, categoriesController.checkAndAddNewCategories, questionsController.addQuestion, statsController.makeAuthorStats);
 app.post("/api/answerquestion/:questionId/", authController.ensureAuthenticated, usersController.addQuestionToAnsweredList, questionsController.answerQuestion);
 app.put("/api/questions/:questionId", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.updateQuestion);
 
@@ -58,6 +58,7 @@ app.delete("/api/complaints/:id", authController.ensureAuthenticated, complaints
 
 app.get("/api/stats", statsController.getStats);
 app.get("/api/stats/question/:id", statsController.getCategoryDistribution);
+app.get("/api/stats/author/:id", statsController.makeAuthorStats);
 
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
 app.put("/api/categories/:id", authController.ensureAdmin, categoriesController.updateCategory);

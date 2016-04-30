@@ -19,6 +19,10 @@ var schema = new mongoose.Schema({
     wrong:{type:Number, default:0},
     passed:{type:Number, default:0}
   }],
+  questionsAsked:{type:Number, default:0},
+  categoriesAsked:{type:Number, default:0},
+  tagsAsked:{type:Number, default:0},
+  timesQuestionsAsked:{type:Number, default:0},
   recent_questions:[{type:ObjectId, ref:"Question"}]
 });
 
