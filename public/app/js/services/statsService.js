@@ -21,7 +21,9 @@ app.service('Stats', function($http){
     })
   }
   this.getAuthorStat = function(user){
-    return $http.get('/api/stats/author'+user._id).then(function(response){
+    console.log("Send endpoint");
+    return $http.get('/api/stats/author/'+user._id).then(function(response){
+      console.log("get Response");
       return response.data;
     }, function (err){
       console.log(err);

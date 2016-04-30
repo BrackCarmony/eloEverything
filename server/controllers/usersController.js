@@ -34,7 +34,7 @@ getAllUsers:function(req,res){
 },
 getAllUsersAdmin:function(req, res){
   User.find({})
-  .select("display_name role email")
+  .select("display_name role email questionsAsked")
   .exec(function(err, users){
     if(err){
       console.log(err);
