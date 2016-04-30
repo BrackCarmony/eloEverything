@@ -25,13 +25,6 @@ app.service('Stats', function($http){
       return response.data;
     }, function (err){
       console.log(err);
-    })
-    ​
-    .state('', {
-      url: '/',
-      templateUrl: './../features//.template.html',
-      controller: 'Ctrl'
     });
-    ;
   }
 });
