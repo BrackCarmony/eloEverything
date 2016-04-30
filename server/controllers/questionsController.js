@@ -13,26 +13,14 @@ var questionRange = settings.questionRange;
 
 function calculateUserChangeInRating(score, user, question) {
   var scoreChange = [];
-  //console.log("Starting Scoring");
-  //console.log(user.scores);
-  //console.log(question);
 
   for (var i = 0; i < question.scores.length; i++) {
-    //console.log(question);
-    //console.log(question.scores);
-    //console.log(question.scores[i]);//WTH clearly I am doing something bizzare o.O
-    //console.log(question.scores[i]._doc._category._doc._id.toString());
     if (!question.scores[i]._doc._category) {
       continue
     }
     var category = question.scores[i]._doc._category._doc._id.toString();
 
-
-
-    //console.log('categoryId',category);
-    // console.log(user.scores);
     var userScoreIndex = -1;
-    //console.log('userScoreIndex',userScoreIndex);
     for (var j = 0; j < user.scores.length; j++) {
 
       if (category === user.scores[j]._doc._category.toString()) {
@@ -121,14 +109,12 @@ function calculateRatingChange(score, userRating, questionRating, n) {
 }
 
 function increaseCategoryQuestionCount(scores) {
-  //console.log("Counting question", scores)
   scores.forEach(function(item) {
     Category.findById(item._category, function(err, result) {
       if (err) {
         console.log(err)
         return false;
       }
-      //console.log(result.questions_count);
       result.questions_count += 1;
       result.save();
     })
@@ -208,11 +194,6 @@ module.exports = {
               if (err) {
                 console.log(err)
               } else {
-                //console.log("------------------------------------------");
-                //console.log(req.params.recent_questions);
-                //console.log(result._id);
-                //console.log("------------------------------------------");
-
                 result.possible_answers.push(result.correct_answer);
                 shuffle(result.possible_answers);
                 result.correct_answer = "";
@@ -235,7 +216,7 @@ module.exports = {
         res.send(result)
       })
   },
-  addQuestion: function(req, res) {
+  addQuestion: function(req, res, next) {
     //console.log("Adding Question");
     //console.log(req.user);
     //console.log(req.session.passport);
@@ -248,6 +229,7 @@ module.exports = {
       } else {
         increaseCategoryQuestionCount(req.body.scores);
         res.json(result);
+        next();
       }
     });
   },
@@ -313,7 +295,6 @@ module.exports = {
           console.log(err);
           res.sendStatus(500)
         } else {
-          console.log(result);
           res.send(result)
         }
       })

@@ -20,4 +20,13 @@ app.service('Stats', function($http){
       return err;
     })
   }
+  this.getAuthorStat = function(user){
+    console.log("Send endpoint");
+    return $http.get('/api/stats/author/'+user._id).then(function(response){
+      console.log("get Response");
+      return response.data;
+    }, function (err){
+      console.log(err);
+    });
+  }
 });
