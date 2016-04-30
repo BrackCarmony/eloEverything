@@ -20,6 +20,10 @@
 
 
   <div ng-if = "!editing" class="white card">
+    <div>
+      <h4>You have written {{user.questionsAsked}} questions in {{user.categoriesAsked}} categories covering {{user.tagsAsked + user.categoriesAsked}} topics.
+      Which have been asked {{user.timesQuestionsAsked}} times.</h4>
+    </div>
     <div class="max-scroll-box profile">
       <div class="clearfix">
         <h3 class="center">Categories</h3>
