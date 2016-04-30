@@ -13,26 +13,14 @@ var questionRange = settings.questionRange;
 
 function calculateUserChangeInRating(score, user, question) {
   var scoreChange = [];
-  //console.log("Starting Scoring");
-  //console.log(user.scores);
-  //console.log(question);
 
   for (var i = 0; i < question.scores.length; i++) {
-    //console.log(question);
-    //console.log(question.scores);
-    //console.log(question.scores[i]);//WTH clearly I am doing something bizzare o.O
-    //console.log(question.scores[i]._doc._category._doc._id.toString());
     if (!question.scores[i]._doc._category) {
       continue
     }
     var category = question.scores[i]._doc._category._doc._id.toString();
 
-
-
-    //console.log('categoryId',category);
-    // console.log(user.scores);
     var userScoreIndex = -1;
-    //console.log('userScoreIndex',userScoreIndex);
     for (var j = 0; j < user.scores.length; j++) {
 
       if (category === user.scores[j]._doc._category.toString()) {
@@ -121,14 +109,12 @@ function calculateRatingChange(score, userRating, questionRating, n) {
 }
 
 function increaseCategoryQuestionCount(scores) {
-  //console.log("Counting question", scores)
   scores.forEach(function(item) {
     Category.findById(item._category, function(err, result) {
       if (err) {
         console.log(err)
         return false;
       }
-      //console.log(result.questions_count);
       result.questions_count += 1;
       result.save();
     })
