@@ -1,10 +1,11 @@
 <div class = "card">
-  <button ng-click = "updateAll()">Update Questions </button>
+
  <div ng-repeat = "user in users | orderBy : 'questionsAsked'">
    <input ng-model = "user.display_name">
    <input ng-model = "user.role">
    <input ng-model = "user.email">
    Questions:{{user.questionsAsked}}
+   <button ng-click = "updateAll(user)">Update Questions </button>
 
  </div>
 </div>

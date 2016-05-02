@@ -54,12 +54,16 @@ module.exports = {
       })
   },
   makeAuthorStats(req, res){
-    var objId
+    var objId;
+    var id;
     if (req.params.id){
-      objId = new Object(req.query.id);
+      objId = new Object(req.params.id);
+      id = req.params.id;
     }else{
       objId = new Object(req.user.id);
+      id = req.user.id;
     }
+    console.log(id);
 
       Question.find({_creator:objId})
               .select('scores answered')
@@ -78,7 +82,8 @@ module.exports = {
           prev.timesQuestionsAsked += cur.answered;
           return prev;
         },{Category:0,Tag:0, timesQuestionsAsked:0})
-        User.findByIdAndUpdate(req.params.id, {
+        console.log(allCats);
+        User.findByIdAndUpdate(id, {
           questionsAsked:questions.length,
           categoriesAsked:allCats.Category,
           tagsAsked:allCats.Tag,
