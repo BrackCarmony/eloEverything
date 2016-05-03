@@ -72,7 +72,7 @@ module.exports = {
                 if(!questions || !questions.length) return;
         var allCats = questions.reduce(function(prev, cur){
           cur.scores.reduce(function(prev, cur){
-            if(!prev[cur._category._id]){
+            if(cur._category && !prev[cur._category._id]){
               prev[cur._category.status]++;
             }
             prev[cur._category._id]=true
