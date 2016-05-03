@@ -1,6 +1,6 @@
 <div class = "card">
 
- <div ng-repeat = "user in users | orderBy : 'questionsAsked'">
+ <div ng-repeat = "user in users | orderBy : '-questionsAsked'">
    <input ng-model = "user.display_name">
    <input ng-model = "user.role">
    <input ng-model = "user.email">
