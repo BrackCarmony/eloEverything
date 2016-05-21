@@ -419,6 +419,14 @@ score-graph .line-legend{
   outline: 1px solid #EEE;
 }
 
+.quiz-view h3 {
+  font-size: 2.7em;
+}
+
+.quiz-view li {
+  font-size: 1.6em;
+}
+
 
 @media only screen and (min-width: 768px){
   .question li.possible_answer{

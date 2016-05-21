@@ -1,17 +1,18 @@
 <div class = "categories well">
 
-    <div class = 'container-fluid' ng-hide = "category">
+    <div class = 'container-fluid ' ng-hide = "category">
       <div class = "row">
         <div class = "col-sm-6">
           <strong>Popular Categories: </strong>
-          <select ng-options = "category.name for category in categories | orderBy:'-questions_count' | filter:catFilter" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)"> </select>
+          <select ng-options = "category.name.toUpperCase() for category in categories | orderBy:'-questions_count' | filter:catFilter" ng-model = "selectedCategory" ng-change = "loadQuestion(selectedCategory)"> </select>
         </div>
       </div>
       <div class = 'row'>
         <div class = 'col-sm-12' ng-show = "user.scores.length">
           <strong>Categories:</strong>
           <span ng-repeat ="category in user.scores | filter:scoreFilter | orderBy:'-score' | limitTo:limit " ng-click="loadQuestion(category._category)"><score-display score = "category"></score-display></span>
-          <i><small><span ng-show="limit<user.scores.length" ng-click = "limit=limit+5">More</span><span ng-show="limit>5" ng-click = "limit=limit - 5">Less</span></small></i>
+          <!-- This actually worked? -->
+          <i><small><span ng-show="limit< (user.scores | filter:scoreFilter).length" ng-click = "limit=limit+5">More </span><span ng-show="limit>5" ng-click = "limit=limit - 5">Less</span></small></i>
         </div>
         <div class = 'col-sm-12' ng-hide = "user.scores.length">
           <span class = "h3">Select from popular categories to start increasing your elo score.</span>
@@ -28,7 +29,7 @@
   {{warning}}
 </h2></div>
 
-<div class = "question" ng-show = "question" ng-click="clickEvent($event)">
+<div class = "question quiz-view" ng-show = "question" ng-click="clickEvent($event)">
   <h3>{{question.question}}</h3>
   <ul class = "container-fluid">
     <div class = "row">
