@@ -1,2 +1,9 @@
-<h1> Join a community of <span>{{stats.userCount}}</span> trivians  answering <span>{{stats.questionCount}}</span> questions in <span>{{stats.categoryCount}}</span> categories covering <span>{{stats.tagCount}}</span> topics.
+<h1> Join a community of
+  <span>{{stats.userCount | number : 0}}</span>
+  trivians  answering
+  <span>{{stats.questionCount | number : 0}}</span>
+  questions in
+  <span>{{stats.categoryCount | number : 0}}</span>
+  categories covering
+  <span>{{stats.tagCount | number : 0 }}</span> topics.
 </h1>
