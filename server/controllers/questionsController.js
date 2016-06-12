@@ -13,15 +13,15 @@ var defaultPlayerScore = 1200;
 var questionRange = settings.questionRange;
 
 //Funtion to add the default everything category to well, everything//
-setTimeout(function(){
-  Question.find({}, function(err, result){
-    result.forEach(function(item){
-      // console.log(item);
-      ensureEverythingTag(item.scores);
-      item.save();
-    })
-  })
-}, 5000);
+// setTimeout(function(){
+//   Question.find({}, function(err, result){
+//     result.forEach(function(item){
+//       // console.log(item);
+//       ensureEverythingTag(item.scores);
+//       item.save();
+//     })
+//   })
+// }, 5000);
 
 
 function calculateUserChangeInRating(score, user, question) {
