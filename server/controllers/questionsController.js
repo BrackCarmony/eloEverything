@@ -6,10 +6,23 @@ var User = require('../models/User');
 var Category = require('../models/Category');
 var async = require('async');
 var settings = require('../settings');
+var everything = require('../config/everything.js');
 
 var k = 15;
 var defaultPlayerScore = 1200;
 var questionRange = settings.questionRange;
+
+//Funtion to add the default everything category to well, everything//
+// setTimeout(function(){
+//   Question.find({}, function(err, result){
+//     result.forEach(function(item){
+//       // console.log(item);
+//       ensureEverythingTag(item.scores);
+//       item.save();
+//     })
+//   })
+// }, 5000);
+
 
 function calculateUserChangeInRating(score, user, question) {
   var scoreChange = [];
@@ -85,7 +98,7 @@ function calculateUserChangeInRating(score, user, question) {
   question.save(function(err) {
     if (err) {
       console.log(err);
-      console.log("Am I no longer getting called? That makes me sad :()")
+      // console.log("Am I no longer getting called? That makes me sad :()")
     } else {
       //console.log("success?");
     }
@@ -217,9 +230,10 @@ module.exports = {
       })
   },
   addQuestion: function(req, res, next) {
-    //console.log("Adding Question");
-    //console.log(req.user);
-    //console.log(req.session.passport);
+    console.log("Adding Question");
+    // console.log(req.user);
+    // console.log(req.session.passport);
+    ensureEverythingTag(req.body.scores);
     req.body._creator = req.user._id;
     //console.log(req.body);
     Question.create(req.body, function(err, result) {
@@ -240,6 +254,8 @@ module.exports = {
       .populate('scores._category', 'name')
       .exec(function(err, question) {
         //console.log(question)
+
+        // ensureEverythingTag(question.scores);
         if (err) {
           console.log(err);
           res.sendStatus(500);
@@ -304,4 +320,13 @@ module.exports = {
     res.send("I Was Here");
   }
 
+}
+
+function ensureEverythingTag(scores){
+  // console.log("--------", scores);
+  if (scores.filter(function(item){
+    return item._category == everything.getEverythingCategory()._id;
+  }).length===0) {
+    scores.push({_category:everything.getEverythingCategory()._id,score:1200});
+  }
 }
