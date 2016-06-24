@@ -231,6 +231,10 @@ score-display{
   overflow:hidden;
 }
 
+.no-margin{
+  margin:0 !important;
+}
+
 .progress-button .content{
   position:relative;
   display:block;

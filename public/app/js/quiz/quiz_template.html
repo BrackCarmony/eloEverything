@@ -15,14 +15,13 @@
           <i><small><span ng-show="limit< (user.scores | filter:scoreFilter).length" ng-click = "limit=limit+5">More </span><span ng-show="limit>5" ng-click = "limit=limit - 5">Less</span></small></i>
         </div>
         <div class = 'col-sm-12' ng-hide = "user.scores.length">
-          <span class = "h3">Select from popular categories to start increasing your elo score.</span>
+          <span class = "h3 ">Select from popular categories to start increasing your elo score.</span>
         </div>
       </div>
     </div>
-    <div class = 'container-fluid' ng-show = "category" ng-click = "category = null">
-      <h2 class = "uppercase center">{{category.name}} {{user.scores[categoryIndexInUser].score | number:0}}</h2>
+    <div class = '' ng-show = "category" ng-click = "category = null">
+      <h2 class = "uppercase center no-margin">{{category.name}} {{user.scores[categoryIndexInUser].score | number:0}}</h2>
     </div>
-</br>
 
 </div>
 <div class = 'question' ng-show = "warning"><h2>
