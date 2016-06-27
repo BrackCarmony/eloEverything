@@ -424,21 +424,39 @@ score-graph .line-legend{
 }
 
 .quiz-view h3 {
-  font-size: 2.7em;
+  font-size: 2.2em;
+}
+
+.quiz-view .small-text {
+  font-size: 1em;
 }
 
 .quiz-view li {
-  font-size: 1.6em;
+  font-size: 1.2em;
+  padding:3px;
+}
+
+.quiz-view li .small-text {
+  font-size: .8em;
+  padding:3px;
 }
 
 
-@media only screen and (min-width: 768px){
+@media all and (min-width: 768px){
   .question li.possible_answer{
     float:left;
     width:calc(50% - 15px);
   }
+  .quiz-view h3 {
+    font-size: 2.6em;
+  }
+
+  .quiz-view li {
+    font-size: 1.6em;
+    padding:10px;
+  }
 }
-@media only screen and (max-width: 768px){
+@media all and (max-width: 768px){
   .profile-img-button {
     width: 45px;
     height:auto;
@@ -464,7 +482,7 @@ score-graph .line-legend{
   }
 }
 
-@media only screen and (min-width:768px){
+@media all and (min-width:768px){
   .profile .score-wrapper{
     display: inline-block;
     width:calc(50% - 6px);
@@ -474,7 +492,7 @@ score-graph .line-legend{
     margin-bottom: 2px;
   }
 }
-@media only screen and (min-width:1500px){
+@media all and (min-width:1500px){
   .profile .score-wrapper{
     display: inline-block;
     width:calc(100%/3 - 6px);
