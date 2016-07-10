@@ -428,7 +428,7 @@ score-graph .line-legend{
 }
 
 .quiz-view .small-text {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 .quiz-view li {
@@ -437,7 +437,7 @@ score-graph .line-legend{
 }
 
 .quiz-view li .small-text {
-  font-size: .8em;
+  font-size: 1em;
   padding:3px;
 }
 
