@@ -10,7 +10,7 @@ var upload = multer({ storage : storage}).single('file');
 AWS.config.update({region:'us-east-1'});
 var imageBucket = new AWS.S3(
   {params:{
-    Bucket:"eloeverything"
+    Bucket:config.bucket
   }});
 
 
@@ -46,6 +46,7 @@ module.exports = {
         if (err){
           return res.status(400).send(err);
         }
+        key = config.bucket + '/' + key
         return res.send({key:key,message:"success"});
       })
     })
