@@ -16,7 +16,6 @@ app.controller("newQuestionController", function($scope, questionsService, categ
     if ($scope.picFile){
       imageService.submitImage($scope.questionPicture)
       .then(function(response){
-        console.log(response);
         $scope.newQuestion.pictureUrl = response.key;
         questionsService.addNewQuestion($scope.newQuestion).then(function(respone){
         }, function(error){

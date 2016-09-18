@@ -21,11 +21,7 @@ setTimeout(function(){
 
 
 ///  Code block for testing S3;
-
-console.log("Start Here");
 var s3 = require('./s3.js');
-
-console.log("End Here");
 ///
 
 var k = 15;
@@ -73,8 +69,6 @@ function calculateUserChangeInRating(score, user, question) {
       userRating = 1200;
     }
     var ratingChange = calculateRatingChange(score, userRating, questionRating, question.possible_answers.length + 1);
-
-    console.log("User:Question:Change",userRating, questionRating, ratingChange);
     question.scores[i].score -= ratingChange;
     //console.log('userRatingId',userRatingId);
     if (userScoreIndex == -1) {
@@ -250,7 +244,6 @@ module.exports = {
       })
   },
   addQuestion: function(req, res, next) {
-    console.log("Adding Question");
     ensureEverythingTag(req.body.scores);
     if (req.body.pictureUrl){
       ensurePictureTag(req.body.scores);
@@ -352,7 +345,6 @@ function makeEnsure(specCategory){
     if (scores.filter(function(item){
       return item._category.toString() == category._id.toString();
     }).length===0) {
-      console.log( "Adding category " + specCategory + " to scores")
       scores.push({_category:category._id,score:1200});
     }
   }

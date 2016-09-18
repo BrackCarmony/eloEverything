@@ -30,8 +30,6 @@ module.exports = {
     next();
   },
   testUpload:(req, res, next) =>{
-    console.log("Endpoint hit");
-    console.log(req.body);
     var key = randomstring.generate({
       length:16,
       charset:"alphanumeric",
