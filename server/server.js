@@ -4,10 +4,16 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 var app = express();
 var User = require('./models/User');
 var localhost = process.env.publicIP;
+var s3 = require("./controllers/s3");
 
+module.exports = app;
+// app.use(multipart({
+//   uploadDir:config.tmp
+// }))
 
 
 var questionsController = require('./controllers/questionsController');
@@ -63,6 +69,7 @@ app.get("/api/stats/author/:id", statsController.makeAuthorStats);
 app.get("/api/categories", authController.ensureAuthenticated, categoriesController.getAllCategories);
 app.put("/api/categories/:id", authController.ensureAdmin, categoriesController.updateCategory);
 
+app.post("/api/images", s3.testUpload);
 
 mongoose.connection.once('open', function() {
   console.log('connected to mongoDb at : ', mongoUri);

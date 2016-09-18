@@ -2,8 +2,22 @@
   <form class = "newQuestionForm" ng-submit = "addNewQuestion()" >
     <div>
       <label for ="inputQuestionText">Question</label>
-      <input type = "text" class = "form-control" placeholder = "Question Text" id = "inputQuestionText" required ng-model = 'newQuestion.question'>
+      <span ng-click ="pictureQuestion=!pictureQuestion"
+          class = "pic-question-btn">
+        <i class="fa fa-picture-o" aria-hidden="true">
+        </i>
+      </span>
+      <input type = "text" class = "form-control"
+      placeholder = "Question Text" id = "inputQuestionText"
+      required ng-model = 'newQuestion.question'>
     </div>
+      <div ng-if = "pictureQuestion">
+          <file-upload pic-file = "$parent.picFile" cropped-data-url = "$parent.questionPicture"></file-upload>
+          <!-- <div ng-click = "$parent.callImageSave($parent.questionPicture)"> Test Upload </div> -->
+      </div>
+      <div ng-hide = "pictureQuestion || !picFile" class = "relative" style= "max-height:42vh;height:375px;" >
+        <img class = "abs-center-margin" ng-src="{{questionPicture}}" />
+      </div>
     <div>
       <label for ="inputAnswerText">Answer</label>
        <input type = "text" class = "form-control" placeholder = "Correct Answer" required ng-model = 'newQuestion.correct_answer'>
@@ -21,7 +35,7 @@
     </div>
   </div>
 
-  <label for ="optionInputText">Categories </label> 
+  <label for ="optionInputText">Categories </label>
   <div ng-repeat = "score in newQuestion.scores track by $index">
 
     <div class = "input-group">
@@ -38,4 +52,3 @@
   <button type = "submit" class = "btn-primary btn-lg">Add Question</button>
   </form>
 </div>
-{{spyglass}}

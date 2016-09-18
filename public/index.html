@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/mainStyle.css">
     <link rel="stylesheet" href="/styles/angucomplete.css">
+    <link rel="stylesheet" href="node_modules/ngImgCrop/compile/minified/ng-img-crop.css">
 
   </head>
   <body ng-controller = "authController">
@@ -39,6 +40,8 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+    <script src = "node_modules/ngImgCrop/compile/minified/ng-img-crop.js" charset="utf-8"></script>
+    <script src = "node_modules/ng-file-upload/dist/ng-file-upload.js" charset="utf-8"></script>
     <script src = "lib/chart.js/Chart.js"></script>
     <script src = "app/app.js"></script>
     <script src = "app/js/quiz/quizController.js"></script>
@@ -53,8 +56,10 @@
     <script src = "app/js/services/categoriesService.js"></script>
     <script src = "app/js/services/sessionService.js"></script>
     <script src = "app/js/services/complaintsService.js"></script>
+    <script src = "app/js/services/imageService.js"></script>
     <script src = "app/js/directives/score/scoreDisplay.js"></script>
     <script src = "app/js/directives/scoreGraph/scoreGraph.js"></script>
+    <script src = "app/js/directives/fileUpload/fileUpload.js"></script>
     <script src = "app/js/users/usersController.js"></script>
     <script src = "app/js/header/headerController.js"></script>
     <script src = "app/js/newQuestion/newQuestionController.js"></script>

@@ -53,7 +53,7 @@ module.exports = {
 
       })
   },
-  makeAuthorStats(req, res){
+  makeAuthorStats(req, res, next){
     var objId;
     var id;
     if (req.params.id){
@@ -96,5 +96,6 @@ module.exports = {
         })
         //res.send({questions:questions.length});
       });
+      next();
   }
 }

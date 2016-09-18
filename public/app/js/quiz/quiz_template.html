@@ -30,6 +30,9 @@
 
 <div class = "question quiz-view" ng-show = "question" ng-click="clickEvent($event)">
   <h3 ng-class = "{'small-text':question.question.length>50}" >{{question.question}}</h3>
+  <div class="image-container" ng-if = "question.pictureUrl">
+    <img class = "quiz-image" ng-src ="https://s3.amazonaws.com/eloeverything/{{question.pictureUrl}}">
+  </div>
   <ul class = "container-fluid">
     <div class = "row">
     <li class = "possible_answer"

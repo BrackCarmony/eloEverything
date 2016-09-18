@@ -9,6 +9,19 @@ html, body{
   outline: red 1px dashed;
 }*/
 
+.relative{
+  position:relative;
+}
+
+.abs-center-margin{
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  margin:auto;
+}
+
 .clear{
   clear:both;
 }
@@ -441,6 +454,37 @@ score-graph .line-legend{
   padding:3px;
 }
 
+.cropArea {
+  max-height: 40vh;
+  height:370px;
+  flex:1;
+}
+
+.even-flex{
+  display:flex;
+}
+
+.even-flex>*{
+  flex:1;
+}
+
+.pic-question-btn{
+  color:blue;
+  font-size: 1.5em;
+  position:fixed;
+  top: 60px;
+  right:60px;
+
+}
+
+.pic-question-button:hover{
+  color:green;
+}
+
+.newQuestionForm img{
+  max-height: 40vh;
+}
+
 
 @media all and (min-width: 768px){
   .question li.possible_answer{
@@ -455,6 +499,24 @@ score-graph .line-legend{
     font-size: 1.6em;
     padding:10px;
   }
+}
+
+.image-container{
+  margin:5px;
+  height:20vh;
+  position:relative;
+}
+
+.quiz-image{
+  max-height:100%;
+  max-width: 100%;
+  position: absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  margin:auto;
+  box-shadow: 2px 2px 2px #111;
 }
 @media all and (max-width: 768px){
   .profile-img-button {

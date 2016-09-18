@@ -35,6 +35,7 @@ var schema = new mongoose.Schema({
   correct:{type:Number, default:0},
   passed:{type:Number, default:0},
   wrong:{type:[Number]},
+  pictureUrl:String,
   _creator:{type:ObjectId, ref:'User'}
 });
 

@@ -1,0 +1,21 @@
+<form name="myForm">
+        <button ngf-select ng-model="picFile" accept="image/*">
+            Select Picture</button>
+          </br>
+          <div class = "even-flex">
+            <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+                 class="cropArea">
+                <img-crop image="picFile  | ngfDataUrl"
+                result-image="croppedDataUrl"
+                area-type = "square"
+                area-min-size = 20
+                result-image-size = 350
+                result-image-quality = 1
+                ng-init="croppedDataUrl=''">
+                </img-crop >
+            </div>
+            <div class = "relative">
+                <img class = "abs-center-margin" ng-src="{{croppedDataUrl}}" />
+            </div>
+        </div>
+    </form>
