@@ -454,6 +454,37 @@ score-graph .line-legend{
   padding:3px;
 }
 
+.picturemodal{
+  background-color: rgba(100,100,100,.9);
+  height:100vh;
+  width:100vw;
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  margin:auto;
+  overflow:hidden;
+  transition-duration: .25s;
+  z-index: 2000;
+}
+
+.picturemodal .image{
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  margin:auto;
+  width:600px;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+.hiddenmodal{
+  width: 0vw;
+  height: 0vh;
+}
+
 .cropArea {
   max-height: 40vh;
   height:370px;
@@ -503,7 +534,7 @@ score-graph .line-legend{
 
 .image-container{
   margin:5px;
-  height:20vh;
+  height:30vh;
   position:relative;
 }
 
