@@ -12,7 +12,7 @@ app.controller("newQuestionController", function($scope, questionsService, categ
   //   })
   // }
 
-  $scope.addNewQuestion = function(){
+  $scope.addNewQuestion = function(i){
     if ($scope.picFile){
       imageService.submitImage($scope.questionPicture)
       .then(function(response){
@@ -25,10 +25,16 @@ app.controller("newQuestionController", function($scope, questionsService, categ
       })
     }else{
       questionsService.addNewQuestion($scope.newQuestion).then(function(respone){
+        initQuestion();
       }, function(error){
         console.log(error);
+        if (i<5){
+          $scope.addNewQuestion(i+1||1);
+        }else{
+          alert("There seems to be an issue with the server.  Please try again later.");
+        }
       });
-      initQuestion();
+
     }
   }
 
