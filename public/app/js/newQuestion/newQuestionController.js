@@ -24,15 +24,21 @@ app.controller("newQuestionController", function($scope, questionsService, categ
         initQuestion();
       })
     }else{
-      questionsService.addNewQuestion($scope.newQuestion).then(function(respone){
-        initQuestion();
-      }, function(error){
-        console.log(error);
-        if (i<5){
+      questionsService.addNewQuestion($scope.newQuestion).then(function(response){
+        console.log("But you should be failing!!!", response);
+        if (response._id){
+          return initQuestion();
+        }
+
+        if (i<5 || !i){
+          console.log(i);
           $scope.addNewQuestion(i+1||1);
         }else{
           alert("There seems to be an issue with the server.  Please try again later.");
         }
+      }, function(error){
+        console.log(error);
+
       });
 
     }
