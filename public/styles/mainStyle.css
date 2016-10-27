@@ -547,7 +547,6 @@ score-graph .line-legend{
   bottom:0;
   left:0;
   margin:auto;
-  box-shadow: 2px 2px 2px #111;
 }
 @media all and (max-width: 768px){
   .profile-img-button {
