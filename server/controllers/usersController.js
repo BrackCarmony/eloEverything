@@ -46,11 +46,22 @@ getAllUsersAdmin:function(req, res){
 },
 getUserById:function(req,res){
   User.findById(req.params.id)
-  .populate('scores.category')
+  .populate('scores._category')
   .exec(function(err, result){
     if (err){
       res.sendStatus(500);
     }else{
+      console.log(result);
+      result = result.toObject();
+      delete result.password;
+      delete result.facebookId;
+      delete result.googleId;
+      delete result.email;
+      delete result.recent_questions;
+      delete result.role;
+
+      console.log(result);
+
       res.json(result);
     }
   });

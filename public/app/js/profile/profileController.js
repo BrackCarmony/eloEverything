@@ -1,14 +1,23 @@
 var app = angular.module('eloEverything');
 
-app.controller('profileController', function($scope, user, usersService){
-  $scope.user = user;
+app.controller('profileController', function($scope, user, usersService, $routeParams){
+  if (!$routeParams.id){
+    $scope.user = user;
+    calcEloScore();
+  }else{
+    usersService.getUserById($routeParams.id).then(function(response){
+      $scope.user = response;
+      console.log(response);
+      calcEloScore();
+    });
+  }
   $scope.currentCategory = null;
   $scope.catFilter = {_category:{status:"Category"}};
   $scope.tagFilter = {_category:{status:"Tag"}};
-  calcEloScore();
+
   function calcEloScore(){
     var eloScore = 0;
-      user.scores.forEach(function(score){
+      $scope.user.scores.forEach(function(score){
         //console.log(score.score*Math.min(100,score.answered)/100)
         if (!score._category){
           return ;

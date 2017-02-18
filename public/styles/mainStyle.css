@@ -416,6 +416,9 @@ score-graph {
   position:relative;
   display: block;
 }
+score-graph canvas{
+  max-width: 70vh;
+}
 
 score-graph .line-legend{
   position:absolute;
@@ -547,6 +550,40 @@ score-graph .line-legend{
   bottom:0;
   left:0;
   margin:auto;
+}
+
+.rankCategories{
+  max-height: 25vh;
+  overflow: auto;
+}
+.my-rank {
+  font-weight: bolder;
+}
+
+.ranking-graph{
+  max-height: 60vh;
+  overflow: hidden;
+}
+
+.mini-rank {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.rank-item{
+  font:font-family: "courier new", courier, monospace;
+  font-size: 12px;
+  padding-left: 5px;
+  border-bottom: 1px solid #aeaeae;
+  border-left: 1px dotted #aeaeae;
+}
+.flex {
+  display:flex;
+  align-content: space-between;
+  align-items: center;
+}
+.flex1{
+  flex:1;
 }
 @media all and (max-width: 768px){
   .profile-img-button {

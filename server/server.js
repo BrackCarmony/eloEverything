@@ -56,6 +56,7 @@ app.get("/api/users/admin", authController.ensureAuthenticated, authController.e
 
 app.post("/api/users", usersController.addUser);
 app.put("/api/users", authController.ensureAuthenticated, usersController.updateSelf);
+app.get("/api/users/:id", usersController.getUserById);
 app.get("/api/rankings/:category", usersController.getRankingsInCategory);
 
 app.post("/api/complaints", authController.ensureAuthenticated, complaintsController.addComplaint);

@@ -24,7 +24,7 @@ app.config(function($routeProvider){
       categories:function(categoriesService){
         return categoriesService.getAllCategories();
       },
-      user: function(usersService, $route, $location){
+      user: function(usersService, $route, $location, $routeParams){
         return usersService.getMe().then(function(result){
           if(result._id){
           return result;
