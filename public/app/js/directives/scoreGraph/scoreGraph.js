@@ -1,7 +1,37 @@
 angular.module('eloEverything').directive('scoreGraph', function() {
+  
+  var origionalDraw = Chart.controllers.line.prototype.draw;
+  var myScoreX = 1200;
+
+  Chart.controllers.line.prototype.draw = function(ease){
+    origionalDraw.call(this, ease);
+
+    var myScore = myScoreX;
+    var scale = this.chart.scales['x-axis-0'];
+    // var bot = this.chart.scales['y-axis-0'];
+
+    var top = this.chart.scales['y-axis-0'].top;
+    var bottom = this.chart.scales['y-axis-0'].bottom;
+
+    var left = (myScore-scale.min*1)/ (scale.max*1-scale.min*1) * (scale.right - scale.left) + scale.left;
+
+    this.chart.chart.ctx.beginPath();
+    this.chart.chart.ctx.strokeStyle = '#000';
+    this.chart.chart.ctx.moveTo(left,top);
+    this.chart.chart.ctx.lineTo(left,bottom);
+    this.chart.chart.ctx.stroke();
+
+    this.chart.chart.ctx.textAlign = "center";
+    this.chart.chart.ctx.fillStyle = '#000';
+    this.chart.chart.ctx.fillText('YOU', left - 20, top+20);
+  };
+
+
+
   return {
     scope: {
-      scoresCollection: "="
+      scoresCollection: "=",
+      myScore:"="
     },
     templateUrl: "app/js/directives/scoreGraph/scoreGraph.html",
     link: function(scope, elem, attr) {
@@ -12,6 +42,7 @@ angular.module('eloEverything').directive('scoreGraph', function() {
       updateChartData();
 
       function updateChartData() {
+        myScoreX = scope.myScore;
         var bounds = scope.scoresCollection.reduce(function(prev, item) {
           return item.scores.reduce(function(prev, cur) {
             if (cur < prev.min) prev.min = cur;
@@ -60,8 +91,8 @@ angular.module('eloEverything').directive('scoreGraph', function() {
 
             return {
               label: data.name,
-              fillColor: cols[index]+"0.2)",
-              strokeColor: cols[index]+"1)",
+              backgroundColor: cols[index]+"0.2)",
+              borderColor: cols[index]+"1)",
               pointColor: cols[index]+"1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
@@ -79,15 +110,12 @@ angular.module('eloEverything').directive('scoreGraph', function() {
 
         Chart.defaults.global.responsive = true;
 
-        var myNewChart = new Chart(ctx).Line(chartData)
-        elem.append(myNewChart.generateLegend());
-        drawLine(myNewChart, 1200);
+        var myNewChart = new Chart(ctx, {
+            type:'line',
+            data:chartData
+          });
+
       }
     }
   }
 })
-
-function drawLine(chart, position){
-  console.log(chart);
-
-}
