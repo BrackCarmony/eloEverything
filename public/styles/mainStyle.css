@@ -9,6 +9,19 @@ html, body{
   outline: red 1px dashed;
 }*/
 
+.relative{
+  position:relative;
+}
+
+.abs-center-margin{
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  margin:auto;
+}
+
 .clear{
   clear:both;
 }
@@ -231,6 +244,10 @@ score-display{
   overflow:hidden;
 }
 
+.no-margin{
+  margin:0 !important;
+}
+
 .progress-button .content{
   position:relative;
   display:block;
@@ -420,21 +437,118 @@ score-graph .line-legend{
 }
 
 .quiz-view h3 {
-  font-size: 2.7em;
+  font-size: 2.2em;
+}
+
+.quiz-view .small-text {
+  font-size: 1.2em;
 }
 
 .quiz-view li {
-  font-size: 1.6em;
+  font-size: 1.2em;
+  padding:3px;
+}
+
+.quiz-view li .small-text {
+  font-size: 1em;
+  padding:3px;
+}
+
+.picturemodal{
+  background-color: rgba(100,100,100,.9);
+  height:100vh;
+  width:100vw;
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  margin:auto;
+  overflow:hidden;
+  transition-duration: .25s;
+  z-index: 2000;
+}
+
+.picturemodal .image{
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  bottom:0;
+  margin:auto;
+  width:600px;
+  max-width: 95vw;
+  max-height: 95vh;
+}
+.hiddenmodal{
+  width: 0vw;
+  height: 0vh;
+}
+
+.cropArea {
+  max-height: 40vh;
+  height:370px;
+  flex:1;
+}
+
+.even-flex{
+  display:flex;
+}
+
+.even-flex>*{
+  flex:1;
+}
+
+.pic-question-btn{
+  color:blue;
+  font-size: 1.5em;
+  position:fixed;
+  top: 60px;
+  right:60px;
+
+}
+
+.pic-question-button:hover{
+  color:green;
+}
+
+.newQuestionForm img{
+  max-height: 40vh;
 }
 
 
-@media only screen and (min-width: 768px){
+@media all and (min-width: 768px){
   .question li.possible_answer{
     float:left;
     width:calc(50% - 15px);
   }
+  .quiz-view h3 {
+    font-size: 2.6em;
+  }
+
+  .quiz-view li {
+    font-size: 1.6em;
+    padding:10px;
+  }
 }
-@media only screen and (max-width: 768px){
+
+.image-container{
+  margin:5px;
+  height:30vh;
+  position:relative;
+}
+
+.quiz-image{
+  max-height:100%;
+  max-width: 100%;
+  position: absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  margin:auto;
+}
+@media all and (max-width: 768px){
   .profile-img-button {
     width: 45px;
     height:auto;
@@ -460,7 +574,7 @@ score-graph .line-legend{
   }
 }
 
-@media only screen and (min-width:768px){
+@media all and (min-width:768px){
   .profile .score-wrapper{
     display: inline-block;
     width:calc(50% - 6px);
@@ -470,7 +584,7 @@ score-graph .line-legend{
     margin-bottom: 2px;
   }
 }
-@media only screen and (min-width:1500px){
+@media all and (min-width:1500px){
   .profile .score-wrapper{
     display: inline-block;
     width:calc(100%/3 - 6px);

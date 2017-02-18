@@ -1,4 +1,4 @@
-var app = angular.module("eloEverything", ['ngRoute',"angucomplete", "ngAnimate"]);
+var app = angular.module("eloEverything", ['ngRoute',"angucomplete", "ngAnimate", "ngFileUpload", "ngImgCrop"]);
 
 app.constant('AUTH_EVENTS',{
   loginSuccess: 'auth-login-success',

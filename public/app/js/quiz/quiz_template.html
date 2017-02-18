@@ -15,14 +15,13 @@
           <i><small><span ng-show="limit< (user.scores | filter:scoreFilter).length" ng-click = "limit=limit+5">More </span><span ng-show="limit>5" ng-click = "limit=limit - 5">Less</span></small></i>
         </div>
         <div class = 'col-sm-12' ng-hide = "user.scores.length">
-          <span class = "h3">Select from popular categories to start increasing your elo score.</span>
+          <span class = "h3 ">Select from popular categories to start increasing your elo score.</span>
         </div>
       </div>
     </div>
-    <div class = 'container-fluid' ng-show = "category" ng-click = "category = null">
-      <h2 class = "uppercase center">{{category.name}} {{user.scores[categoryIndexInUser].score | number:0}}</h2>
+    <div class = '' ng-show = "category" ng-click = "category = null">
+      <h2 class = "uppercase center no-margin">{{category.name}} {{user.scores[categoryIndexInUser].score | number:0}}</h2>
     </div>
-</br>
 
 </div>
 <div class = 'question' ng-show = "warning"><h2>
@@ -30,7 +29,13 @@
 </h2></div>
 
 <div class = "question quiz-view" ng-show = "question" ng-click="clickEvent($event)">
-  <h3>{{question.question}}</h3>
+  <h3 ng-class = "{'small-text':question.question.length>50}" >{{question.question}}</h3>
+  <div class="image-container" ng-if = "question.pictureUrl">
+    <img ng-click = "imagemodal = true" class = "quiz-image" ng-src ="https://s3.amazonaws.com/{{question.pictureUrl}}">
+    <div ng-click = "imagemodal=false" class = "picturemodal" ng-class = "{hiddenmodal:!imagemodal}">
+      <img class = "image" ng-src ="https://s3.amazonaws.com/{{question.pictureUrl}}">
+    </div>
+  </div>
   <ul class = "container-fluid">
     <div class = "row">
     <li class = "possible_answer"
@@ -38,7 +43,7 @@
         ng-class = "{noselect:true, selected:$parent.selected == answer, correct:$parent.correct_answer === answer && $parent.answered, wrong:$parent.selected == answer && $parent.correct_answer}"
         ng-click = "select(answer)"
         ng-repeat = "answer in question.possible_answers">
-        <div class = "possible_answer">{{answer}}</div></li>
+        <div class = "possible_answer" ng-class = "{'small-text':answer.length>25}" >{{answer}}</div></li>
     </div>
   </ul>
   <div class = "container-fluid">

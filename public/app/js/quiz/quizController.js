@@ -16,7 +16,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
 
 
   $scope.loadQuestion = function(category){
-
+    ga('send', 'event', 'quiz', category.name);
     $scope.complaining = false;
     $scope.complaintFinished = false;
     $scope.selected = "";
@@ -38,6 +38,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
 
     questionsService.getSingleQuestion(category._id).then(function(question){
       if(question.length == 0){
+        ga('send', 'event', 'error', 'out of questions', category.name);
         $scope.warning = "No suitable questions in "+category.name+".  Please try another category.";
         $scope.question= false;
       }else{
@@ -100,7 +101,7 @@ app.controller('quizController', function($scope, user, questionsService, usersS
   }
 
   $scope.submitComplaint = function(newComplaint){
-
+      ga('send', 'event', 'complain', 'submit', $scope.question.question);
       newComplaint._question = $scope.question._id;
       newComplaint._user = $scope.user._id;
 

@@ -6,7 +6,23 @@ var User = require('../models/User');
 var Category = require('../models/Category');
 var async = require('async');
 var settings = require('../settings');
-var everything = require('../config/everything.js');
+var getSpecialCategory = require('../config/everything.js').getSpecialCategory;
+
+
+var ensureEverythingTag ;
+var ensurePictureTag ;
+var removePictureTag;
+
+setTimeout(function(){
+  ensureEverythingTag = makeEnsure('everything');
+  ensurePictureTag = makeEnsure('picture');
+  removePictureTag = makeRemove('picture');
+}, 1000);
+
+
+///  Code block for testing S3;
+var s3 = require('./s3.js');
+///
 
 var k = 15;
 var defaultPlayerScore = 1200;
@@ -53,8 +69,6 @@ function calculateUserChangeInRating(score, user, question) {
       userRating = 1200;
     }
     var ratingChange = calculateRatingChange(score, userRating, questionRating, question.possible_answers.length + 1);
-
-    console.log("User:Question:Change",userRating, questionRating, ratingChange);
     question.scores[i].score -= ratingChange;
     //console.log('userRatingId',userRatingId);
     if (userScoreIndex == -1) {
@@ -230,10 +244,12 @@ module.exports = {
       })
   },
   addQuestion: function(req, res, next) {
-    console.log("Adding Question");
-    // console.log(req.user);
-    // console.log(req.session.passport);
     ensureEverythingTag(req.body.scores);
+    if (req.body.pictureUrl){
+      ensurePictureTag(req.body.scores);
+    }else{
+      req.body.scores = removePictureTag(req.body.scores);
+    }
     req.body._creator = req.user._id;
     //console.log(req.body);
     Question.create(req.body, function(err, result) {
@@ -241,6 +257,7 @@ module.exports = {
         console.log(err);
         res.sendStatus(500);
       } else {
+        req.body._id = result._id;
         increaseCategoryQuestionCount(req.body.scores);
         res.json(result);
         next();
@@ -322,11 +339,23 @@ module.exports = {
 
 }
 
-function ensureEverythingTag(scores){
-  // console.log("--------", scores);
-  if (scores.filter(function(item){
-    return item._category == everything.getEverythingCategory()._id;
-  }).length===0) {
-    scores.push({_category:everything.getEverythingCategory()._id,score:1200});
+function makeEnsure(specCategory){
+  var category = getSpecialCategory(specCategory);;
+  return function (scores){
+    if (scores.filter(function(item){
+      return item._category.toString() == category._id.toString();
+    }).length===0) {
+      scores.push({_category:category._id,score:1200});
+    }
+  }
+}
+
+function makeRemove(specCategory){
+  var category = getSpecialCategory(specCategory);;
+  return function(scores){
+    scores = scores.filter(function(item){
+      return item._category.toString() !== category._id.toString();
+    });
+    return scores;
   }
 }

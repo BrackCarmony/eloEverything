@@ -2,3 +2,5 @@ node_modules
 server/config.js
 server/settings.js
 .DS_store
+npm-debug.log
+img
