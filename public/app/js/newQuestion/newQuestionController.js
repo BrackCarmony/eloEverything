@@ -13,7 +13,9 @@ app.controller("newQuestionController", function($scope, questionsService, categ
   // }
 
   $scope.addNewQuestion = function(i){
+
     if ($scope.picFile){
+      ga('send', 'event', 'question', 'create', 'picture');
       imageService.submitImage($scope.questionPicture)
       .then(function(response){
         $scope.newQuestion.pictureUrl = response.key;
@@ -24,6 +26,7 @@ app.controller("newQuestionController", function($scope, questionsService, categ
         initQuestion();
       })
     }else{
+      ga('send', 'event', 'question', 'create', 'text');
       questionsService.addNewQuestion($scope.newQuestion).then(function(response){
         console.log("But you should be failing!!!", response);
         if (response._id){
