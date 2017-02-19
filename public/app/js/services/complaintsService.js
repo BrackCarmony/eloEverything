@@ -8,7 +8,7 @@ app.service('complaintsService', function($http, Session, $location){
     .then(function(result){
       return result.data;
     }, function(err){
-      console.log(err);
+      console.error(err);
       return err;
     });
   }
@@ -17,7 +17,7 @@ app.service('complaintsService', function($http, Session, $location){
     then(function(result){
       return result.data;
     }, function(err){
-      console.log(err);
+      console.error(err);
       return err;
     });
   }
@@ -26,7 +26,7 @@ app.service('complaintsService', function($http, Session, $location){
     then(function(result){
       return result.data;
     }, function (err){
-      console.log(err);
+      console.error(err);
       return err;
     })
   }

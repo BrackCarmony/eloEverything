@@ -13,7 +13,7 @@ app.service('categoriesService', function($http, $location){
       //console.log(response.data);
       return response.data;
     }, function(error){
-      console.log(error);
+      console.error(error);
       return error;
     });
   };

@@ -13,7 +13,7 @@ module.exports = {
         var newCat = {name:score.category.toLowerCase()};
         Category.findOne(newCat, function(err, result){
           if(err){
-            console.log(err);
+            console.error(err);
             res.send(500);
           }
           if(result !== null){
@@ -26,7 +26,7 @@ module.exports = {
             Category.create(newCat, function(err, result){
               counter--;
               if(err){
-                console.log(err);
+                console.error(err);
               }else{
                 //console.log(result);
                 arry[index]._category = result._id;
@@ -56,7 +56,7 @@ module.exports = {
 
     Category.find(queryObj, function(err, result){
       if(err){
-        console.log(err);
+        console.error(err);
         res.sendStatus(500);
       }
       res.json(result);
@@ -76,7 +76,7 @@ module.exports = {
       Category.findByIdAndUpdate(req.params.id, req.body)
       .exec(function(err, result){
         if (err){
-          console.log(err);
+          console.error(err);
         }
         res.json(result);
       });

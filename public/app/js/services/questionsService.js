@@ -20,7 +20,7 @@ app.service('questionsService',function($http, $location){
     .then(function(response){
         return response.data
     }, function(error){
-      console.log(error);
+      console.error(error);
       return error;
     });
   };
@@ -30,7 +30,7 @@ app.service('questionsService',function($http, $location){
     .then(function(response){
         return response.data
     }, function(error){
-      console.log(error);
+      console.error(error);
       return error;
     });
   }
@@ -40,7 +40,7 @@ app.service('questionsService',function($http, $location){
     .then(function(response){
       return response.data;
     }, function(error){
-      console.log(error);
+      console.error(error);
       return error;
     })
   }
@@ -51,7 +51,7 @@ app.service('questionsService',function($http, $location){
     .then(function(response){
       return response.data;
     }, function(error){
-      console.log(error);
+      console.error(error);
       return error;
     })
   }

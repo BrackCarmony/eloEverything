@@ -45,7 +45,7 @@ module.exports = {
         {$project:{score:'$scores.score'}}
       ]).exec(function(err, result){
         if(err){
-          console.log(err);
+          console.error(err);
           res.send(err);
         }
 
@@ -91,7 +91,7 @@ module.exports = {
           timesQuestionsAsked:allCats.timesQuestionsAsked
         }, function(err, response){
           if(err){
-            console.log(err);
+            console.error(err);
           }
         })
         //res.send({questions:questions.length});

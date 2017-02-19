@@ -1,10 +1,12 @@
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var usersController = require('../controllers/usersController');
+var usersController = require('./usersController');
 var LocalStrategy = require('passport-local').Strategy;
 var asyn = require('async');
 var User = require('../models/User');
 var bCrypt = require('bcrypt-nodejs');
+var jwt = require('jsonwebtoken');
+var jwtSecret = require('../config').tokenSecret;
 
 var isValidPassword = function(user, password){
   return bCrypt.compareSyn(password, user.password);
@@ -15,6 +17,19 @@ var createHash = function(toHash){
 }
 
 module.exports = {
+  getToken:function(req, res){
+    if (req.user){
+      jwt.sign({ _id: req.user._id, date:new Date() }, jwtSecret, {}, function(err, token) {
+        if(err){
+          console.error(err);
+        }
+        return res.send(token);
+      });
+    }else{
+      return res.status(403).send("Not logged in");
+    }
+  },
+
   ensureAuthenticated:function(req, res, next) {
     if (req.isAuthenticated())
       return next();
@@ -33,64 +48,3 @@ module.exports = {
     }
   }
 }
-
-module.exports.fbStrat = new FacebookStrategy({
-  clientID:process.env.facebookClientId,
-  clientSecret:process.env.facebookClientSecret,
-  callbackURL:'/auth/facebook/callback',
-  enableProof: true,
-  profileFields: ['id', 'displayName', 'photos', 'email']
-}, function (token, refreshToken, profile, done){
-  usersController.findOrCreateFromFacebook(profile, done)
-});
-
-module.exports.localStrat = new LocalStrategy(
-    {usernaneField: 'email',
-    passwordField:'password'},
-  function(email, password, done){
-    User.findOne({'email':email},
-      function(err, user){
-        if(err){
-          console.log(err);
-          return done(err);
-        }
-        if(!user){
-          return done(null, false);
-        }
-        if(!isValidPassword(user, password)){
-          return done(null, false);
-        }
-        return done(null, user);
-      })
-    }
-);
-
-module.exports.localSignup = new LocalStrategy(
-  {usernameField:'email',passwordField:'password'},
-  function(email, password, done){
-    findOrCreateUser = function(){
-      User.findOne({'email':email}, function(err, user){
-        if (err){
-
-        }
-        if (user){
-          console.log("User already exists");
-          return;
-        }else{
-          var newUser = new User();
-          newUser.email = email;
-          newUser.password = createHash(password);
-
-          newUser.save(function(err){
-            if (err){
-              console.log('Error in saving user', err);
-              throw err;
-            }
-            console.log('User Registration Succesful');
-            return done(null, newUser);
-          })
-        }
-      });
-    }
-  }
-);

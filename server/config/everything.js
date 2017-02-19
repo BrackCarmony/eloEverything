@@ -7,13 +7,13 @@ function makeSpecialCateogry(category){
   Category.findOne({name:category}, function(err, response){
     console.log(category,response);
     if(err){
-      return console.log(err);
+      return console.error(err);
     }else if(!response){
       console.log("Create "+ category + " Category");
         Category.create({name:category}, function (err, response){
           console.log("Created "+ category + " Category");
           if(err){
-            return console.log(err);
+            return console.error(err);
           }
           specialCategories[category] = response;
         });
