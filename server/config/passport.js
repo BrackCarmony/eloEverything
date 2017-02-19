@@ -4,6 +4,8 @@ var User = require('./../models/User');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var gravatar = require('gravatar');
+var jwt = require('jsonwebtoken');
+var jwtSecret = require('../config').tokenSecret;
 
 
 
@@ -16,6 +18,20 @@ var fbStrat = new FacebookStrategy({
 }, function(token, refreshToken, profile, done) {
   findOrCreateFromFacebook(profile, done);
 });
+
+var tokenStrat = new LocalStrategy({
+  usernameField:'token',
+  passwordField:'token2'
+}, function(token, token2, done){
+  console.log(token, token2)
+  jwt.verify(token, jwtSecret, function(err, dToken){
+    console.log(dToken);
+    if(err){
+      done(err, null);
+    }
+    done(null, dToken);
+  })
+})
 
 var localStrat = new LocalStrategy({
   usernameField: 'email',
@@ -43,7 +59,7 @@ var localStrat = new LocalStrategy({
 
         newUser.save(function(err) {
           if (err) {
-            console.log(err);
+            console.error(err);
             done(null, false)
           }
           done(null, newUser);
@@ -62,13 +78,18 @@ module.exports = function(app, passport) {
     failureRedirect: "/loginFailure"
   }))
 
+  app.post('/auth/token', passport.authenticate('token', {
+    successRedirect: "/api/me",
+    failureRedirect: "/loginFailure"
+  }))
+
   app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res) {
     //Under normal conditions this should not execute.
     console.log("Facebookauth experieced problems");
   });
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    fialureRedirect: '/login'
+    failureRedirect: '/login'
   }), function(req, res) {
     res.body = req.user;
     res.redirect('/#/login-land');
@@ -84,13 +105,15 @@ module.exports = function(app, passport) {
 
   passport.deserializeUser(function(obj, done) {
     User.findById(obj._id, function(err, user) {
-      //console.log(err, ":err || user:", user);
+      //console.error(err, ":err || user:", user);
+      user.token = "Cheese";
       done(err, user);
     });
   });
 
   passport.use('facebook', fbStrat);
   passport.use('local', localStrat);
+  passport.use('token', tokenStrat);
 }
 
 function findOrCreateFromFacebook(profile, done) {
@@ -99,7 +122,7 @@ function findOrCreateFromFacebook(profile, done) {
     facebookId: profile.id
   }, function(err, result) {
     if (err) {
-      console.log(err);
+      console.error(err);
       return err;
     }
     if (result === null) {
@@ -110,7 +133,7 @@ function findOrCreateFromFacebook(profile, done) {
           email: profile.email
         }, function(err, result) {
           if (err) {
-            console.log(err);
+            console.error(err);
             return err;
           } else {
             if (result === null) {
@@ -126,7 +149,7 @@ function findOrCreateFromFacebook(profile, done) {
               };
               User.create(newUser, function(err, result) {
                 if (err) {
-                  console.log(err);
+                  console.error(err);
                   return err;
                 }
                 return done(null, result);
@@ -149,7 +172,7 @@ function findOrCreateFromFacebook(profile, done) {
         };
         User.create(newUser, function(err, result) {
           if (err) {
-            console.log(err);
+            console.error(err);
             return err;
           }
           return done(null, result);

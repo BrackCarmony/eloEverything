@@ -10,7 +10,7 @@ module.exports = {
   addUser:function(req, res){
     User.create(req.body, function(err, result){
       if(err){
-        console.log(err);
+        console.error(err);
         res.sendStatus(500);
       }else{
         res.json(result);
@@ -37,7 +37,7 @@ getAllUsersAdmin:function(req, res){
   .select("display_name role email questionsAsked")
   .exec(function(err, users){
     if(err){
-      console.log(err);
+      console.error(err);
       res.send(500);
     }else{
       res.json(users);
@@ -74,7 +74,7 @@ getUserById:function(req,res){
 //       .sort("scores.score")
 //       .exec(function(err, result){
 //         if(err){
-//             console.log(err);
+//             console.error(err);
 //         }
 //         console.log('rankings result:', result);
 //         res.send(result);
@@ -92,7 +92,7 @@ getRankingsInCategory:function(req,res,next){
   ])
       .exec(function(err, result){
         if(err){
-            console.log(err);
+            console.error(err);
         }
         res.send(result);
       });
@@ -110,7 +110,7 @@ getRecentQuestions:function(req, res, next){
   .select('recent_questions')
   .exec(function(err, result){
     if(err){
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     }else{
       if(result === null){
@@ -134,7 +134,6 @@ getUserBySession:function(req,res){
     }
   });
 },
-
 addQuestionToAnsweredList:function(req, res, next){
   User.findById(req.user._id)
   .select("recent_questions")
@@ -161,7 +160,7 @@ updateSelf:function(req, res){
   }
     User.findByIdAndUpdate(req.user._id, req.body, function(err, result){
       if(err){
-        console.log(err);
+        console.error(err);
         res.sendStatus(500);
       }else{
         res.sendStatus(200);

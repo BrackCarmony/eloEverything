@@ -11,7 +11,7 @@ app.service('usersService',function($http, Session){
         return response.data;
       },
       function(error){
-        console.log(error);
+        console.error(error);
         return error;
       }
     );
@@ -22,7 +22,7 @@ app.service('usersService',function($http, Session){
         return response.data;
       },
       function(error){
-        console.log(error);
+        console.error(error);
         return error;
       }
     );
@@ -33,7 +33,7 @@ app.service('usersService',function($http, Session){
 
       return response.data;
     }, function(error){
-      console.log(error);
+      console.error(error);
       return error;
     });
   };
@@ -45,7 +45,7 @@ app.service('usersService',function($http, Session){
       }
       return response.data;
     }, function(error){
-      console.log(error);
+      console.error(error);
       return error;
     });
   };
@@ -59,7 +59,7 @@ app.service('usersService',function($http, Session){
       .then(function(res){
         return res;},
       function(err){
-        console.log(err);
+        console.error(err);
         return err;
       });
   };
@@ -71,7 +71,7 @@ app.service('usersService',function($http, Session){
       //console.log(res);
       return res.data;
     }, function(err){
-      console.log(err);
+      console.error(err);
       return err;
     });
   };

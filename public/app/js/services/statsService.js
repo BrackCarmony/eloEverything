@@ -6,7 +6,7 @@ app.service('Stats', function($http){
     then(function(result){
       return result.data;
     }, function(err){
-      console.log(err);
+      console.error(err);
       return err;
     });
   };
@@ -16,17 +16,15 @@ app.service('Stats', function($http){
 
       return result.data;
     }, function(err){
-      console.log(err);
+      console.error(err);
       return err;
     })
   }
   this.getAuthorStat = function(user){
-    console.log("Send endpoint");
     return $http.get('/api/stats/author/'+user._id).then(function(response){
-      console.log("get Response");
       return response.data;
     }, function (err){
-      console.log(err);
+      console.error(err);
     });
   }
 });

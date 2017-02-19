@@ -23,6 +23,7 @@
     "express-session": "^1.11.3",
     "express-sessions": "^1.0.5",
     "gravatar": "^1.4.0",
+    "jsonwebtoken": "^7.3.0",
     "knuth-shuffle": "^1.0.1",
     "mongoose": "^4.1.9",
     "multer": "^1.2.0",

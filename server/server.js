@@ -40,6 +40,8 @@ app.use(bodyParser.json());
 require('./config/passport')(app, passport); //Setup passport
 
 app.get("/auth/logout", authController.logout);
+app.get("/auth/token", authController.getToken);
+
 
 app.get("/api/questions", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.seeQuestions);
 app.get("/api/questions/edit/:id", authController.ensureAuthenticated, authController.ensureAdmin, questionsController.getSingleQuestion);

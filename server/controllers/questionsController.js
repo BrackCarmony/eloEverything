@@ -111,7 +111,7 @@ function calculateUserChangeInRating(score, user, question) {
   }
   question.save(function(err) {
     if (err) {
-      console.log(err);
+      console.error(err);
       // console.log("Am I no longer getting called? That makes me sad :()")
     } else {
       //console.log("success?");
@@ -119,7 +119,7 @@ function calculateUserChangeInRating(score, user, question) {
   });
   user.save(function(err) {
     if (err) {
-      console.log(err);
+      console.error(err);
     } else {
       //console.log("success?");
     }
@@ -139,7 +139,7 @@ function increaseCategoryQuestionCount(scores) {
   scores.forEach(function(item) {
     Category.findById(item._category, function(err, result) {
       if (err) {
-        console.log(err)
+        console.error(err)
         return false;
       }
       result.questions_count += 1;
@@ -163,7 +163,7 @@ module.exports = {
     .populate('_creator', "display_name _id")
       .exec(function(err, result) {
         if (err) {
-          console.log(err);
+          console.error(err);
           res.sendStatus(500);
         } else {
           async.forEach(result.scores, function(score, callback) {
@@ -171,7 +171,7 @@ module.exports = {
               path: "category"
             }, function(err, output) {
               if (err) {
-                console.log(err)
+                console.error(err)
                 throw err;
               }
               callback();
@@ -199,7 +199,7 @@ module.exports = {
       })
       .exec(function(err, result) {
         if (err) {
-          console.log(err);
+          console.error(err);
           res.sendStatus(500);
         } else {
           //console.log("Valid Questions:",result);
@@ -219,7 +219,7 @@ module.exports = {
             .skip(Math.floor(Math.random() * result))
             .exec(function(err, result) {
               if (err) {
-                console.log(err)
+                console.error(err)
               } else {
                 result.possible_answers.push(result.correct_answer);
                 shuffle(result.possible_answers);
@@ -237,7 +237,7 @@ module.exports = {
       .populate('_creator', "display_name _id")
       .exec(function(err, result) {
         if (err) {
-          console.log(err)
+          console.error(err)
           res.sendStatus(500);
         }
         res.send(result)
@@ -254,7 +254,7 @@ module.exports = {
     //console.log(req.body);
     Question.create(req.body, function(err, result) {
       if (err) {
-        console.log(err);
+        console.error(err);
         res.sendStatus(500);
       } else {
         req.body._id = result._id;
@@ -274,7 +274,7 @@ module.exports = {
 
         // ensureEverythingTag(question.scores);
         if (err) {
-          console.log(err);
+          console.error(err);
           res.sendStatus(500);
         } else {
           //Retrieved
@@ -303,7 +303,7 @@ module.exports = {
           //console.log("score:",score);
           User.findById(req.user._id, function(err, user) {
             if (err) {
-              console.log(err);
+              console.error(err);
               res.sendStatus(500);
             } else {
               //console.log("question:", question);
@@ -325,7 +325,7 @@ module.exports = {
       })
       .exec(function(err, result) {
         if (err) {
-          console.log(err);
+          console.error(err);
           res.sendStatus(500)
         } else {
           res.send(result)

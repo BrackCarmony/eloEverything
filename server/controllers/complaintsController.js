@@ -8,7 +8,7 @@ module.exports.addComplaint = function(req, res){
   Complaint.create(req.body,
     function(err, newComplaint){
     if(err){
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     }else{
       res.sendStatus(200);
@@ -21,7 +21,7 @@ module.exports.getComplaints = function(req, res){
   .populate('_question')
   .exec(function(err, result){
     if(err){
-      console.log(err);
+      console.error(err);
       res.sendStatus(500);
     }
     res.json(result);
