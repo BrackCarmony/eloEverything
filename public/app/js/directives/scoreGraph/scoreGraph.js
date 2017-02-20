@@ -1,5 +1,5 @@
 angular.module('eloEverything').directive('scoreGraph', function() {
-  
+
   var origionalDraw = Chart.controllers.line.prototype.draw;
   var myScoreX = 1200;
 
@@ -55,8 +55,8 @@ angular.module('eloEverything').directive('scoreGraph', function() {
         })
 
         var labels = [];
-        var segments = 10;
-        for (var i = 0; i < segments; i++) {
+        var segments = 12;
+        for (var i = -1; i < segments+1; i++) {
           labels.push(Math.floor(bounds.min + (i + 0.5) * (bounds.max - bounds.min) / segments)+"")
         }
 
@@ -88,6 +88,9 @@ angular.module('eloEverything').directive('scoreGraph', function() {
             }, labels.map(function() {
               return 0;
             }))
+
+            dataset.unshift(0);
+            dataset.push(0);
 
             return {
               label: data.name,

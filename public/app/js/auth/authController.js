@@ -23,4 +23,15 @@ app.controller('authController', function($scope, authService ,$location){
     //console.log("redirect to " + url);
     $location.path(url);
   }
+  $scope.logout = function(){
+    authService.logout().then(function(){
+      $scope.setCurrentUser(null);
+      localStorage.removeItem('token')
+      $location.path("/login");
+    }, function(){
+      $scope.setCurrentUser(null);
+      localStorage.removeItem('token')
+      $location.path("/login");
+    });
+  }
 });
