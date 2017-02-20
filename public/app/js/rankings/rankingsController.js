@@ -7,6 +7,7 @@ app.controller('rankingsController', function($scope, user, usersService, Stats)
 
   $scope.getRankings = function(category){
     $scope.scoreData = [{},{}];
+    $scope.myScore = category.score;
     $scope.ready = 0;
     Stats.getQuestionScores(category)
       .then(function(res){
@@ -17,16 +18,6 @@ app.controller('rankingsController', function($scope, user, usersService, Stats)
       $scope.rankings = res;
       $scope.ready++;
 
-      try{
-        $scope.myScore = res.filter(function(e){
-
-          return e._id == $scope.user._id;
-        })[0].scores.score;
-
-      }catch(err){
-        console.error(err);
-        $scope.myScore = 0;
-      }
       var scores = res.map(function(item){return item.scores.score});
       $scope.scoreData[1] = {name:'Players', scores:scores};
     },function(err){});
