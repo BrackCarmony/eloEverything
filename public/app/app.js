@@ -53,19 +53,9 @@ app.config(function($routeProvider){
   })
   .when("/profile",{
     templateUrl:"app/js/profile/profile_template.html",
-    controller:"profileController",
-    resolve:{
-      user: function(usersService, $route, $location){
-        return usersService.getMe().then(function(result){
-          if(result._id){
-          return result;
-        }else{
-          $location.path("/login");
-        }
-      });
-      }
+    controller:"profileController"
     }
-  })
+  )
   .when("/rankings",{
     templateUrl:"app/js/rankings/rankings_template.html",
     controller:"rankingsController",

@@ -461,11 +461,11 @@ score-graph .line-legend{
 }
 
 .quiz-view h3 {
-  font-size: 2.2em;
+  font-size: 2.4em;
 }
 
 .quiz-view .small-text {
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 
 .quiz-view li {
@@ -474,7 +474,7 @@ score-graph .line-legend{
 }
 
 .quiz-view li .small-text {
-  font-size: 1em;
+  font-size: 1.2em;
   padding:3px;
 }
 
@@ -525,7 +525,7 @@ score-graph .line-legend{
 
 .pic-question-btn{
   color:blue;
-  font-size: 1.5em;
+  font-size: 1.7em;
   position:fixed;
   top: -500px;
   right:-500px;

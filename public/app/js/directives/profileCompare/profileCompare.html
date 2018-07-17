@@ -1,0 +1,69 @@
+
+  <div class="well" ng-dblclick = "editing = !editing">
+    <div>
+      <h3 class="profile-header">{{user.display_name}}'s Score: {{user.eloScore|number:0}}</h3>
+    </div>
+
+    <div class="user-profile row">
+      <img ng-src="{{user.pictureUrl}}" class="profile-img-button">
+      <i class="fa fa-cogs" ng-if="owner" ng-click = "editing = !editing"></i>
+    </div>
+  </div>
+  <div class = "well" ng-show ="editing">
+      Display Name: <input type = "text" ng-model="user.display_name"/>
+    </br>
+    </br>
+    <button class = "emptyButton"  ng-click = "updateUser()"> Save </button>
+  </div>
+
+
+  <div ng-if = "!editing" class="white card">
+    <div>
+      <h4 ng-if = "user.questionsAsked">You have written {{user.questionsAsked}} questions in {{user.categoriesAsked}} categories covering {{user.tagsAsked + user.categoriesAsked}} topics.
+      Which have been asked {{user.timesQuestionsAsked}} times.</h4>
+    </div>
+    <div class="max-scroll-box profile">
+      <div>
+        <h3 class="center">Categories</h3>
+        <span ng-repeat="score in user.scores|orderBy:'-score'|filter:catFilter">
+          <div class="score-wrapper relative">
+            <score-display class="vertical-expand-in" score="score" ng-click="setCurrentCategory(score)" ng-class='{"selected-tag":currentCategory==score}'> </score-display>
+
+            <div class="tag-card vertical-expand-in" ng-if='currentCategory==score'>
+              <div class="h4">{{currentCategory._category.name.toUpperCase()}}</div>
+              <div class="">
+                Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
+              </div>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div>
+        <h3 class="center">Tags</h3>
+        <span ng-repeat="score in user.scores|orderBy:'-answered'|filter:tagFilter">
+          <div class="score-wrapper relative">
+            <score-display class="vertical-expand-in" score="score" ng-click="setCurrentCategory(score)" ng-class='{"selected-tag":currentCategory==score}'> </score-display>
+            <div class="tag-card vertical-expand-in" ng-if='currentCategory==score'>
+              <div class="h4">{{currentCategory._category.name.toUpperCase()}}</div>
+              <div class="">
+                Correct: {{currentCategory.correct}}/{{currentCategory.answered}} {{currentCategory.correct*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Wrong: {{currentCategory.wrong}}/{{currentCategory.answered}} {{currentCategory.wrong*100/currentCategory.answered |number:1}}%
+              </div>
+              <div class="">
+                Passed: {{currentCategory.passed}}/{{currentCategory.answered}} {{currentCategory.passed*100/currentCategory.answered |number:1}}%
+              </div>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+
+  </div>

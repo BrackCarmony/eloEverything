@@ -1,23 +1,35 @@
 var app = angular.module('eloEverything');
 
-app.controller('profileController', function($scope, user, usersService, $routeParams){
-  if (!$routeParams.id){
-    $scope.user = user;
-    calcEloScore();
-  }else{
+app.controller('profileController', function($scope, usersService, $routeParams, authService, $location){
+  console.log()
+  if ($routeParams.id){
     usersService.getUserById($routeParams.id).then(function(response){
-      $scope.user = response;
-      console.log(response);
-      calcEloScore();
+      if (response.status==401){
+        if($scope.missing){
+          $location.path('/login');
+        }
+        $scope.missing = true;
+      }
+      $scope.compare = response;
+      calcEloScore($scope.compare);
     });
   }
-  $scope.currentCategory = null;
-  $scope.catFilter = {_category:{status:"Category"}};
-  $scope.tagFilter = {_category:{status:"Tag"}};
+  usersService.getMe().then(function(user){
+    if (user.status == 401) {
+      if($scope.missing || !$routeParams.id){
+        $location.path('/login');
+      }
+      $scope.missing = true;
+      return;
+    }
+    $scope.user = user;
+    $scope.owner = true;
+    calcEloScore($scope.user);
+  });
 
-  function calcEloScore(){
+  function calcEloScore(user){
     var eloScore = 0;
-      $scope.user.scores.forEach(function(score){
+      user.scores.forEach(function(score){
         //console.log(score.score*Math.min(100,score.answered)/100)
         if (!score._category){
           return ;
@@ -26,25 +38,6 @@ app.controller('profileController', function($scope, user, usersService, $routeP
           eloScore+=score.score*Math.min(100,score.answered)/100;
         }
       });
-    $scope.eloScore = eloScore;
+    user.eloScore = eloScore;
   }
-
-  $scope.updateUser = function(){
-    userPropsToUpdate = {
-      display_name: $scope.user.display_name
-    };
-    var saveUser = user;
-    console.log(userPropsToUpdate);
-    usersService.updateUser(userPropsToUpdate).then(
-      function(res){
-        $scope.editing = false;
-        $scope.setCurrentUser(saveUser);
-      }
-    );
-
-  };
-
-  $scope.setCurrentCategory = function(currentCategory){
-    $scope.currentCategory = currentCategory;
-  };
 });

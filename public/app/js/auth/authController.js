@@ -4,7 +4,12 @@ app.controller('authController', function($scope, authService ,$location){
   $scope.currentUser = null;
   if (typeof(Storage) !== "undefined") {
     if (localStorage.token){
-      authService.tokenLogin();
+      console.log($location.path());
+      var path = $location.path();
+      authService.tokenLogin().then(function(){
+        $location.path(path);
+      }
+      );
     }
   }
 
